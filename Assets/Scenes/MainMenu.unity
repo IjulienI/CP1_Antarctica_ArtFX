@@ -389,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUIT
+  m_text: EXIT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 603311597}
   - component: {fileID: 603311596}
   m_Layer: 0
-  m_Name: QuitBtn
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1159,7 +1159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &932037597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1660,6 +1660,8 @@ MonoBehaviour:
   mainMenuCanvas: {fileID: 1944978991}
   optionMenuCanvas: {fileID: 932037600}
   creditsMenuCanvas: {fileID: 1081823475}
+  newGameBtn: {fileID: 1020109166}
+  exitOptionBtn: {fileID: 603311596}
   escape: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!1 &1389219932
 GameObject:
