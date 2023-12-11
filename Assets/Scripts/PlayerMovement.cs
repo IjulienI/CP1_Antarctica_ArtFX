@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 0;
     private float maxSpeed = 8;
     private bool goRight;
-    private float jumpHeight = 450f;
+    private float jumpHeight = 800;
     private bool isFalling;
     private float tempHeigh;
     private float baseGravity;
