@@ -37,20 +37,21 @@ public class CharacterMovement : MonoBehaviour
     {
         _moveDirection = move.action.ReadValue<Vector2>();
 
-        Debug.Log(_rigidbody.velocity);
+        //Debug.Log(_rigidbody.velocity);
     }
 
     private void FixedUpdate()
     {
-        if (canUp == true)
+        _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, _moveDirection.y * _speed);
+        /*if (canUp == true)
         {
             _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, _moveDirection.y * _speed + 0.2f);
         }
         else
         {
-            _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, -_speed);
-        }
-        
+            _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, 0);
+        }*/
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -69,5 +70,15 @@ public class CharacterMovement : MonoBehaviour
 
             canUp = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        jump.action.started += JumpTest;
+    }
+
+    private void JumpTest(InputAction.CallbackContext context)
+    {
+        print("test");
     }
 }
