@@ -15,10 +15,11 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] float gravityForce = 5f;
 
     private LayerMask layerGround;
-    private float _speed = 5;
-    private float _fall = 1;
-
-    [SerializeField] bool canUp = false;
+    private float _speedX;
+    private float _speedY;
+    public float _fall = 1;
+    bool _canUp = false;
+    bool _lunchFallAcceleration = true;
     Vector2 _moveDirection;
 
     [SerializeField] private Rigidbody2D _rigidbody;
@@ -50,13 +51,38 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canUp == true)
+        if (_lunchFallAcceleration)
         {
-            _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, _moveDirection.y * _speed + 0.2f);
+                _fall = Mathf.SmoothStep(_fall, 1, 0.2f);
+        }
+        if (_moveDirection.x != 0)
+        {
+            _speedX = Mathf.SmoothStep(_rigidbody.velocity.x, maxSpeed * _moveDirection.x, accelerationFactor);
+        }
+        else if (Mathf.Abs(_speedX) > stopMargin)
+        {
+            _speedX = Mathf.SmoothStep(_rigidbody.velocity.x, 0, brakeFactor);
         }
         else
         {
-            _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, - gravityForce * _fall);
+            _speedX = 0;
+        }
+        if (_moveDirection.y != 0)
+        {
+            _speedY = maxSpeed * _moveDirection.y ;
+        }
+        else
+        {
+            _speedY = 0;
+        }
+
+        if (_canUp == true)
+        {
+            _rigidbody.velocity = new Vector2(_speedX, _speedY);
+        }
+        else
+        {
+            _rigidbody.velocity = new Vector2(_speedX, - gravityForce * _fall);
         }
 
     }
@@ -65,7 +91,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "GoUp")
         {
-            canUp = true;
+            _canUp = true;
         }
         
     }
@@ -74,8 +100,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "GoUp")
         {
-
-            canUp = false;
+            _canUp = false;
         }
     }
 
@@ -88,9 +113,9 @@ public class CharacterMovement : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == layerGround)
+        if (collision.gameObject.layer == layerGround && _canUp == false)
         {
-            _fall = 1;
+            _lunchFallAcceleration = true;
         }
     }
 }

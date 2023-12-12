@@ -157,11 +157,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  accelerationFactor: 0.1
-  brakeFactor: 0.1
+  accelerationFactor: 0.5
+  brakeFactor: 0.3
   stopMargin: 0.05
   gravityForce: 15
-  canUp: 0
+  _fall: 1
   _rigidbody: {fileID: 0}
   move: {fileID: -7175644652601710126, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   jump: {fileID: -4457775621405196565, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
@@ -218,7 +218,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 1680129107}
   - component: {fileID: 1680129106}
   - component: {fileID: 1680129105}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ladder
   m_TagString: GoUp
   m_Icon: {fileID: 0}
