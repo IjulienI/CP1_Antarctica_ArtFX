@@ -13,21 +13,27 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float brakeFactor = 0.1f;
     [SerializeField] private float stopMargin = 0.05f;
     [SerializeField] float gravityForce = 5f;
+    [SerializeField] private float jumpStrength = 8f;
 
     private LayerMask layerGround;
     private float _speedX;
     private float _speedY;
     public float _fall = 1;
     bool _canUp = false;
+    bool _canDown = false;
+    [SerializeField] bool _jump = false;
+    bool _lunchJump = false;
     bool _lunchFallAcceleration = false;
-    [SerializeField] bool _ladderInteraction = false;
+    bool _ladderInteraction = false;
     bool _onTriggerLadder = false;
     Vector2 _moveDirection;
+    
 
     [SerializeField] private Rigidbody2D _rigidbody;
 
 
     [Header("Input Manager (don't tuch)")]
+    [SerializeField] private CapsuleCollider2D _collider;
     public InputActionReference move;
     public InputActionReference jump;
     public InputActionReference interact;
@@ -55,6 +61,11 @@ public class CharacterMovement : MonoBehaviour
             _fall = 0.1f;
             _lunchFallAcceleration = true;
             _canUp = false;
+        }
+
+        if (_jump != true)
+        {
+            _lunchJump = false;
         }
     }
 
@@ -89,15 +100,40 @@ public class CharacterMovement : MonoBehaviour
             _speedY = 0;
         }
 
+
         if (_ladderInteraction == true)
         {
             _rigidbody.velocity = new Vector2(/*_speedX*/0, _speedY);
+        }
+        else if (_moveDirection.y < 0 && _canDown == true)
+        {
+            StartCoroutine(GoDown());
         }
         else
         {
             _rigidbody.velocity = new Vector2(_speedX, - gravityForce * _fall);
         }
 
+
+        /*if (_lunchJump)
+        {
+            _rigidbody.AddForce(new Vector2(0, jumpStrength), ForceMode2D.Impulse);
+            gravityForce = -gravityForce;
+            _lunchJump = false;
+        }
+        if (!_jump && _rigidbody.velocity.y < 0)
+        {
+            print("wtf");
+            gravityForce = -gravityForce;
+        }*/
+    }
+
+    IEnumerator GoDown()
+    {
+        _collider.isTrigger = true;
+        _lunchFallAcceleration = true;
+        yield return new WaitForSeconds(0.5f);
+        _collider.isTrigger = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -130,6 +166,11 @@ public class CharacterMovement : MonoBehaviour
         {
             _fall = 0;
             _lunchFallAcceleration = false;
+            _jump = true;
+        }
+        if (collision.gameObject.tag == "FlyingPlatform")
+        {
+            _canDown = true;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -137,12 +178,18 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.layer == layerGround && _canUp == false)
         {
             _lunchFallAcceleration = true;
+            _jump = false;
+        }
+        if (collision.gameObject.tag == "FlyingPlatform")
+        {
+            _canDown = false;
         }
     }
 
     private void OnEnable()
     {
         interact.action.started += Interaction;
+        jump.action.started += Jumping;
     }
 
     private void Interaction(InputAction.CallbackContext obj)
@@ -150,6 +197,13 @@ public class CharacterMovement : MonoBehaviour
         if (_onTriggerLadder)
         {
             _ladderInteraction = !_ladderInteraction;
+        }
+    }
+    private void Jumping(InputAction.CallbackContext obj)
+    {
+        if (_jump)
+        {
+            _lunchJump = true;
         }
     }
 }
