@@ -179,7 +179,6 @@ GameObject:
   - component: {fileID: 1262260072}
   - component: {fileID: 1262260071}
   - component: {fileID: 1262260070}
-  - component: {fileID: 1262260069}
   - component: {fileID: 1262260074}
   m_Layer: 0
   m_Name: Square
@@ -188,19 +187,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1262260069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262260068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce895b867257984d9d3f2202f675b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coyoteTime: 0.1
 --- !u!50 &1262260070
 Rigidbody2D:
   serializedVersion: 4
