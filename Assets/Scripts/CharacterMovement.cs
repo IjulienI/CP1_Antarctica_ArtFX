@@ -21,13 +21,15 @@ public class CharacterMovement : MonoBehaviour
     public float _fall = 1;
     bool _canUp = false;
     bool _canDown = false;
-    [SerializeField] bool _jump = false;
-    bool _lunchJump = false;
+    [SerializeField] bool _isGrounded = false;
+    //bool _lunchJump = false;
     bool _lunchFallAcceleration = false;
     bool _ladderInteraction = false;
     bool _onTriggerLadder = false;
     Vector2 _moveDirection;
-    
+    private float coyoteTime = 0.1f;
+    private float coyoteTimer;
+
 
     [SerializeField] private Rigidbody2D _rigidbody;
 
@@ -63,9 +65,13 @@ public class CharacterMovement : MonoBehaviour
             _canUp = false;
         }
 
-        if (_jump != true)
+        if (_isGrounded)
         {
-            _lunchJump = false;
+            coyoteTimer = coyoteTime;
+        }
+        else
+        {
+            coyoteTimer -= Time.deltaTime;
         }
     }
 
@@ -115,17 +121,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
 
-        /*if (_lunchJump)
-        {
-            _rigidbody.AddForce(new Vector2(0, jumpStrength), ForceMode2D.Impulse);
-            gravityForce = -gravityForce;
-            _lunchJump = false;
-        }
-        if (!_jump && _rigidbody.velocity.y < 0)
-        {
-            print("wtf");
-            gravityForce = -gravityForce;
-        }*/
+
     }
 
     IEnumerator GoDown()
@@ -166,7 +162,7 @@ public class CharacterMovement : MonoBehaviour
         {
             _fall = 0;
             _lunchFallAcceleration = false;
-            _jump = true;
+            _isGrounded = true;
         }
         if (collision.gameObject.tag == "FlyingPlatform")
         {
@@ -178,7 +174,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.layer == layerGround && _canUp == false)
         {
             _lunchFallAcceleration = true;
-            _jump = false;
+            _isGrounded = true;
         }
         if (collision.gameObject.tag == "FlyingPlatform")
         {
@@ -201,9 +197,17 @@ public class CharacterMovement : MonoBehaviour
     }
     private void Jumping(InputAction.CallbackContext obj)
     {
-        if (_jump)
+        if (coyoteTime > 0f)
         {
-            _lunchJump = true;
+        LunchJump();
         }
+
+    }
+
+    private void LunchJump()
+    {
+            _isGrounded = true;
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f);
+            _rigidbody.AddForce(Vector2.up * jumpStrength, ForceMode2D.Impulse);
     }
 }
