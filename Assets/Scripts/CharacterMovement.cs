@@ -12,8 +12,12 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float accelerationFactor = 0.1f;
     [SerializeField] private float brakeFactor = 0.1f;
     [SerializeField] private float stopMargin = 0.05f;
+    [SerializeField] float gravityForce = 5f;
 
+    private LayerMask layerGround;
     private float _speed = 5;
+    private float _fall = 1;
+
     [SerializeField] bool canUp = false;
     Vector2 _moveDirection;
 
@@ -27,6 +31,10 @@ public class CharacterMovement : MonoBehaviour
     public InputActionReference midLight;
     public InputActionReference fullLight;
 
+    private void Awake()
+    {
+        layerGround = LayerMask.NameToLayer("Ground");
+    }
 
     private void Start()
     {
@@ -42,15 +50,14 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, _moveDirection.y * _speed);
-        /*if (canUp == true)
+        if (canUp == true)
         {
             _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, _moveDirection.y * _speed + 0.2f);
         }
         else
         {
-            _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, 0);
-        }*/
+            _rigidbody.velocity = new Vector2(_moveDirection.x * _speed, - gravityForce * _fall);
+        }
 
     }
 
@@ -72,13 +79,18 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        jump.action.started += JumpTest;
+        if (collision.gameObject.layer == layerGround)
+        {
+            _fall = 0;
+        }
     }
-
-    private void JumpTest(InputAction.CallbackContext context)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        print("test");
+        if (collision.gameObject.layer == layerGround)
+        {
+            _fall = 1;
+        }
     }
 }

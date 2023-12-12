@@ -160,6 +160,7 @@ MonoBehaviour:
   accelerationFactor: 0.1
   brakeFactor: 0.1
   stopMargin: 0.05
+  gravityForce: 5
   canUp: 0
   _rigidbody: {fileID: 0}
   move: {fileID: -7175644652601710126, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
@@ -568,7 +569,7 @@ GameObject:
   - component: {fileID: 1502807247}
   - component: {fileID: 1502807246}
   - component: {fileID: 1502807245}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +700,7 @@ GameObject:
   - component: {fileID: 2092014031}
   - component: {fileID: 2092014030}
   - component: {fileID: 2092014029}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FlyingPlatfom
   m_TagString: FlyingPlatform
   m_Icon: {fileID: 0}
