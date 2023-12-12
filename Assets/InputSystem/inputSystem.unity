@@ -162,6 +162,7 @@ MonoBehaviour:
   stopMargin: 0.05
   gravityForce: 15
   _fall: 1
+  interaction: 0
   _rigidbody: {fileID: 0}
   move: {fileID: -7175644652601710126, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   jump: {fileID: -4457775621405196565, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}

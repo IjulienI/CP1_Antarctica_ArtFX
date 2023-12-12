@@ -19,7 +19,9 @@ public class CharacterMovement : MonoBehaviour
     private float _speedY;
     public float _fall = 1;
     bool _canUp = false;
-    bool _lunchFallAcceleration = true;
+    bool _lunchFallAcceleration = false;
+    [SerializeField] bool _ladderInteraction = false;
+    bool _onTriggerLadder = false;
     Vector2 _moveDirection;
 
     [SerializeField] private Rigidbody2D _rigidbody;
@@ -47,13 +49,24 @@ public class CharacterMovement : MonoBehaviour
         _moveDirection = move.action.ReadValue<Vector2>();
 
         //Debug.Log(_rigidbody.velocity);
+
+        if (_ladderInteraction == false && _canUp == true)
+        {
+            _fall = 0.1f;
+            _lunchFallAcceleration = true;
+            _canUp = false;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (_lunchFallAcceleration)
+        if (_lunchFallAcceleration == true)
         {
-                _fall = Mathf.SmoothStep(_fall, 1, 0.2f);
+            _fall = Mathf.SmoothStep(_fall, 1, 0.1f); 
+            if (_fall == 0)
+            {
+                _lunchFallAcceleration = false;
+            }
         }
         if (_moveDirection.x != 0)
         {
@@ -76,9 +89,9 @@ public class CharacterMovement : MonoBehaviour
             _speedY = 0;
         }
 
-        if (_canUp == true)
+        if (_ladderInteraction == true)
         {
-            _rigidbody.velocity = new Vector2(_speedX, _speedY);
+            _rigidbody.velocity = new Vector2(/*_speedX*/0, _speedY);
         }
         else
         {
@@ -87,20 +100,27 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GoUp")
         {
-            _canUp = true;
+            _onTriggerLadder = true;
         }
-        
+
+        if (collision.gameObject.tag == "GoUp" && _ladderInteraction == true)
+        {
+            _canUp = true;
+            _fall = 0;
+            _lunchFallAcceleration = false;
+        }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GoUp")
         {
-            _canUp = false;
+            _onTriggerLadder = false;
         }
     }
 
@@ -109,6 +129,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.layer == layerGround)
         {
             _fall = 0;
+            _lunchFallAcceleration = false;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -116,6 +137,19 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.layer == layerGround && _canUp == false)
         {
             _lunchFallAcceleration = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        interact.action.started += Interaction;
+    }
+
+    private void Interaction(InputAction.CallbackContext obj)
+    {
+        if (_onTriggerLadder)
+        {
+            _ladderInteraction = !_ladderInteraction;
         }
     }
 }
