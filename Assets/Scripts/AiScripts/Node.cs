@@ -166,9 +166,12 @@ public class Node : MonoBehaviour
         }
 
         var view = UnityEditor.SceneView.currentDrawingSceneView;
-        Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
-        Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
-        GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), name.ToString());
+        if(view != null)
+        {
+            Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
+            Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
+            GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), name.ToString());
+        }
         UnityEditor.Handles.EndGUI();
     }
     void DrawArrow(Vector3 pos, Vector3 direction, Color color)
