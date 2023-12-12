@@ -1,5 +1,10 @@
+using System;
+using System.Net;
 using UnityEngine;
 using Pathfinding;
+using System.Threading;
+using UnityEditor.Rendering;
+using UnityEngine.UIElements;
 
 public class EnemyAi : MonoBehaviour
 {
@@ -14,6 +19,7 @@ public class EnemyAi : MonoBehaviour
     public float jumpNodeHeightRequirement = 0.8f;
     public float jumpModifier = 0.3f;
     public float jumpCheckOffset = 0.1f;
+    public LayerMask groundLayer;
 
     [Header("Custom Behavior")]
     public bool followEnabled = true;
@@ -34,8 +40,19 @@ public class EnemyAi : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
 
+    private void Update()
+    {
+        Debug.DrawRay(this.transform.position, new Vector2(this.transform.position.x - (GetComponent<SpriteRenderer>().bounds.size.x) / 2, this.transform.position.y), Color.red);
+        RaycastHit2D left = Physics2D.Raycast(new Vector2(this.transform.position.x - (GetComponent<SpriteRenderer>().bounds.size.x / 2), this.transform.position.y),
+            Vector2.up, 2f, groundLayer);
+    }
+
     private void FixedUpdate()
     {
+        Debug.DrawRay(this.transform.position, Vector2.down, Color.green);
+        RaycastHit2D hitGround = Physics2D.Raycast(this.transform.position, Vector2.down, 1f, groundLayer);
+        isGrounded = hitGround.collider;
+        
         if (TargetInDistance() && followEnabled)
         {
             PathFollow();
@@ -61,8 +78,8 @@ public class EnemyAi : MonoBehaviour
         {
             return;
         }
-
-        isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
+        
+        //isGrounded = Physics2D.Raycast(transform.position, -Vector3.up, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);        
 
         Vector2 direction = ((Vector2)_path.vectorPath[currentWaypoint] - _rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
@@ -71,10 +88,12 @@ public class EnemyAi : MonoBehaviour
         {
             if(direction.y > jumpNodeHeightRequirement)
             {
-                _rb.AddForce(Vector2.up * speed * jumpModifier);
-                jumpEnabled = false;
+                _rb.AddForce(Vector2.up * jumpModifier);
             }
+
+            isGrounded = false;
         }
+        Debug.Log(force);
 
         _rb.AddForce(force);
 
@@ -109,21 +128,5 @@ public class EnemyAi : MonoBehaviour
             _path = p;
             currentWaypoint = 0;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            jumpEnabled = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            jumpEnabled = false;
-        }
-    }
+    }  
 }
