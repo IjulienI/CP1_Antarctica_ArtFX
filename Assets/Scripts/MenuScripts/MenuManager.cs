@@ -7,11 +7,23 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private Canvas mainMenuCanvas, optionMenuCanvas, creditsMenuCanvas;
-    [SerializeField] private Button newGameBtn, volumeBtn, keybindsBtn, graficsBtn;
+    [Header("Menus Canvas")]
+    [SerializeField] private Canvas mainMenuCanvas;
+    [SerializeField] private Canvas optionMenuCanvas;
+    [SerializeField] private Canvas creditsMenuCanvas;
+    [Header("Buttons")]
+    [SerializeField] private Button newGameBtn;
+    [SerializeField] private Button volumeBtn;
+    [SerializeField] private Button keybindsBtn;
+    [SerializeField] private Button graficsBtn;
+    [Header("Volume Slider")]
     [SerializeField] private Slider globalVolumeSlider;
-    [SerializeField] private Image volumeImg, keybindsImg, graficsImg;
-    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGrafics;
+    [Header("Options Menus Backgrounds")]
+    [SerializeField] private Image volumeImg;
+    [SerializeField] private Image keybindsImg;
+    [SerializeField] private Image graphicsImg;
+    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGraphics;
+    [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
     private void OnEnable()
     {
@@ -66,21 +78,21 @@ public class MenuManager : MonoBehaviour
         globalVolumeSlider.Select();
         volumeImg.gameObject.SetActive(true);
         keybindsImg.gameObject.SetActive(false);
-        graficsImg.gameObject.SetActive(false);
+        graphicsImg.gameObject.SetActive(false);
     }
     public void Keybinds()
     {
         isInKeybinds = true;
         volumeImg.gameObject.SetActive(false);
         keybindsImg.gameObject.SetActive(true);
-        graficsImg.gameObject.SetActive(false);
+        graphicsImg.gameObject.SetActive(false);
     }
     public void Graphics()
     {
-        isInGrafics = true;
+        isInGraphics = true;
         volumeImg.gameObject.SetActive(false);
         keybindsImg.gameObject.SetActive(false);
-        graficsImg.gameObject.SetActive(true);
+        graphicsImg.gameObject.SetActive(true);
     }
     public void ExitVolume()
     {
@@ -97,13 +109,13 @@ public class MenuManager : MonoBehaviour
     public void ExitGraphics()
     {
         graficsBtn.Select();
-        isInGrafics = false;
-        graficsImg.gameObject.SetActive(false);
+        isInGraphics = false;
+        graphicsImg.gameObject.SetActive(false);
     }
 
     private void ReturnBack(InputAction.CallbackContext obj)
     {
-        if (isInOptions && (!isInVolume && !isInKeybinds && !isInGrafics))
+        if (isInOptions && (!isInVolume && !isInKeybinds && !isInGraphics))
         {
             ExitOptionsMenu();
         }
@@ -119,7 +131,7 @@ public class MenuManager : MonoBehaviour
         {
             ExitKeybinds();
         }
-        if (isInGrafics && isInOptions)
+        if (isInGraphics && isInOptions)
         {
             ExitGraphics();
         }
