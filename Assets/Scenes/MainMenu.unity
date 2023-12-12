@@ -2232,7 +2232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &932037597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2734,6 +2734,9 @@ MonoBehaviour:
   creditsMenuCanvas: {fileID: 1081823475}
   newGameBtn: {fileID: 1020109166}
   exitOptionBtn: {fileID: 304841450}
+  volumeImg: {fileID: 0}
+  keybindsImg: {fileID: 0}
+  graficsImg: {fileID: 0}
   escape: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!1 &1370015212
 GameObject:
