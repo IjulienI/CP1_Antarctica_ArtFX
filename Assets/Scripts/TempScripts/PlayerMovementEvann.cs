@@ -34,13 +34,13 @@ public class PlayerMovementEvann : MonoBehaviour
     private bool isFacingRight = true;
     private bool isGrounded;
 
-    private static PlayerMovementEvann playerScriptInstance;
+    public static PlayerMovementEvann instance;
 
     private void Awake()
     {
-        if (playerScriptInstance == null)
+        if (instance == null)
         {
-            playerScriptInstance = this;
+            instance = this;
         }
     }
     void Update()

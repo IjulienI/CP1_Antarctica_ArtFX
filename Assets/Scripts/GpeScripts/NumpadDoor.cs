@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -17,12 +18,20 @@ public class NumpadDoor : MonoBehaviour
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
     [SerializeField] private InputActionReference interract;
-
+    [Header("Keybind Sprites")]
+    [SerializeField] private Sprite keyboardKeybind;
+    [SerializeField] private Sprite gamepadKeybind;
+    [Header("Rumble")]
+    [SerializeField] private float lowFrequency = 0.5f;
+    [SerializeField] private float highFrequency = 0.5f;
+    [SerializeField] private float rumbleDuration = 0.5f;
 
     private bool isSelectButtonShowed;
     private bool isNumpadShowed;
+    private bool isDoorOpened;
     private int childCount;
     int count = 0;
+
 
     [Header("Code de la porte (svp 4 chiffres max)")]
     [SerializeField]private List<int> code = new List<int>();
@@ -68,6 +77,8 @@ public class NumpadDoor : MonoBehaviour
     {
         if (isSelectButtonShowed && !isNumpadShowed)
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequency, highFrequency, rumbleDuration);
+            PlayerMovementEvann.instance.enabled = false;
             codePlayer.Clear();
             ResetCodeText("-");
             numpadImg.gameObject.SetActive(true);
@@ -78,8 +89,17 @@ public class NumpadDoor : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) 
+        if (collision.CompareTag("Player") && !isDoorOpened) 
         {
+            if (DeviceDetection.instance.GetIsKeyboard())
+            {
+                keybindGo.GetComponent<SpriteRenderer>().sprite = keyboardKeybind;
+                
+            }
+            else if (DeviceDetection.instance.GetIsGamepad())
+             {
+             keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
+             }
             keybindGo.SetActive(true);
             isSelectButtonShowed = true;
         }
@@ -94,8 +114,9 @@ public class NumpadDoor : MonoBehaviour
     }
     private void ReturnBack(InputAction.CallbackContext obj)
     {
-        if (isNumpadShowed)
+        if (isNumpadShowed && !isDoorOpened)
         {
+            PlayerMovementEvann.instance.enabled = true;
             numpadImg.gameObject.SetActive(false);
             keybindGo.SetActive(true);
             isNumpadShowed = false;
@@ -105,7 +126,6 @@ public class NumpadDoor : MonoBehaviour
     {
         if (codePlayer.Count < 4)
         {
-            print(count);
             codePlayer.Add(number);
             numberText[count].SetText("" + number);
             count++;
@@ -130,7 +150,7 @@ public class NumpadDoor : MonoBehaviour
             {
                 numberTxt.color = Color.green;
             }
-            print("reussi");
+            Invoke(nameof(OpenDoor), 1f);
         }
         else
         {   
@@ -148,5 +168,11 @@ public class NumpadDoor : MonoBehaviour
         {
             numberTxt.SetText(text);
         }
+    }
+    private void OpenDoor()
+    {
+        isDoorOpened = true;
+        numpadImg.gameObject.SetActive(false);
+        PlayerMovementEvann.instance.enabled = true;
     }
 }
