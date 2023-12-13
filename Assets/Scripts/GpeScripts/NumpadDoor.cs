@@ -16,6 +16,8 @@ public class NumpadDoor : MonoBehaviour
     [SerializeField] private Button numpadValidateBtn, numpadDeleteBtn;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
+    [SerializeField] private InputActionReference interract;
+
 
     private bool isSelectButtonShowed;
     private bool isNumpadShowed;
@@ -54,15 +56,17 @@ public class NumpadDoor : MonoBehaviour
     private void OnEnable()
     {
         escape.action.started += ReturnBack;
+        interract.action.started += Interract;
     }
 
     private void OnDisable()
     {
         escape.action.started -= ReturnBack;
+        interract.action.started -= Interract;
     }
-    void Update()
+    private void Interract(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.E) && isSelectButtonShowed && !isNumpadShowed)
+        if (isSelectButtonShowed && !isNumpadShowed)
         {
             codePlayer.Clear();
             ResetCodeText("-");

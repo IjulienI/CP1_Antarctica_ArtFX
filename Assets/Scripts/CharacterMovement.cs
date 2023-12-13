@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
 
     [Header("Input Manager (don't tuch)")]
-    [SerializeField] private CapsuleCollider2D _collider;
+    [SerializeField] private BoxCollider2D _collider;
     public InputActionReference move;
     public InputActionReference jump;
     public InputActionReference interact;
