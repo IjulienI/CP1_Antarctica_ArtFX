@@ -292,20 +292,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2238b3ec739eef4ead8017e24508816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 1536497173374643543}
   rb: {fileID: 5141975564484948127}
-  groundCheck: {fileID: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   playerMaterial: {fileID: 6200000, guid: 28e8e767122712749a17a9497da70d9c, type: 2}
-  coyoteTime: 0.1
-  accelerationFactorInAir: 50
   accelerationFactorOnGround: 60
-  stopMargin: 0.5
-  brakeFactorInAir: 20
   brakeFactorOnGround: 60
-  maxSpeedInAir: 8
   maxSpeedOnGround: 10
+  accelerationFactorInAir: 50
+  brakeFactorInAir: 20
+  maxSpeedInAir: 8
   jumpingPower: 12
+  coyoteTime: 0.1
   normalGravityScale: 3
   fallingGravityScale: 5
+  _fall: 1
+  interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  midLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  fullLight: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}

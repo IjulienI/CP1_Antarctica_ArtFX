@@ -518,11 +518,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1816195797 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1536497173374643543, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-  m_PrefabInstance: {fileID: 6636082653129097503}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1828655961
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,26 +925,6 @@ PrefabInstance:
     - target: {fileID: 2677651126098139841, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3843487037794754977, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: interact
-      value: 
-      objectReference: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
-    - target: {fileID: 3843487037794754977, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: midLight
-      value: 
-      objectReference: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
-    - target: {fileID: 3843487037794754977, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: _collider
-      value: 
-      objectReference: {fileID: 1816195797}
-    - target: {fileID: 3843487037794754977, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: fullLight
-      value: 
-      objectReference: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
-    - target: {fileID: 3843487037794754977, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8004435236793628628, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_LocalPosition.x
