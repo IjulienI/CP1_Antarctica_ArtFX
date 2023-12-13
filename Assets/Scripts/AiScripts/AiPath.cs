@@ -1,57 +1,60 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class AiPath : MonoBehaviour
+public class AIPath : MonoBehaviour
 {
     [SerializeField] private Tilemap tile;
 
     public Tilemap Tile { get => tile; private set => tile = value; }
 
-    [ContextMenu("Add Nodes")]
-    void AddNodes()
+    [ContextMenu("Create Nodes")]
+    void CreateNodes()
     {
-        if(Tile == null)
+        if (Tile == null)
         {
-            Debug.Log("Please place a tilemap in your scene");
+            Debug.Log("You must have a tilemap in your project");
             return;
         }
 
-        Vector3 origine = Tile.origin;
-        origine.x += Tile.cellSize.x / 2;
-        origine.y += Tile.cellSize.y / 2;
+        Vector3 origin = Tile.origin;
+        origin.x += Tile.cellSize.x / 2;
+        origin.y += Tile.cellSize.y / 2;
 
+        //Debug.Log(origin);
         Vector3 bounds = Tile.size;
-        bounds.x -= Mathf.Abs(origine.x);
-        bounds.y -= Mathf.Abs(origine.y);
+        bounds.x -= Mathf.Abs(origin.x);
+        bounds.y -= Mathf.Abs(origin.y);
+        //Debug.Log(bounds);
 
-        for (int u = 0; u < Mathf.Abs(origine.y) + Mathf.Abs(bounds.y); u++)
+        for (int u = 0; u < Mathf.Abs(origin.y) + Mathf.Abs(bounds.y); u++)
         {
-            for (int i = 0; i < Mathf.Abs(origine.x) + Mathf.Abs(bounds.x); i++)
+            for (int i = 0; i < Mathf.Abs(origin.x) + Mathf.Abs(bounds.x); i++)
             {
-                Vector3 pos = new Vector3(origine.x + i, origine.y + u, 0);
+                Vector3 pos = new Vector3(origin.x + i, origin.y + u, 0);
                 if (!Tile.HasTile(new Vector3Int(Tile.origin.x + i, Tile.origin.y + u, 0)) && Tile.HasTile(new Vector3Int(Tile.origin.x + i, Tile.origin.y + u - 1, 0)))
                 {
-                    CreateNodes(pos);
+                    InstantiateNodes(pos);
                 }
             }
         }
     }
 
-    [ContextMenu("Make Link")]
-    void MakeLink()
+    [ContextMenu("Make Conections")]
+    void MakeConections()
     {
         if (Tile == null)
         {
-            Debug.Log("Please place a tilemap in your scene");
+            Debug.Log("You must have a tilemap in your project");
             return;
         }
         List<Node> AllNodes = new List<Node>();
         AllNodes = GetComponentsInChildren<Node>().ToList();
         if (AllNodes.Count == 0)
         {
-            Debug.Log("Please create a node");
+            Debug.Log("You must build your nodes and place them chiddren of this transform, or use \"Create Nodes\" in Context Menu");
             return;
         }
         foreach (var node in AllNodes)
@@ -65,14 +68,8 @@ public class AiPath : MonoBehaviour
         Vector3 pos = node.transform.position;
         foreach (var n in AllNodes)
         {
-            if (n == node || !n.enabled || n == null)
-            {
-                continue;
-            }
-            if (node.ConnectedTo.Contains(n))
-            {
-                continue;
-            }
+            if (n == node || !n.enabled || n == null) continue;
+            if (node.ConnectedTo.Contains(n)) continue;
 
             Vector3 target = n.transform.position;
 
@@ -87,7 +84,6 @@ public class AiPath : MonoBehaviour
                 Vector3 tilePos = pos;
                 tilePos.x -= tile.cellSize.x / 2;
                 tilePos.y -= tile.cellSize.y / 2;
-
                 for (int i = 1; i < x; i++)
                 {
                     int variationX = i * signal;
@@ -107,11 +103,10 @@ public class AiPath : MonoBehaviour
                     }
                 }
                 if ((!obstacle && ground))
-                {
                     node.ConnectedTo.Add(n);
-                }
             }
-            else if (Mathf.Round(Mathf.Abs(pos.x - target.x)) == 1 && Mathf.Round(Mathf.Abs(pos.y - target.y)) == 1)
+            else if (Mathf.Round(Mathf.Abs(pos.x - target.x)) == 1
+                && Mathf.Round(Mathf.Abs(pos.y - target.y)) == 1)
             {
                 node.ConnectedTo.Add(n);
                 node.AddToJump(n);
@@ -119,7 +114,8 @@ public class AiPath : MonoBehaviour
 
         }
     }
-    void CreateNodes(Vector3 position)
+
+    void InstantiateNodes(Vector3 position)
     {
         List<Node> AllNodes = FindObjectsOfType<Node>().ToList();
 
@@ -131,7 +127,7 @@ public class AiPath : MonoBehaviour
             }
         }
 
-        GameObject node = Node.CreateNode();
+        GameObject node = Node.InstantiateNode();
         node.transform.parent = transform;
         node.transform.position = position;
     }

@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Unity.VisualScripting;
-using UnityEditor.Profiling.Memory.Experimental;
+using UnityEngine.UI;
 
 [ExecuteAlways]
 public class Node : MonoBehaviour
@@ -20,55 +17,47 @@ public class Node : MonoBehaviour
 
     private Tilemap tile;
     private Vector3 posAux;
-    private AiPath PathController;
+    private AIPath PathController;
 
     private bool mouseDown = false;
-    private bool connection = false;
+    private bool conection = false;
     private Vector3 mousePos;
 
     public bool hasGround;
-
+    
     public List<Node> NodeToJump { get => nodeToJump; }
 
     private void Awake()
     {
-        PathController = FindObjectOfType<AiPath>();
-        tile = PathController !=  null ? PathController.Tile : null;
+        PathController = FindObjectOfType<AIPath>();
+        tile = PathController != null ? PathController.Tile : null;
     }
-
     private void Start()
     {
-        if(tile != null && RepositionNode)
-        {
-            Snap();
-        }
+        if (tile != null && RepositionNode)
+            Reposition();
 
-        if(Application.IsPlaying(gameObject))
+
+        if (Application.IsPlaying(gameObject))
         {
-            hasGround = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - 0.7f), 0.1f);
+            hasGround = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - .7f), .1f);
         }
     }
-
-    private void Update()
+    void Update()
     {
-        if (connection && mouseDown)
+        if (conection && mouseDown)
         {
-            if(AllNodes.Count > 0)
+            if (AllNodes.Count > 0)
             {
-                foreach(var node in AllNodes)
+                foreach (var node in AllNodes)
                 {
-                    if(node == this || !node.enabled)
-                    {
-                        continue;
-                    }
-                    if(ConnectedTo.Contains(node))
-                    {
-                        continue;
-                    }
+                    if (node == this || !node.enabled) continue;
+                    if (ConnectedTo.Contains(node)) continue;
                     float x = node.transform.position.x - mousePos.x;
                     float y = node.transform.position.y - mousePos.y;
 
-                    if(x > -0.5f && x < 0.5f && y > -0.5f && y < 0.5f)
+                    if (x > -0.5f && x < 0.5f
+                        && y > -0.5f && y < 0.5f)
                     {
                         ConnectedTo.Add(node);
                         AddToJump(node);
@@ -76,59 +65,53 @@ public class Node : MonoBehaviour
                     }
                 }
             }
-            connection = false;
+            conection = false;
         }
-        ConnectedTo.RemoveAll(delegate (Node o)
-        {
-            return o == null;
-        });
-        nodeToJump.RemoveAll(delegate (Node o)
-        {
-            return !ConnectedTo.Contains(o);
-        });
+
+        ConnectedTo.RemoveAll(delegate (Node o) { return o == null; });
+        nodeToJump.RemoveAll(delegate (Node o) { return !ConnectedTo.Contains(o); });
 
         if (transform.position != posAux && !mouseDown && tile != null && RepositionNode)
-        {
-            Snap();
-        }
+            Reposition();
+
     }
 
-    [MenuItem("GameObject/AiPath/Node")]
-    public static GameObject CreateNode()
+    [MenuItem("GameObject/AIPath/Node")]
+    public static GameObject InstantiateNode()
     {
-        List<Node> Allnodes = FindObjectsOfType<Node>().ToList();
-        GameObject obj = new GameObject("empty");
-        obj.AddComponent<Node>();
+        List<Node> AllNodes = FindObjectsOfType<Node>().ToList();
+        GameObject ob = new GameObject("emptyGO");
+        ob.AddComponent<Node>();
         string name = "Node (";
 
-        obj.name = Allnodes.Count > 0 ? name + Allnodes.Count + ")" : name + "0)";
-        return obj;
+        ob.name = AllNodes.Count > 0 ? name + AllNodes.Count + ")" : name + "0)";
+        return ob;
     }
 
-    [ContextMenu("Make Link")]
-    void MakeLink()
+    [ContextMenu("Make Conection")]
+    void MakeConection()
     {
-        connection = true;
-        AllNodes = new List<Node>(0);
+        conection = true;
+        AllNodes = new List<Node>();
         AllNodes = FindObjectsOfType<Node>().ToList();
     }
-
     public void AddToJump(Node node)
     {
         if (nodeToJump.Contains(node))
-        {
             return;
-        }
+
         if (node.transform.position.y - transform.position.y > .1f)
         {
             nodeToJump.Add(node);
             return;
         }
+
         if (Mathf.Abs(node.transform.position.x - transform.position.x) > 2.1f && node.transform.position.y - transform.position.y < -.1f)
         {
             nodeToJump.Add(node);
             return;
         }
+
         if (tile != null)
         {
             if (Mathf.Abs(node.transform.position.x - transform.position.x) > 1.5f)
@@ -157,21 +140,15 @@ public class Node : MonoBehaviour
             }
         }
     }
+
     void DrawName(Vector3 worldPos, Color? colour = null)
     {
         UnityEditor.Handles.BeginGUI();
-        if (colour.HasValue)
-        {
-            GUI.color = colour.Value;
-        }
-
+        if (colour.HasValue) GUI.color = colour.Value;
         var view = UnityEditor.SceneView.currentDrawingSceneView;
-        if(view != null)
-        {
-            Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
-            Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
-            GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), name.ToString());
-        }
+        Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
+        Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
+        GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), name.ToString());
         UnityEditor.Handles.EndGUI();
     }
     void DrawArrow(Vector3 pos, Vector3 direction, Color color)
@@ -186,7 +163,8 @@ public class Node : MonoBehaviour
         Gizmos.DrawRay((pos + direction) / 2, right * arrowHeadLength);
         Gizmos.DrawRay((pos + direction) / 2, left * arrowHeadLength);
     }
-        void VerifieNodes(Node node)
+
+    void CheckNodes(Node node)
     {
         foreach (var n in node.ConnectedTo)
         {
@@ -200,22 +178,22 @@ public class Node : MonoBehaviour
         DrawArrow(transform.position, node.transform.position, Color.white);
     }
 
-    void Snap()
+    void Reposition()
     {
-        Vector3 origine = tile.origin;
-        origine.x += tile.cellSize.x / 2;
-        origine.y += tile.cellSize.y / 2;
-        if((transform.position.x - origine.x) % 1 != 0 || (transform.position.y - origine.y) % 1 != 0)
+        Vector3 origin = tile.origin;
+        origin.x += tile.cellSize.x / 2;
+        origin.y += tile.cellSize.y / 2;
+        if ((transform.position.x - origin.x) % 1 != 0 || (transform.position.y - origin.y) % 1 != 0)
         {
-            if((transform.position.x - origine.x) % 1 != 0 || (transform.position.y - origine.y) % 1 != 0)
+            if ((transform.position.x - origin.x) % 1 != 0 || (transform.position.y - origin.y) % 1 != 0)
             {
-                float x = Mathf.Round(transform.position.x - origine.x) + origine.x;
-                float y = Mathf.Round(transform.position.y - origine.y) + origine.y;
+                float x = Mathf.Round(transform.position.x - origin.x) + origin.x;
+                float y = Mathf.Round(transform.position.y - origin.y) + origin.y;
 
                 Vector3 aux = new Vector3(x, y, transform.position.z);
                 transform.position = posAux = aux;
             }
-        } 
+        }
     }
 
     public void OnDrawGizmos()
@@ -228,7 +206,7 @@ public class Node : MonoBehaviour
             if (node == null)
                 return;
 
-            VerifieNodes(node);
+            CheckNodes(node);
         }
     }
     void OnEnable()
@@ -250,7 +228,7 @@ public class Node : MonoBehaviour
             mouseDown = false;
         }
 
-        if (connection)
+        if (conection)
         {
             HandleUtility.Repaint();
             mousePos = new Vector3(cur.mousePosition.x, cur.mousePosition.y, 0);
@@ -259,4 +237,5 @@ public class Node : MonoBehaviour
             Handles.DrawLine(transform.position, mousePos);
         }
     }
+
 }

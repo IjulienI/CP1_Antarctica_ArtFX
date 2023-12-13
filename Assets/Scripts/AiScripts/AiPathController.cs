@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class AiPathController : MonoBehaviour
+public class AIPathController : MonoBehaviour
 {
     [SerializeField] private bool DrawPath = false;
+
 
     [Tooltip("Speed to apply velocity")]
     [SerializeField] private float speed;
@@ -226,7 +228,7 @@ public class AiPathController : MonoBehaviour
             }
             HorizontalMove *= velocity * 10;
         }
-        if (Path.Count == 0)
+        if(Path.Count == 0)
         {
             FindPath();
         }
