@@ -2398,7 +2398,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208512567}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ChangeValueSliders
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &720729540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,6 +3594,12 @@ MonoBehaviour:
   keybindsImg: {fileID: 705997248}
   graphicsImg: {fileID: 290050361}
   escape: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  lowFrequencyReturnButton: 0.1
+  highFrequencyReturnButton: 0.2
+  rumbleDurationReturnButton: 0.3
+  lowFrequencyVolumeSlider: 0.1
+  highFrequencyVolumeSlider: 0.1
+  rumbleDurationVolumeSlider: 0.1
 --- !u!1 &1261328521
 GameObject:
   m_ObjectHideFlags: 0
@@ -4298,6 +4316,63 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1001 &1553475596
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4209722857725428042, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_Name
+      value: GamepadRumble
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691001691078228788, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c39eb7c126ce99c458954912d8ffa50a, type: 3}
 --- !u!1 &1580534416
 GameObject:
   m_ObjectHideFlags: 0
@@ -4868,7 +4943,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208512567}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ChangeValueSliders
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1798089392
 GameObject:
   m_ObjectHideFlags: 0
@@ -5166,7 +5253,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208512567}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ChangeValueSliders
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1864690652
 GameObject:
   m_ObjectHideFlags: 0
@@ -5450,6 +5549,63 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10000
   m_TargetDisplay: 0
+--- !u!1001 &2031971757
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1346879437302479459, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_Name
+      value: DeviceDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833521540093030947, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4af8d46b78053474aa99bc48b2440a59, type: 3}
 --- !u!1 &2052319096
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,3 +6050,5 @@ SceneRoots:
   - {fileID: 1445883792}
   - {fileID: 1208512566}
   - {fileID: 1864690653}
+  - {fileID: 2031971757}
+  - {fileID: 1553475596}
