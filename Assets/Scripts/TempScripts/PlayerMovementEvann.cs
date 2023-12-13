@@ -6,29 +6,55 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementEvann : MonoBehaviour
 {
+    [Header("Don't Touch")]
+    [SerializeField] private BoxCollider2D _collider;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
 
-    [SerializeField] private float coyoteTime = 0.2f;
-    private float coyoteTimer;
-    private float horizontal;
-    private float speedX;
-    private float accelerationFactor = 2f;
-    [SerializeField] private float accelerationFactorInAir = 1f;
+    [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
-    private float brakeFactor = 1f;
-    [SerializeField] private float brakeFactorInAir = 0.5f;
     [SerializeField] private float brakeFactorOnGround = 1f;
-    private float maxSpeed = 8f;
-    [SerializeField] private float maxSpeedInAir = 4f;
     [SerializeField] private float maxSpeedOnGround = 8f;
+
+    [Header("Air Control")]
+    [SerializeField] private float accelerationFactorInAir = 1f;
+    [SerializeField] private float brakeFactorInAir = 0.5f;
+    [SerializeField] private float maxSpeedInAir = 4f;
+
+    [Header("Jump")]
     [SerializeField] private float jumpingPower = 5f;
+    [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float normalGravityScale = 1f;
     [SerializeField] private float fallingGravityScale = 3f;
+
+    private float coyoteTimer;
+    private float horizontal;
+    private float vertical;
+    private float speedX;
+    private float speedY;
+    private float accelerationFactor = 2f;
+    private float brakeFactor = 1f;
+    private float maxSpeed = 8f;
+
     private bool isFacingRight = true;
     private bool isGrounded;
 
+    private static PlayerMovementEvann playerScriptInstance;
+
+    bool _ladderInteraction = false;
+    bool _onTriggerLadder = false;
+    bool _canDown = false;
+
+    [Header("Input Manager (don't touch)")]
+    public InputActionReference interact;
+    public InputActionReference midLight;
+    public InputActionReference fullLight;
+
+    private void Awake()
+    {
+        playerScriptInstance = this;
+    }
     void Update()
     {
         if (!isFacingRight && horizontal > 0f)
@@ -51,6 +77,8 @@ public class PlayerMovementEvann : MonoBehaviour
 
     private void FixedUpdate()
     {
+        horizontal = Mathf.RoundToInt(horizontal);
+        vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
         {
             if (!isGrounded)
@@ -71,16 +99,59 @@ public class PlayerMovementEvann : MonoBehaviour
         {
            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
-        rb.velocity = new Vector2(speedX, rb.velocity.y);
 
-        if (rb.velocity.y >= 0)
+        if (_ladderInteraction == true)
         {
-            rb.gravityScale = normalGravityScale;
+
+            rb.velocity = new Vector2(0, speedY);
         }
-        else if (rb.velocity.y < 0)
+        else
         {
-            rb.gravityScale = fallingGravityScale;
+        rb.velocity = new Vector2(speedX, rb.velocity.y);
         }
+
+
+
+        if (_ladderInteraction == true)
+        {
+            rb.gravityScale = 0;
+            if (vertical != 0)
+            {
+                speedY = maxSpeed * vertical;
+            }
+            else { speedY = 0; }
+
+            if (vertical < 0 && _canDown == true)
+            {
+                _collider.isTrigger = true;
+            }
+            else
+            {
+                _collider.isTrigger = false;
+            }
+        }
+        else if (vertical < 0 && _canDown == true && isGrounded ==true)
+        {
+            StartCoroutine(GoDown());
+        }
+        else
+        {
+            if (rb.velocity.y >= 0)
+            {
+                rb.gravityScale = normalGravityScale;
+            }
+            else if (rb.velocity.y < 0)
+            {
+                rb.gravityScale = fallingGravityScale;
+            }
+        }
+    }
+    IEnumerator GoDown()
+    {
+        _collider.isTrigger = true;
+        //_lunchFallAcceleration = true;
+        yield return new WaitForSeconds(0.2f);
+        _collider.isTrigger = false;
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -97,8 +168,28 @@ public class PlayerMovementEvann : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        interact.action.started += Interaction;
+    }
+    private void Interaction(InputAction.CallbackContext obj)
+    {
+        if (_onTriggerLadder)
+        {
+            _ladderInteraction = !_ladderInteraction;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "GoUp")
+        {
+            _onTriggerLadder = true;
+        }
+        if (collision.gameObject.tag == "FlyingPlatform")
+        {
+            _canDown = true;
+        }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
@@ -106,9 +197,18 @@ public class PlayerMovementEvann : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "GoUp")
+        {
+            _onTriggerLadder = false;
+        }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
+        }
+        if (collision.gameObject.tag == "FlyingPlatform")
+        {
+            _canDown = false;
+
         }
     }
 
@@ -123,5 +223,7 @@ public class PlayerMovementEvann : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
+        vertical = context.ReadValue<Vector2>().y;
     }
+
 }
