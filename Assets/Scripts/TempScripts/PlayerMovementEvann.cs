@@ -40,20 +40,25 @@ public class PlayerMovementEvann : MonoBehaviour
     private bool isFacingRight = true;
     private bool isGrounded;
 
-    private static PlayerMovementEvann playerScriptInstance;
-
     bool _ladderInteraction = false;
     bool _onTriggerLadder = false;
     bool _canDown = false;
+    public float _fall = 1;
+    bool _lunchFallAcceleration = false;
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
     public InputActionReference midLight;
     public InputActionReference fullLight;
 
+    public static PlayerMovementEvann instance;
+
     private void Awake()
     {
-        playerScriptInstance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
     void Update()
     {
@@ -73,10 +78,23 @@ public class PlayerMovementEvann : MonoBehaviour
         {
             coyoteTimer -= Time.deltaTime;
         }
+        if (isGrounded)
+        {
+            _lunchFallAcceleration = false;
+        }
     }
 
     private void FixedUpdate()
     {
+        if (_lunchFallAcceleration == true)
+        {
+            _fall = Mathf.SmoothStep(_fall, 1, 0.2f);
+            if (_fall == 0)
+            {
+                _lunchFallAcceleration = false;
+            }
+        }
+
         horizontal = Mathf.RoundToInt(horizontal);
         vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
@@ -107,7 +125,7 @@ public class PlayerMovementEvann : MonoBehaviour
         }
         else
         {
-        rb.velocity = new Vector2(speedX, rb.velocity.y);
+            rb.velocity = new Vector2(speedX, rb.velocity.y);
         }
 
 
@@ -142,14 +160,15 @@ public class PlayerMovementEvann : MonoBehaviour
             }
             else if (rb.velocity.y < 0)
             {
-                rb.gravityScale = fallingGravityScale;
+                _lunchFallAcceleration = true;
+                rb.gravityScale = fallingGravityScale * _fall;
             }
         }
     }
     IEnumerator GoDown()
     {
         _collider.isTrigger = true;
-        //_lunchFallAcceleration = true;
+        _lunchFallAcceleration = true;
         yield return new WaitForSeconds(0.2f);
         _collider.isTrigger = false;
     }
@@ -193,6 +212,8 @@ public class PlayerMovementEvann : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
+            _fall = 0;
+            _lunchFallAcceleration = false;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -204,6 +225,7 @@ public class PlayerMovementEvann : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
+            _lunchFallAcceleration = true;
         }
         if (collision.gameObject.tag == "FlyingPlatform")
         {
