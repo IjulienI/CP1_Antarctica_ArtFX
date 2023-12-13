@@ -1,34 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementEvann : MonoBehaviour
 {
+    [Header("Don't Touch")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
 
+    [Header("Ground Control")]
+    [SerializeField] private float accelerationFactorOnGround = 2f;
+    [SerializeField] private float brakeFactorOnGround = 1f;
+    [SerializeField] private float maxSpeedOnGround = 8f;
+
+    [Header("Air Control")]
+    [SerializeField] private float accelerationFactorInAir = 1f;
+    [SerializeField] private float brakeFactorInAir = 0.5f;
+    [SerializeField] private float maxSpeedInAir = 4f;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpingPower = 5f;
     [SerializeField] private float coyoteTime = 0.2f;
+    [SerializeField] private float normalGravityScale = 1f;
+    [SerializeField] private float fallingGravityScale = 3f;
+
     private float coyoteTimer;
     private float horizontal;
     private float speedX;
-    private float accelerationFactor = 2f;
-    [SerializeField] private float accelerationFactorInAir = 1f;
-    [SerializeField] private float accelerationFactorOnGround = 2f;
+    private float accelerationFactor = 2f;  
     private float brakeFactor = 1f;
-    [SerializeField] private float brakeFactorInAir = 0.5f;
-    [SerializeField] private float brakeFactorOnGround = 1f;
-    private float maxSpeed = 8f;
-    [SerializeField] private float maxSpeedInAir = 4f;
-    [SerializeField] private float maxSpeedOnGround = 8f;
-    [SerializeField] private float jumpingPower = 5f;
-    [SerializeField] private float normalGravityScale = 1f;
-    [SerializeField] private float fallingGravityScale = 3f;
+    private float maxSpeed = 8f; 
+
     private bool isFacingRight = true;
     private bool isGrounded;
 
+    private static PlayerMovementEvann playerScriptInstance;
+
+    private void Awake()
+    {
+        if (playerScriptInstance == null)
+        {
+            playerScriptInstance = this;
+        }
+    }
     void Update()
     {
         if (!isFacingRight && horizontal > 0f)
@@ -51,8 +65,10 @@ public class PlayerMovementEvann : MonoBehaviour
 
     private void FixedUpdate()
     {
+        horizontal = Mathf.RoundToInt(horizontal);
         if (horizontal != 0)
         {
+            print(horizontal);
             if (!isGrounded)
             {
                 maxSpeed = maxSpeedInAir;
@@ -84,7 +100,7 @@ public class PlayerMovementEvann : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context)
-    {
+    { 
         if (context.performed && coyoteTimer > 0f)
         {   
             rb.velocity = new Vector2(rb.velocity.x, 0f);
