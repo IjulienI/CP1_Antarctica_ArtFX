@@ -17,7 +17,7 @@ public class Node : MonoBehaviour
 
     private Tilemap tile;
     private Vector3 posAux;
-    private AIPath PathController;
+    private AiPath PathController;
 
     private bool mouseDown = false;
     private bool conection = false;
@@ -29,7 +29,7 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
-        PathController = FindObjectOfType<AIPath>();
+        PathController = FindObjectOfType<AiPath>();
         tile = PathController != null ? PathController.Tile : null;
     }
     private void Start()

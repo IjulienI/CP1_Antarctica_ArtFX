@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class AIPathController : MonoBehaviour
+public class AiPathController : MonoBehaviour
 {
     [SerializeField] private bool DrawPath = false;
 
@@ -77,6 +77,8 @@ public class AIPathController : MonoBehaviour
             StartCoroutine(IsStopped());
         }
     }
+    
+    //hi
 
     void FixedUpdate()
     {
