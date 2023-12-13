@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [Header("Move Settings")]
+    
     
 
     [SerializeField] private float maxSpeed = 5f;
@@ -106,10 +106,13 @@ public class CharacterMovement : MonoBehaviour
             _speedY = 0;
         }
 
-
-        if (_ladderInteraction == true)
+        if (_ladderInteraction == true && _isGrounded)
         {
-            _rigidbody.velocity = new Vector2(/*_speedX*/0, _speedY);
+            _rigidbody.velocity = new Vector2(_speedX, _speedY);
+        }
+        else if (_ladderInteraction == true)
+        {
+            _rigidbody.velocity = new Vector2(0, _speedY);
         }
         else if (_moveDirection.y < 0 && _canDown == true)
         {

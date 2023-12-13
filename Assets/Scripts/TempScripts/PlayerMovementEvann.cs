@@ -43,7 +43,7 @@ public class PlayerMovementEvann : MonoBehaviour
     bool _ladderInteraction = false;
     bool _onTriggerLadder = false;
     bool _canDown = false;
-    public float _fall = 1;
+    float _fall = 1;
     bool _lunchFallAcceleration = false;
 
     [Header("Input Manager (don't touch)")]
@@ -73,14 +73,17 @@ public class PlayerMovementEvann : MonoBehaviour
         if (isGrounded)
         {
             coyoteTimer = coyoteTime;
+            _lunchFallAcceleration = false;
         }
         else
         {
             coyoteTimer -= Time.deltaTime;
         }
-        if (isGrounded)
+        if (_onTriggerLadder == false)
         {
-            _lunchFallAcceleration = false;
+            _ladderInteraction = false;
+            rb.gravityScale = fallingGravityScale;
+            speedY = 0f;
         }
     }
 
@@ -118,7 +121,7 @@ public class PlayerMovementEvann : MonoBehaviour
            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
-        if (_ladderInteraction == true)
+        if (_ladderInteraction == true && isGrounded == false)
         {
 
             rb.velocity = new Vector2(0, speedY);
@@ -129,9 +132,29 @@ public class PlayerMovementEvann : MonoBehaviour
         }
 
 
-
-        if (_ladderInteraction == true)
+        if (_ladderInteraction == true && isGrounded == true)
         {
+            rb.gravityScale = 0;
+            if (vertical != 0)
+            {
+                speedY = maxSpeed * vertical;
+            }
+            else { speedY = 0; }
+
+            if (vertical < 0 && _canDown == true)
+            {
+                _collider.isTrigger = true;
+            }
+            else
+            {
+                _collider.isTrigger = false;
+            }
+
+            rb.velocity = new Vector2(speedX, speedY);
+        }
+        else if (_ladderInteraction == true)
+        {
+
             rb.gravityScale = 0;
             if (vertical != 0)
             {
@@ -150,10 +173,12 @@ public class PlayerMovementEvann : MonoBehaviour
         }
         else if (vertical < 0 && _canDown == true && isGrounded ==true)
         {
+            
             StartCoroutine(GoDown());
         }
         else
         {
+            
             if (rb.velocity.y >= 0)
             {
                 rb.gravityScale = normalGravityScale;
@@ -196,6 +221,10 @@ public class PlayerMovementEvann : MonoBehaviour
         if (_onTriggerLadder)
         {
             _ladderInteraction = !_ladderInteraction;
+            //if (_ladderInteraction == true)
+            //{
+            //    _collider.isTrigger = true;
+            //}
         }
     }
 
