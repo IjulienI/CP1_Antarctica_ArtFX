@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiController : MonoBehaviour
+public class BotMovimentController : MonoBehaviour
 {
+
     private float m_MovementSmoothing = .05f;
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;
+    private bool m_FacingRight = true;  
     private Vector3 m_Velocity = Vector3.zero;
 
-    private AiPathController Control;
+    private AIPathController Control;
 
     public float HorizontalMove { get; set; }
     public Vector2 m_JumpForce { get; set; }
@@ -20,7 +21,7 @@ public class AiController : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        Control = GetComponent<AiPathController>();
+        Control = GetComponent<AIPathController>();
     }
     private void Start()
     {
@@ -68,4 +69,6 @@ public class AiController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+
 }
