@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementEvann : MonoBehaviour
@@ -43,6 +40,7 @@ public class PlayerMovementEvann : MonoBehaviour
     bool _ladderInteraction = false;
     bool _onTriggerLadder = false;
     bool _canDown = false;
+    bool canJump = true;
     float _fall = 1;
     bool _lunchFallAcceleration = false;
 
@@ -198,7 +196,7 @@ public class PlayerMovementEvann : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && coyoteTimer > 0f)
+        if (context.performed && coyoteTimer > 0f && canJump)
         {   
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
@@ -273,6 +271,11 @@ public class PlayerMovementEvann : MonoBehaviour
     {
         horizontal = context.ReadValue<Vector2>().x;
         vertical = context.ReadValue<Vector2>().y;
+    }
+
+    public void SetCanJump(bool x)
+    {
+        canJump = x;
     }
 
 }

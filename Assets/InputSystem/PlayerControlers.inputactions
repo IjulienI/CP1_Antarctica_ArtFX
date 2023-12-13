@@ -99,7 +99,7 @@
                 {
                     "name": "up",
                     "id": "6ecd7def-8620-4941-ae88-ec0232b2263e",
-                    "path": "<Gamepad>/leftStick/right",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
