@@ -79,7 +79,8 @@ public class NumpadDoor : MonoBehaviour
         {
             RumbleGamepad.instance.MakeGampadRumble(lowFrequency, highFrequency, rumbleDuration);
             PlayerMovementEvann.instance.enabled = false;
-            codePlayer.Clear();
+            PlayerMovementEvann.instance.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            PlayerMovementEvann.instance.SetCanJump(false);
             ResetCodeText("-");
             numpadImg.gameObject.SetActive(true);
             keybindGo.SetActive(false);
@@ -97,9 +98,9 @@ public class NumpadDoor : MonoBehaviour
                 
             }
             else if (DeviceDetection.instance.GetIsGamepad())
-             {
-             keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
-             }
+            {
+                keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
+            }
             keybindGo.SetActive(true);
             isSelectButtonShowed = true;
         }
@@ -116,7 +117,10 @@ public class NumpadDoor : MonoBehaviour
     {
         if (isNumpadShowed && !isDoorOpened)
         {
+            codePlayer.Clear();
+            count = 0;
             PlayerMovementEvann.instance.enabled = true;
+            PlayerMovementEvann.instance.SetCanJump(true);
             numpadImg.gameObject.SetActive(false);
             keybindGo.SetActive(true);
             isNumpadShowed = false;
@@ -158,8 +162,7 @@ public class NumpadDoor : MonoBehaviour
             {
                 numberTxt.color = Color.red;
                 Invoke(nameof(CodeClear), 1f);
-            }
-            
+            } 
         }
     }
     private void ResetCodeText(string text)
@@ -174,5 +177,7 @@ public class NumpadDoor : MonoBehaviour
         isDoorOpened = true;
         numpadImg.gameObject.SetActive(false);
         PlayerMovementEvann.instance.enabled = true;
+        PlayerMovementEvann.instance.SetCanJump(true);
     }
+    
 }
