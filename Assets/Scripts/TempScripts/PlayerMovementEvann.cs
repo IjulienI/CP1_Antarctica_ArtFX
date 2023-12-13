@@ -173,8 +173,9 @@ public class PlayerMovementEvann : MonoBehaviour
         }
         else if (vertical < 0 && _canDown == true && isGrounded ==true)
         {
-            
-            StartCoroutine(GoDown());
+            _collider.isTrigger = true;
+            _lunchFallAcceleration = true;
+            Invoke("GoDown", 0.2f);
         }
         else
         {
@@ -190,11 +191,8 @@ public class PlayerMovementEvann : MonoBehaviour
             }
         }
     }
-    IEnumerator GoDown()
+    private void GoDown()
     {
-        _collider.isTrigger = true;
-        _lunchFallAcceleration = true;
-        yield return new WaitForSeconds(0.2f);
         _collider.isTrigger = false;
     }
 
