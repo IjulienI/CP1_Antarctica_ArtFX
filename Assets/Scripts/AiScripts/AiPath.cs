@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class AiPath : MonoBehaviour
+public class AIPath : MonoBehaviour
 {
     [SerializeField] private Tilemap tile;
 

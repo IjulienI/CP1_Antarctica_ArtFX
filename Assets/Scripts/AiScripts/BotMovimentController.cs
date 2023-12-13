@@ -10,7 +10,7 @@ public class BotMovimentController : MonoBehaviour
     private bool m_FacingRight = true;  
     private Vector3 m_Velocity = Vector3.zero;
 
-    private AiPathController Control;
+    private AIPathController Control;
 
     public float HorizontalMove { get; set; }
     public Vector2 m_JumpForce { get; set; }
@@ -21,7 +21,7 @@ public class BotMovimentController : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        Control = GetComponent<AiPathController>();
+        Control = GetComponent<AIPathController>();
     }
     private void Start()
     {
@@ -57,7 +57,7 @@ public class BotMovimentController : MonoBehaviour
         if (jump)
         {
             m_Rigidbody2D.velocity = Vector2.zero;
-            m_Rigidbody2D.AddForce(m_JumpForce);
+            m_Rigidbody2D.AddForce(m_JumpForce * 1.3f, ForceMode2D.Impulse);
         }
     }
 
