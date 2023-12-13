@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.16, y: -3.37, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.011508405}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -132,7 +132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.9769832}
   m_EdgeRadius: 0
 --- !u!50 &5141975564484948127
 Rigidbody2D:
@@ -193,7 +193,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01978992, y: -0.44037798}
+  m_Offset: {x: 0, y: -0.97}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -204,7 +204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7949053, y: 0.23168153}
+  m_Size: {x: 0.8, y: 0.23}
   m_EdgeRadius: 0
 --- !u!114 &1864259789821008929
 MonoBehaviour:
@@ -292,22 +292,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2238b3ec739eef4ead8017e24508816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 1536497173374643543}
+  _collider: {fileID: 7668552998897465100}
   rb: {fileID: 5141975564484948127}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   playerMaterial: {fileID: 6200000, guid: 28e8e767122712749a17a9497da70d9c, type: 2}
-  accelerationFactorOnGround: 60
-  brakeFactorOnGround: 60
-  maxSpeedOnGround: 10
-  accelerationFactorInAir: 50
+  accelerationFactorOnGround: 70
+  brakeFactorOnGround: 70
+  maxSpeedOnGround: 7
+  accelerationFactorInAir: 40
   brakeFactorInAir: 20
-  maxSpeedInAir: 8
-  jumpingPower: 12
+  maxSpeedInAir: 7
+  jumpingPower: 16.5
   coyoteTime: 0.1
-  normalGravityScale: 3
-  fallingGravityScale: 5
+  normalGravityScale: 4
+  fallingGravityScale: 7
   _fall: 1
   interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   midLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
