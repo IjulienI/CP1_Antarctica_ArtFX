@@ -25,6 +25,14 @@ public class MenuManager : MonoBehaviour
     private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGraphics;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
+    [Header("Gamepad Rumble settings - Return Button (For the frequencies, 1 is the max value)")]
+    [SerializeField] private float lowFrequencyReturnButton;
+    [SerializeField] private float highFrequencyReturnButton;
+    [SerializeField] private float rumbleDurationReturnButton;
+    [Header("Gamepad Rumble settings - Volume Slider (For the frequencies, 1 is the max value)")]
+    [SerializeField] private float lowFrequencyVolumeSlider;
+    [SerializeField] private float highFrequencyVolumeSlider;
+    [SerializeField] private float rumbleDurationVolumeSlider;
     private void OnEnable()
     {
         escape.action.started += ReturnBack;
@@ -65,12 +73,14 @@ public class MenuManager : MonoBehaviour
         mainMenuCanvas.gameObject.SetActive(true);
         optionMenuCanvas.gameObject.SetActive(false);
         newGameBtn.Select();
+        isInOptions = false;
     }
     public void ExitCreditsMenu() 
     {
         mainMenuCanvas.gameObject.SetActive(true);
         creditsMenuCanvas.gameObject.SetActive(false);
         newGameBtn.Select();
+        isInCredits = false;
     }
     public void Volume()
     {
@@ -117,23 +127,32 @@ public class MenuManager : MonoBehaviour
     {
         if (isInOptions && (!isInVolume && !isInKeybinds && !isInGraphics))
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitOptionsMenu();
         }
         if (isInCredits)
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitCreditsMenu();
         }
         if (isInVolume && isInOptions)
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitVolume();
         }
         if (isInKeybinds && isInOptions)
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitKeybinds();
         }
         if (isInGraphics && isInOptions)
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitGraphics();
         }
+    }
+    public void ChangeValueSliders()
+    {
+        RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
     }
 }
