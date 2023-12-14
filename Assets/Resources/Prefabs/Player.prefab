@@ -307,7 +307,7 @@ MonoBehaviour:
   jumpingPower: 16.5
   coyoteTime: 0.1
   normalGravityScale: 4
-  fallingGravityScale: 7
+  fallingGravityScale: 10
   interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   midLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   fullLight: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
