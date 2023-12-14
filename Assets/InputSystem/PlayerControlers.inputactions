@@ -99,7 +99,7 @@
                 {
                     "name": "up",
                     "id": "6ecd7def-8620-4941-ae88-ec0232b2263e",
-                    "path": "<Gamepad>/leftStick/right",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -198,7 +198,7 @@
                 {
                     "name": "",
                     "id": "fb814809-8904-4df4-b492-79272b1a02fe",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Control",
@@ -210,6 +210,17 @@
                     "name": "",
                     "id": "246179fe-77a0-4cdb-8254-8873a5b8befe",
                     "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e1b5d0d-0d9d-4f76-8b65-323803e1daa8",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

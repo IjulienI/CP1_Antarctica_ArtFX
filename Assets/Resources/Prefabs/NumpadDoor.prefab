@@ -236,6 +236,8 @@ MonoBehaviour:
   numpadDeleteBtn: {fileID: 0}
   escape: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   interract: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  keyboardKeybind: {fileID: 1404314231, guid: fc669b4f48fbd5a4aa0550eba71e275d, type: 3}
+  gamepadKeybind: {fileID: -1045534858, guid: 07e90cc3bad84c345a18d0a20c25f5b5, type: 3}
   code: 00000000010000000200000003000000
   numberText:
   - {fileID: 0}
