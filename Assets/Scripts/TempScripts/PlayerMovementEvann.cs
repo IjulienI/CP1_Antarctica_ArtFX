@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMovementEvann : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerMovementEvann : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
+    [SerializeField] private Light2D _fire;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -46,8 +48,8 @@ public class PlayerMovementEvann : MonoBehaviour
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
-    public InputActionReference midLight;
-    public InputActionReference fullLight;
+    public InputActionReference upLight;
+    public InputActionReference downLight;
 
     public static PlayerMovementEvann instance;
 
@@ -211,6 +213,8 @@ public class PlayerMovementEvann : MonoBehaviour
     private void OnEnable()
     {
         interact.action.started += Interaction;
+        upLight.action.started += UpLight;
+        downLight.action.started += DownLight;
     }
     private void Interaction(InputAction.CallbackContext obj)
     {
@@ -221,6 +225,37 @@ public class PlayerMovementEvann : MonoBehaviour
             //{
             //    _collider.isTrigger = true;
             //}
+        }
+    }
+
+    private void UpLight(InputAction.CallbackContext light)
+    {
+        if (_fire.pointLightOuterRadius == 2)
+        {
+            _fire.pointLightOuterRadius = 5;
+        }
+        else if (_fire.pointLightOuterRadius == 5)
+        {
+            _fire.pointLightOuterRadius = 10;
+        }
+        else
+        {
+            _fire.pointLightOuterRadius = 2;
+        }
+    }
+    private void DownLight(InputAction.CallbackContext light)
+    {
+        if (_fire.pointLightOuterRadius == 10)
+        {
+            _fire.pointLightOuterRadius = 5;
+        }
+        else if (_fire.pointLightOuterRadius == 5)
+        {
+            _fire.pointLightOuterRadius = 2;
+        }
+        else
+        {
+            _fire.pointLightOuterRadius = 10;
         }
     }
 
