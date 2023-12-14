@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MidLight",
+                    "name": "DownLight",
                     "type": "Button",
                     "id": "1dce644f-2104-423e-a911-082f274e8f7e",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FullLight",
+                    "name": "UpLight",
                     "type": "Button",
                     "id": "efa0e1b4-2127-4641-afec-86aa6a17aa60",
                     "expectedControlType": "Button",
@@ -158,7 +158,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Control",
-                    "action": "MidLight",
+                    "action": "DownLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -169,7 +169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Control",
-                    "action": "FullLight",
+                    "action": "UpLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

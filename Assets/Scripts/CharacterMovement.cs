@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class CharacterMovement : MonoBehaviour
 
 
     [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private Light2D _fire;
 
 
     [Header("Input Manager (don't tuch)")]
@@ -39,8 +41,8 @@ public class CharacterMovement : MonoBehaviour
     public InputActionReference move;
     public InputActionReference jump;
     public InputActionReference interact;
-    public InputActionReference midLight;
-    public InputActionReference fullLight;
+    public InputActionReference upLight;
+    public InputActionReference downLight;
 
     private void Awake()
     {
@@ -50,6 +52,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        //_fire.pointLightOuterRadius = 5;
     }
 
     private void Update()
@@ -189,6 +192,8 @@ public class CharacterMovement : MonoBehaviour
     {
         interact.action.started += Interaction;
         jump.action.started += Jumping;
+        upLight.action.started += UpLight;
+        downLight.action.started += DownLight;
     }
 
     private void Interaction(InputAction.CallbackContext obj)
@@ -212,5 +217,36 @@ public class CharacterMovement : MonoBehaviour
             _isGrounded = true;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f);
             _rigidbody.AddForce(Vector2.up * jumpStrength, ForceMode2D.Impulse);
+    }
+
+    private void UpLight(InputAction.CallbackContext light)
+    {
+        if (_fire.pointLightOuterRadius == 2)
+        {
+            _fire.pointLightOuterRadius = 5;
+        }
+        else if (_fire.pointLightOuterRadius == 5)
+        {
+            _fire.pointLightOuterRadius = 10;
+        }
+        else
+        {
+            _fire.pointLightOuterRadius = 2;
+        }
+    }
+    private void DownLight(InputAction.CallbackContext light)
+    {
+        if (_fire.pointLightOuterRadius == 10)
+        {
+            _fire.pointLightOuterRadius = 5;
+        }
+        else if (_fire.pointLightOuterRadius == 5)
+        {
+            _fire.pointLightOuterRadius = 5;
+        }
+        else
+        {
+            _fire.pointLightOuterRadius = 2;
+        }
     }
 }

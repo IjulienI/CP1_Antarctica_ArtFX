@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMovementEvann : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerMovementEvann : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
+    [SerializeField] private Light2D _fire;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -33,7 +35,7 @@ public class PlayerMovementEvann : MonoBehaviour
     private float accelerationFactor = 2f;
     private float brakeFactor = 1f;
     private float maxSpeed = 8f;
-
+    
     private bool isFacingRight = true;
     private bool isGrounded;
 
@@ -43,11 +45,13 @@ public class PlayerMovementEvann : MonoBehaviour
     bool canJump = true;
     float _fall = 1;
     bool _lunchFallAcceleration = false;
+    int stateOfFire = 1;
+    bool progressiveFire = false;
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
-    public InputActionReference midLight;
-    public InputActionReference fullLight;
+    public InputActionReference upLight;
+    public InputActionReference downLight;
 
     public static PlayerMovementEvann instance;
 
@@ -173,7 +177,7 @@ public class PlayerMovementEvann : MonoBehaviour
         {
             _collider.isTrigger = true;
             _lunchFallAcceleration = true;
-            Invoke("GoDown", 0.2f);
+            Invoke("GoDown", 0.4f);
         }
         else
         {
@@ -186,6 +190,33 @@ public class PlayerMovementEvann : MonoBehaviour
             {
                 _lunchFallAcceleration = true;
                 rb.gravityScale = fallingGravityScale * _fall;
+            }
+        }
+        if (progressiveFire == true)
+        {
+            if (stateOfFire == 2)
+            {
+                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 5.1f, 0.2f);
+                if (_fire.pointLightOuterRadius <= 5.2 && _fire.pointLightOuterRadius >= 5)
+                {
+                    progressiveFire = false;
+                }
+            }
+            else if (stateOfFire == 3)
+            {
+                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 10.1f, 0.2f);
+                if (_fire.pointLightOuterRadius >= 10)
+                {
+                    progressiveFire = false;
+                }
+            }
+            else
+            {
+                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 1.9f, 0.2f);
+                if (_fire.pointLightOuterRadius <= 2)
+                {
+                    progressiveFire = false;
+                }
             }
         }
     }
@@ -211,6 +242,8 @@ public class PlayerMovementEvann : MonoBehaviour
     private void OnEnable()
     {
         interact.action.started += Interaction;
+        upLight.action.started += UpLight;
+        downLight.action.started += DownLight;
     }
     private void Interaction(InputAction.CallbackContext obj)
     {
@@ -221,6 +254,43 @@ public class PlayerMovementEvann : MonoBehaviour
             //{
             //    _collider.isTrigger = true;
             //}
+        }
+    }
+
+    private void UpLight(InputAction.CallbackContext light)
+    {
+        if (stateOfFire == 1)
+        {
+            stateOfFire = 2;
+            progressiveFire = true;
+        }
+        else if (stateOfFire == 2)
+        {
+            stateOfFire = 3;
+            progressiveFire = true;
+        }
+        else
+        {
+            stateOfFire = 1;
+            progressiveFire = true;
+        }
+    }
+    private void DownLight(InputAction.CallbackContext light)
+    {
+        if (stateOfFire == 3)
+        {
+            stateOfFire = 2;
+            progressiveFire = true;
+        }
+        else if (stateOfFire == 2)
+        {
+            stateOfFire = 1;
+            progressiveFire = true;
+        }
+        else
+        {
+            stateOfFire = 3;
+            progressiveFire = true;
         }
     }
 
@@ -239,6 +309,10 @@ public class PlayerMovementEvann : MonoBehaviour
             isGrounded = true;
             _fall = 0;
             _lunchFallAcceleration = false;
+        }
+        if (collision.gameObject.tag == "Untagged")
+        {
+            _collider.isTrigger = false;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
