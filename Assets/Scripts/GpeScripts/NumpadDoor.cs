@@ -89,10 +89,15 @@ public class NumpadDoor : MonoBehaviour
             keybindGo.SetActive(false);
             isNumpadShowed = true;
             numpadButtons[1].Select();
+            if (DeviceDetection.instance.GetIsGamepad())
+            {
+                keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
+            }
         }
-        else
+        else if(DeviceDetection.instance.GetIsKeyboard())
         {
             codePlayer.Clear();
+            keybindGo.GetComponent<SpriteRenderer>().sprite = keyboardKeybind;
             count = 0;
             PlayerMovementEvann.instance.enabled = true;
             PlayerMovementEvann.instance.SetCanJump(true);
