@@ -177,7 +177,7 @@ public class PlayerMovementEvann : MonoBehaviour
         {
             _collider.isTrigger = true;
             _lunchFallAcceleration = true;
-            Invoke("GoDown", 0.2f);
+            Invoke("GoDown", 0.4f);
         }
         else
         {
@@ -309,6 +309,10 @@ public class PlayerMovementEvann : MonoBehaviour
             isGrounded = true;
             _fall = 0;
             _lunchFallAcceleration = false;
+        }
+        if (collision.gameObject.tag == "Untagged")
+        {
+            _collider.isTrigger = false;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
