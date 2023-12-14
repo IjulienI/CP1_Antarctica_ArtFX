@@ -35,7 +35,7 @@ public class PlayerMovementEvann : MonoBehaviour
     private float accelerationFactor = 2f;
     private float brakeFactor = 1f;
     private float maxSpeed = 8f;
-
+    
     private bool isFacingRight = true;
     private bool isGrounded;
 
@@ -45,6 +45,8 @@ public class PlayerMovementEvann : MonoBehaviour
     bool canJump = true;
     float _fall = 1;
     bool _lunchFallAcceleration = false;
+    int stateOfFire = 1;
+    bool progressiveFire = false;
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
@@ -190,6 +192,33 @@ public class PlayerMovementEvann : MonoBehaviour
                 rb.gravityScale = fallingGravityScale * _fall;
             }
         }
+        if (progressiveFire == true)
+        {
+            if (stateOfFire == 2)
+            {
+                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 5.1f, 0.2f);
+                if (_fire.pointLightOuterRadius <= 5.2 && _fire.pointLightOuterRadius >= 5)
+                {
+                    progressiveFire = false;
+                }
+            }
+            else if (stateOfFire == 3)
+            {
+                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 10.1f, 0.2f);
+                if (_fire.pointLightOuterRadius >= 10)
+                {
+                    progressiveFire = false;
+                }
+            }
+            else
+            {
+                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 1.9f, 0.2f);
+                if (_fire.pointLightOuterRadius <= 2)
+                {
+                    progressiveFire = false;
+                }
+            }
+        }
     }
     private void GoDown()
     {
@@ -230,32 +259,38 @@ public class PlayerMovementEvann : MonoBehaviour
 
     private void UpLight(InputAction.CallbackContext light)
     {
-        if (_fire.pointLightOuterRadius == 2)
+        if (stateOfFire == 1)
         {
-            _fire.pointLightOuterRadius = 5;
+            stateOfFire = 2;
+            progressiveFire = true;
         }
-        else if (_fire.pointLightOuterRadius == 5)
+        else if (stateOfFire == 2)
         {
-            _fire.pointLightOuterRadius = 10;
+            stateOfFire = 3;
+            progressiveFire = true;
         }
         else
         {
-            _fire.pointLightOuterRadius = 2;
+            stateOfFire = 1;
+            progressiveFire = true;
         }
     }
     private void DownLight(InputAction.CallbackContext light)
     {
-        if (_fire.pointLightOuterRadius == 10)
+        if (stateOfFire == 3)
         {
-            _fire.pointLightOuterRadius = 5;
+            stateOfFire = 2;
+            progressiveFire = true;
         }
-        else if (_fire.pointLightOuterRadius == 5)
+        else if (stateOfFire == 2)
         {
-            _fire.pointLightOuterRadius = 2;
+            stateOfFire = 1;
+            progressiveFire = true;
         }
         else
         {
-            _fire.pointLightOuterRadius = 10;
+            stateOfFire = 3;
+            progressiveFire = true;
         }
     }
 
