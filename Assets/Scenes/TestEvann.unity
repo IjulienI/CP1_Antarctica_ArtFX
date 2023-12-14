@@ -695,7 +695,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -865,18 +865,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4167815136589729862, guid: bf22f864ad6807345ab8ba31d577c50a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5541717975017927474, guid: bf22f864ad6807345ab8ba31d577c50a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.057088
-      objectReference: {fileID: 0}
-    - target: {fileID: 5541717975017927474, guid: bf22f864ad6807345ab8ba31d577c50a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.21486247
-      objectReference: {fileID: 0}
     - target: {fileID: 5541717975017927474, guid: bf22f864ad6807345ab8ba31d577c50a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.587
@@ -1129,22 +1117,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1227145180}
@@ -1152,38 +1124,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1227145180}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DeviceDetector
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DeviceDetector
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: DeviceDetection, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: DeviceDetection, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1864259789821008929, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2677651126098139841, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1194,7 +1134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8004435236793628628, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.37
+      value: -2.947
       objectReference: {fileID: 0}
     - target: {fileID: 8004435236793628628, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_LocalPosition.z

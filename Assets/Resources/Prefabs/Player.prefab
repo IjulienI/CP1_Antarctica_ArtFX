@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 8a1a2df7c7ffb684c83d80f61b5d7c23, type: 3}
   m_Color: {r: 0, g: 1, b: 0.11066723, a: 1}
   m_FlipX: 0
@@ -121,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0016098022, y: -0.011508405}
+  m_Offset: {x: -0.0013961792, y: -0.011508405}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -132,7 +132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9127655, y: 1.9769832}
+  m_Size: {x: 0.91729164, y: 1.9769832}
   m_EdgeRadius: 0
 --- !u!50 &5141975564484948127
 Rigidbody2D:
@@ -245,6 +245,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 46fb9aba-8276-4c04-994e-ecf4c269bdb4
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
@@ -260,6 +272,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3843487037794754977}
         m_TargetAssemblyTypeName: PlayerMovementEvann, Assembly-CSharp
         m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -292,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2238b3ec739eef4ead8017e24508816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 7668552998897465100}
+  _collider: {fileID: 1536497173374643543}
   rb: {fileID: 5141975564484948127}
   groundLayer:
     serializedVersion: 2
