@@ -15,14 +15,17 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button newGameBtn;
     [SerializeField] private Button volumeBtn;
     [SerializeField] private Button keybindsBtn;
-    [SerializeField] private Button graficsBtn;
+    [SerializeField] private Button generalBtn;
     [Header("Volume Slider")]
     [SerializeField] private Slider globalVolumeSlider;
+    [Header("General Options Toggles")]
+    [SerializeField] private Toggle gamepadVibrationsToggle;
+    [SerializeField] private Toggle fullscreenToggle;
     [Header("Options Menus Backgrounds")]
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
-    [SerializeField] private Image graphicsImg;
-    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGraphics;
+    [SerializeField] private Image generalImg;
+    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
     [Header("Gamepad Rumble settings - Return Button (For the frequencies, 1 is the max value)")]
@@ -33,6 +36,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float lowFrequencyVolumeSlider;
     [SerializeField] private float highFrequencyVolumeSlider;
     [SerializeField] private float rumbleDurationVolumeSlider;
+
+    public static MenuManager instance;
+
+    private bool hasLoad;
+    private int isVibrationsActivated;
     private void OnEnable()
     {
         escape.action.started += ReturnBack;
@@ -41,6 +49,26 @@ public class MenuManager : MonoBehaviour
     private void OnDisable()
     {
         escape.action.started -= ReturnBack;
+        PlayerPrefs.SetInt("Vibration activation", isVibrationsActivated);
+    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+    private void Start()
+    {
+        isVibrationsActivated = PlayerPrefs.GetInt("Vibration activation", 1);
+        if (isVibrationsActivated == 1)
+        {
+            gamepadVibrationsToggle.isOn = true;
+        }
+        else if (isVibrationsActivated == 0)
+        {
+            gamepadVibrationsToggle.isOn = false;
+        }
     }
 
     public void NewGame()
@@ -54,7 +82,7 @@ public class MenuManager : MonoBehaviour
     public void Option()
     {
         isInOptions = true;
-        volumeBtn.Select();
+        generalBtn.Select();
         mainMenuCanvas.gameObject.SetActive(false);
         optionMenuCanvas.gameObject.SetActive(true);
     }
@@ -88,21 +116,22 @@ public class MenuManager : MonoBehaviour
         globalVolumeSlider.Select();
         volumeImg.gameObject.SetActive(true);
         keybindsImg.gameObject.SetActive(false);
-        graphicsImg.gameObject.SetActive(false);
+        generalImg.gameObject.SetActive(false);
     }
     public void Keybinds()
     {
         isInKeybinds = true;
         volumeImg.gameObject.SetActive(false);
         keybindsImg.gameObject.SetActive(true);
-        graphicsImg.gameObject.SetActive(false);
+        generalImg.gameObject.SetActive(false);
     }
-    public void Graphics()
+    public void General()
     {
-        isInGraphics = true;
+        isInGeneral = true;
+        gamepadVibrationsToggle.Select();
         volumeImg.gameObject.SetActive(false);
         keybindsImg.gameObject.SetActive(false);
-        graphicsImg.gameObject.SetActive(true);
+        generalImg.gameObject.SetActive(true);
     }
     public void ExitVolume()
     {
@@ -118,14 +147,14 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitGraphics()
     {
-        graficsBtn.Select();
-        isInGraphics = false;
-        graphicsImg.gameObject.SetActive(false);
+        generalBtn.Select();
+        isInGeneral = false;
+        generalImg.gameObject.SetActive(false);
     }
 
     private void ReturnBack(InputAction.CallbackContext obj)
     {
-        if (isInOptions && (!isInVolume && !isInKeybinds && !isInGraphics))
+        if (isInOptions && (!isInVolume && !isInKeybinds && !isInGeneral))
         {
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitOptionsMenu();
@@ -145,7 +174,7 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitKeybinds();
         }
-        if (isInGraphics && isInOptions)
+        if (isInGeneral && isInOptions)
         {
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitGraphics();
@@ -153,6 +182,29 @@ public class MenuManager : MonoBehaviour
     }
     public void ChangeValueSliders()
     {
-        RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+        if (hasLoad)
+        {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+        }
+    }
+    public void GamepadVibrations()
+    {
+        if (isVibrationsActivated == 1 && hasLoad)
+        {
+            isVibrationsActivated = 0;
+            PlayerPrefs.SetInt("Vibration activation",isVibrationsActivated);
+        }
+        else if(isVibrationsActivated == 0 && hasLoad)
+        {
+            isVibrationsActivated = 1;
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+            PlayerPrefs.SetInt("Vibration activation", isVibrationsActivated);
+        }
+    }
+
+
+    public void setHasLoad()
+    {
+        hasLoad = true;
     }
 }

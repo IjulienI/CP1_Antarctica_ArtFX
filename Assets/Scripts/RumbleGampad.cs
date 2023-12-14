@@ -5,6 +5,7 @@ public class RumbleGamepad : MonoBehaviour
 {
     public static RumbleGamepad instance;
     private bool playing = false;
+    private int isActivated;
 
     private void Start()
     {
@@ -12,7 +13,8 @@ public class RumbleGamepad : MonoBehaviour
     }
     public void MakeGampadRumble(float lowFrequency, float highFrequency, float rumbleDuration)
     {
-        if (Gamepad.current != null && !playing)
+        isActivated = PlayerPrefs.GetInt("Vibration activation", 1);
+        if (Gamepad.current != null && !playing && isActivated == 1)
         {
             playing = true;
             Gamepad.current.SetMotorSpeeds(0.2f, 1f);

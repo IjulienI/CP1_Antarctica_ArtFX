@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -26,6 +24,8 @@ public class VolumeSettings : MonoBehaviour
         globalVolumeSlider.value = PlayerPrefs.GetFloat(AudioManager.MASTER_KEY, 1f);
         musicVolumeSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, 1f);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 1f);
+
+        MenuManager.instance.setHasLoad();
     }
 
     private void OnDisable()
