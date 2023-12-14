@@ -3597,9 +3597,9 @@ MonoBehaviour:
   lowFrequencyReturnButton: 0.1
   highFrequencyReturnButton: 0.2
   rumbleDurationReturnButton: 0.2
-  lowFrequencyVolumeSlider: 0
+  lowFrequencyVolumeSlider: 0.1
   highFrequencyVolumeSlider: 0.1
-  rumbleDurationVolumeSlider: 0.1
+  rumbleDurationVolumeSlider: 0.08
 --- !u!1 &1261328521
 GameObject:
   m_ObjectHideFlags: 0

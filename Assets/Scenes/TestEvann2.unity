@@ -1039,6 +1039,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1269252573}
     - target: {fileID: 914348929424926760, guid: ef775a1596bd29340963b4368c22440c, type: 3}
+      propertyPath: lowFrequencyNumpadKey
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914348929424926760, guid: ef775a1596bd29340963b4368c22440c, type: 3}
+      propertyPath: highFrequencyNumpadKey
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914348929424926760, guid: ef775a1596bd29340963b4368c22440c, type: 3}
+      propertyPath: rumbleDurationNumpadKey
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914348929424926760, guid: ef775a1596bd29340963b4368c22440c, type: 3}
       propertyPath: numberText.Array.data[0]
       value: 
       objectReference: {fileID: 246268302}

@@ -21,10 +21,14 @@ public class NumpadDoor : MonoBehaviour
     [Header("Keybind Sprites")]
     [SerializeField] private Sprite keyboardKeybind;
     [SerializeField] private Sprite gamepadKeybind;
-    [Header("Rumble")]
-    [SerializeField] private float lowFrequency = 0.5f;
-    [SerializeField] private float highFrequency = 0.5f;
-    [SerializeField] private float rumbleDuration = 0.5f;
+    [Header("Gamepad Rumble Numpad Key")]
+    [SerializeField] private float lowFrequencyNumpadKey = 0.5f;
+    [SerializeField] private float highFrequencyNumpadKey = 0.5f;
+    [SerializeField] private float rumbleDurationNumpadKey = 0.5f;
+    [Header("Gamepad Rumble Wrong code")]
+    [SerializeField] private float lowFrequencyWrongCode = 0.5f;
+    [SerializeField] private float highFrequencyWrongCode = 0.5f;
+    [SerializeField] private float rumbleDurationWrongCode = 0.5f;
 
     private bool isSelectButtonShowed;
     private bool isNumpadShowed;
@@ -77,7 +81,6 @@ public class NumpadDoor : MonoBehaviour
     {
         if (isSelectButtonShowed && !isNumpadShowed)
         {
-            RumbleGamepad.instance.MakeGampadRumble(lowFrequency, highFrequency, rumbleDuration);
             PlayerMovementEvann.instance.enabled = false;
             PlayerMovementEvann.instance.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             PlayerMovementEvann.instance.SetCanJump(false);
@@ -86,6 +89,16 @@ public class NumpadDoor : MonoBehaviour
             keybindGo.SetActive(false);
             isNumpadShowed = true;
             numpadButtons[1].Select();
+        }
+        else
+        {
+            codePlayer.Clear();
+            count = 0;
+            PlayerMovementEvann.instance.enabled = true;
+            PlayerMovementEvann.instance.SetCanJump(true);
+            numpadImg.gameObject.SetActive(false);
+            keybindGo.SetActive(true);
+            isNumpadShowed = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -130,6 +143,7 @@ public class NumpadDoor : MonoBehaviour
     {
         if (codePlayer.Count < 4)
         {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyNumpadKey, highFrequencyNumpadKey, rumbleDurationNumpadKey);
             codePlayer.Add(number);
             numberText[count].SetText("" + number);
             count++;
@@ -157,7 +171,8 @@ public class NumpadDoor : MonoBehaviour
             Invoke(nameof(OpenDoor), 1f);
         }
         else
-        {   
+        {
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyWrongCode, highFrequencyWrongCode, rumbleDurationWrongCode);
             foreach (TextMeshProUGUI numberTxt in numberText)
             {
                 numberTxt.color = Color.red;
