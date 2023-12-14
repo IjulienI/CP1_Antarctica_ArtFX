@@ -197,8 +197,23 @@ public class MenuManager : MonoBehaviour
         else if(isVibrationsActivated == 0 && hasLoad)
         {
             isVibrationsActivated = 1;
-            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
             PlayerPrefs.SetInt("Vibration activation", isVibrationsActivated);
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+        }
+    }
+
+    public void setFullscreen()
+    {
+        if (fullscreenToggle.isOn)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
+        }
+
+        else 
+        { 
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+            RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
         }
     }
 
