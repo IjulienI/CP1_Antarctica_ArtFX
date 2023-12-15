@@ -20,7 +20,7 @@ public class AiStateMachine : MonoBehaviour
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Target");
-        player = GameObject.FindAnyObjectByType<PlayerMovementEvann>().gameObject;
+        player = GameObject.FindAnyObjectByType<PlayerMovement>().gameObject;
     }
 
     private void Start()

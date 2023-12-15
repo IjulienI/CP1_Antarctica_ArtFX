@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-//using static System.Net.Mime.MediaTypeNames;
 
 public class NumpadDoor : MonoBehaviour
 {
@@ -81,9 +78,9 @@ public class NumpadDoor : MonoBehaviour
     {
         if (isSelectButtonShowed && !isNumpadShowed)
         {
-            PlayerMovementEvann.instance.enabled = false;
-            PlayerMovementEvann.instance.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            PlayerMovementEvann.instance.SetCanJump(false);
+            PlayerMovement.instance.enabled = false;
+            PlayerMovement.instance.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            PlayerMovement.instance.SetCanJump(false);
             ResetCodeText("-");
             numpadImg.gameObject.SetActive(true);
             keybindGo.SetActive(false);
@@ -99,8 +96,8 @@ public class NumpadDoor : MonoBehaviour
             codePlayer.Clear();
             keybindGo.GetComponent<SpriteRenderer>().sprite = keyboardKeybind;
             count = 0;
-            PlayerMovementEvann.instance.enabled = true;
-            PlayerMovementEvann.instance.SetCanJump(true);
+            PlayerMovement.instance.enabled = true;
+            PlayerMovement.instance.SetCanJump(true);
             numpadImg.gameObject.SetActive(false);
             keybindGo.SetActive(true);
             isNumpadShowed = false;
@@ -137,8 +134,8 @@ public class NumpadDoor : MonoBehaviour
         {
             codePlayer.Clear();
             count = 0;
-            PlayerMovementEvann.instance.enabled = true;
-            PlayerMovementEvann.instance.SetCanJump(true);
+            PlayerMovement.instance.enabled = true;
+            PlayerMovement.instance.SetCanJump(true);
             numpadImg.gameObject.SetActive(false);
             keybindGo.SetActive(true);
             isNumpadShowed = false;
@@ -196,8 +193,8 @@ public class NumpadDoor : MonoBehaviour
     {
         isDoorOpened = true;
         numpadImg.gameObject.SetActive(false);
-        PlayerMovementEvann.instance.enabled = true;
-        PlayerMovementEvann.instance.SetCanJump(true);
+        PlayerMovement.instance.enabled = true;
+        PlayerMovement.instance.SetCanJump(true);
     }
     
 }

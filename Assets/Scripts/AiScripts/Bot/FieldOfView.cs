@@ -11,7 +11,7 @@ public class FieldOfView : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindAnyObjectByType<PlayerMovementEvann>().gameObject;
+        player = GameObject.FindAnyObjectByType<PlayerMovement>().gameObject;
         _stateMachine = GetComponent<AiStateMachine>();
     }
 
