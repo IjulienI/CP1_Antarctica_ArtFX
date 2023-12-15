@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerMovementEvann : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Don't Touch")]
     [SerializeField] private BoxCollider2D _collider;
@@ -38,6 +39,7 @@ public class PlayerMovementEvann : MonoBehaviour
     
     private bool isFacingRight = true;
     private bool isGrounded;
+    private bool hasPullTrigger;
 
     bool _ladderInteraction = false;
     bool _onTriggerLadder = false;
@@ -53,7 +55,7 @@ public class PlayerMovementEvann : MonoBehaviour
     public InputActionReference upLight;
     public InputActionReference downLight;
 
-    public static PlayerMovementEvann instance;
+    public static PlayerMovement instance;
 
     private void Awake()
     {
@@ -259,6 +261,7 @@ public class PlayerMovementEvann : MonoBehaviour
 
     private void UpLight(InputAction.CallbackContext light)
     {
+
         if (stateOfFire == 1)
         {
             stateOfFire = 2;
@@ -274,23 +277,26 @@ public class PlayerMovementEvann : MonoBehaviour
             stateOfFire = 1;
             progressiveFire = true;
         }
+        
     }
     private void DownLight(InputAction.CallbackContext light)
     {
-        if (stateOfFire == 3)
         {
-            stateOfFire = 2;
-            progressiveFire = true;
-        }
-        else if (stateOfFire == 2)
-        {
-            stateOfFire = 1;
-            progressiveFire = true;
-        }
-        else
-        {
-            stateOfFire = 3;
-            progressiveFire = true;
+            if (stateOfFire == 3)
+            {
+                stateOfFire = 2;
+                progressiveFire = true;
+            }
+            else if (stateOfFire == 2)
+            {
+                stateOfFire = 1;
+                progressiveFire = true;
+            }
+            else
+            {
+                stateOfFire = 3;
+                progressiveFire = true;
+            }
         }
     }
 
@@ -351,5 +357,4 @@ public class PlayerMovementEvann : MonoBehaviour
     {
         canJump = x;
     }
-
 }
