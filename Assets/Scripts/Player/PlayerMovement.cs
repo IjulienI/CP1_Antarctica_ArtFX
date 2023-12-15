@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _collider.isTrigger = true;
             _lunchFallAcceleration = true;
-            Invoke("GoDown", 0.4f);
+            Invoke("GoDown", 0.25f);
         }
         else
         {
@@ -334,6 +334,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "FlyingPlatform")
         {
+            print("exit");
             _canDown = false;
 
         }
