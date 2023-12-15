@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -210,14 +207,12 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
         }
 
-        else 
-        { 
+        else
+        {
             Screen.fullScreenMode = FullScreenMode.Windowed;
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyVolumeSlider, highFrequencyVolumeSlider, rumbleDurationVolumeSlider);
         }
     }
-
-
     public void setHasLoad()
     {
         hasLoad = true;
