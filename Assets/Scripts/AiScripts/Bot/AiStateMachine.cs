@@ -6,16 +6,19 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class AiStateMachine : MonoBehaviour
 {
     private GameObject target;
-    public GameObject player;
     private AIPathController _controller;
     private Locomotion locomotion;
-    public State state;
-    public bool alerted;
+    [Header("Movements")]
     [SerializeField] private int randomRange;
     [SerializeField] private int distanceTreshold;
     [SerializeField] private int minWaitRange;
     [SerializeField] private int maxWaitRange;
     [SerializeField] public int maxDistance;
+    [Header("State")]
+    public State state;
+    public bool alerted;
+    [Header("Other")]
+    public GameObject player;
 
     private void Awake()
     {
@@ -82,7 +85,7 @@ public class AiStateMachine : MonoBehaviour
         state = State.move;
     }
 
-    private void GetRandomInRange(int minRange, int maxRange)
+    public void GetRandomInRange(int minRange, int maxRange)
     {
         List<Node> tempNodes = new List<Node>();
         for (int i = 0; i < _controller.AllNodes.Count; i++)
