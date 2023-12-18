@@ -1,11 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class MenuManager : MonoBehaviour
 {
     [Header("Menus Canvas")]
+    [SerializeField] private Canvas titleScreenCanvas;
     [SerializeField] private Canvas mainMenuCanvas;
     [SerializeField] private Canvas optionMenuCanvas;
     [SerializeField] private Canvas creditsMenuCanvas;
@@ -25,6 +28,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
+    [SerializeField] private Image titleScreenBackgroundImg;
+    [SerializeField] private Image titleScreenIceImg;
+    [SerializeField] private Image logoImg;
+    [Header("Press Any Key Images")]
+    [SerializeField] private GameObject pressKeyKeyboard;
+    [SerializeField] private GameObject pressKeyGamepad;
     private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral, isGamePaused;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
@@ -36,10 +45,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float lowFrequencyVolumeSlider;
     [SerializeField] private float highFrequencyVolumeSlider;
     [SerializeField] private float rumbleDurationVolumeSlider;
+    [Header("AudioSounds")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip clickSoundFX;
 
     public static MenuManager instance;
 
     private bool hasLoad;
+    private bool isTitleScreenShowed;
     private int isVibrationsActivated;
     private void OnEnable()
     {
@@ -60,6 +73,12 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
+        if(titleScreenCanvas != null)
+        {
+            isTitleScreenShowed = true;
+            titleScreenCanvas.gameObject.SetActive(true);
+            mainMenuCanvas.gameObject.SetActive(false);
+        }
         isVibrationsActivated = PlayerPrefs.GetInt("Vibration activation", 1);
         if (isVibrationsActivated == 1)
         {
@@ -69,6 +88,56 @@ public class MenuManager : MonoBehaviour
         {
             gamepadVibrationsToggle.isOn = false;
         }
+    }
+    private void Update()
+    {
+        if (isTitleScreenShowed)
+        {
+            if (Gamepad.current != null)
+            {
+                pressKeyGamepad.SetActive(true);
+                pressKeyKeyboard.SetActive(false);
+            }
+            else
+            {
+                pressKeyGamepad.SetActive(false);
+                pressKeyKeyboard.SetActive(true);
+            }
+            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))
+            {
+                sfxSource.clip = clickSoundFX;
+                sfxSource.Play();
+                StartCoroutine(EnterMenu());
+            }
+        }
+    }
+
+    private IEnumerator EnterMenu()
+    {
+        float elapsedTime = 0f;
+        float fadeDuration = 1f;
+        isTitleScreenShowed = false;
+        pressKeyGamepad.SetActive(false);
+        pressKeyKeyboard.SetActive(false);
+        while(elapsedTime < fadeDuration)
+        {
+            titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
+            titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
+            elapsedTime += 1*Time.deltaTime;
+
+            yield return null;
+        }
+        titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,0f);
+        titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, 0f);
+        logoImg.GetComponent<Animator>().SetTrigger("Play");
+        Invoke(nameof(SetCanvasActive), 0.5f);
+        
+    }
+
+    private void SetCanvasActive()
+    {
+        titleScreenCanvas.gameObject.SetActive(false);
+        mainMenuCanvas.gameObject.SetActive(true);
     }
 
     public void PauseGame()
