@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fallingGravityScale = 3f;
 
     [Header("Cold")]
-    [SerializeField] private float coldness = 1000f;
+    [SerializeField] private float coldness = 10f;
     public float actualCold = 0f;
 
     private float coyoteTimer;
@@ -101,7 +101,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (stateOfFire == 1)
         {
-            actualCold -= Time.deltaTime;
+            if (actualCold > 0f)
+            {
+                actualCold -= Time.deltaTime * 2;
+            }
         }
         else if (stateOfFire == 2)
         {
@@ -111,8 +114,39 @@ public class PlayerMovement : MonoBehaviour
         {
             actualCold += Time.deltaTime *3;
         }
+        if(actualCold > coldness)
+        {
+            if (actualCold > coldness * 2f)
+            {
+                if (actualCold > coldness * 3f)
+                {
+                    if (actualCold > coldness * 4f)
+                    {
+                        stateOfFire = 1;
+                        progressiveFire = true;
+                    }
+                    else
+                    {
+                        coldStep4.color = new Color(255, 255, 255, (actualCold - 3f * coldness) / coldness);
+                    }
 
-        //coldStep1.
+                }
+                else
+                {
+                    coldStep3.color = new Color(255, 255, 255, (actualCold - 2f * coldness) / coldness);
+                }
+
+            }
+            else
+            {
+                coldStep2.color = new Color(255, 255, 255, (actualCold - coldness) / coldness);
+            }
+
+        }
+        else
+        {
+            coldStep1.color = new Color(255, 255, 255, actualCold / coldness);
+        }
     }
 
     private void FixedUpdate()
