@@ -5,12 +5,28 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-    [SerializeField] private float visionRange; 
+    [Header("Ai FOV")]
+
+    [Range(5f, 25f)]
+    [SerializeField] private float visionRange;
+
+    [Range(45f, 180f)]
     [SerializeField] private float visionConeAngle;
+
+    [Range(5f,25f)]
+    [SerializeField] private float forceVisioRange;
+
+    [Header("Ai Sound Detection")]
+    [Range(5f, 45f)]
+    [SerializeField] private float soundRange;
+
     private GameObject player;
     private AiStateMachine _stateMachine;
+
     private string touchTag;
+
     bool doOnce;
+    bool detected;
 
     private void Start()
     {
@@ -20,73 +36,26 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlayerInFov())
+        if (IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange)
         {
             _stateMachine.state = AiStateMachine.State.chase;
             doOnce = true;
+            detected = true;
         }
         else if (doOnce)
         {
             doOnce = false;
+            detected = false;
             _stateMachine.state = AiStateMachine.State.move;
-        }
-        //Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, visionRange, LayerMask.NameToLayer("Player"));
-        //if(rangeCheck.Length > 0 )
-        //{ 
-        //    Transform target = rangeCheck[0].transform;
-        //    Vector2 directionToTarget = (target.position - transform.position).normalized;
-
-        //    if(Vector2.Angle(transform.position, directionToTarget) < visionRange / 2)
-        //    {
-        //        float distanceToTarget = Vector2.Distance(transform.position, directionToTarget);
-
-        //        RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - player.transform.position) * -1);
-        //        Debug.DrawRay(transform.position, (transform.position - player.transform.position) * -1);
-        //        touchTag = hit.collider.name;
-        //        Debug.Log(player.transform.position);
-        //        Debug.Log(touchTag);
-        //        if (hit.collider != null && hit.collider.tag == "Player" && distanceToTarget <= _stateMachine.maxDistance)
-        //        {
-        //            _stateMachine.state = AiStateMachine.State.chase;
-        //            doOnce = true;
-        //        }
-        //        else if (doOnce)
-        //        {
-        //            doOnce = false;
-        //            _stateMachine.state = AiStateMachine.State.move;
-        //        }
-        //    }
-        //}
-        //if(Vector2.Distance(transform.position, player.transform.position) <= visionRange)
-        //{
-        //    if (Vector2.Angle(transform.position, player.transform.forward) <= visionConeAngle / 2)
-        //    {
-        //        float distance = Vector2.Distance(transform.position, player.transform.position);
-        //        RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - player.transform.position)*-1);
-        //        Debug.DrawRay(transform.position, (transform.position - player.transform.position)*-1);
-        //        touchTag = hit.collider.name;
-        //        Debug.Log(player.transform.position);
-        //        Debug.Log(touchTag);
-        //        if (hit.collider != null && hit.collider.tag == "Player" && distance <= _stateMachine.maxDistance)
-        //        {
-        //            _stateMachine.state = AiStateMachine.State.chase;
-        //            doOnce = true;
-        //        }
-        //        else if(doOnce)
-        //        {
-        //            doOnce = false;
-        //            _stateMachine.state = AiStateMachine.State.move;
-        //        }
-        //    }
-        //}
+        }       
     }
 
     bool IsPlayerInFov()
     {
-        Vector2 directionToPlayer = player.transform.position - transform.position;
+        Vector2 directionToPlayer = (player.transform.position - transform.position)*-1;
         float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
 
-        if(angleToPlayer < visionConeAngle * 0.5f)
+        if(angleToPlayer < visionConeAngle / 2)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - player.transform.position) * -1,visionRange);
             Debug.DrawRay(transform.position, (transform.position - player.transform.position) * -1);
@@ -112,9 +81,17 @@ public class FieldOfView : MonoBehaviour
         Gizmos.DrawRay(transform.position, upRayDirection);
         Gizmos.DrawRay(transform.position, downRayDirection);
 
+        Gizmos.color = Color.blue;
+
+        Gizmos.DrawWireSphere(transform.position, soundRange);
+
         Gizmos.color = Color.yellow;
 
         Gizmos.DrawWireSphere(transform.position, visionRange);
+
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawWireSphere(transform.position, forceVisioRange);
     }
 
     private void OnGUI()
