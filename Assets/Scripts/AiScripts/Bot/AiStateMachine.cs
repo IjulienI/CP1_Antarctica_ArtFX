@@ -1,26 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class AiStateMachine : MonoBehaviour
 {
     private GameObject target;
-    public GameObject player;
+    private AIPathController _controller;
     private Locomotion locomotion;
-    public State state;
-    public bool alerted;
+    [Header("Movements")]
     [SerializeField] private int randomRange;
     [SerializeField] private int distanceTreshold;
     [SerializeField] private int minWaitRange;
     [SerializeField] private int maxWaitRange;
-    [SerializeField] private int maxDistance;
-
-    private bool drawLine;
+    [SerializeField] public int maxDistance;
+    [Header("State")]
+    public State state;
+    public bool alerted;
+    [Header("Other")]
+    public GameObject player;
 
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Target");
         player = GameObject.FindAnyObjectByType<PlayerMovement>().gameObject;
+        _controller = GetComponent<AIPathController>();
     }
 
     private void Start()
@@ -34,29 +38,29 @@ public class AiStateMachine : MonoBehaviour
         {
             case State.chase:
                 target.transform.position = player.transform.position;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position);
-                if(hit.collider != null)
-                {
-                    float distance = Vector2.Distance(transform.position, player.transform.position);
-                    if(distance >= maxDistance)
-                    {
-                        drawLine = true;
-                        if(hit.collider.tag != "Player")
-                        {
-                            state = State.move;
-                        }
-                    }
-                }
                 break;
             case State.free:
                 GetRandomTarget();
                 break;
             case State.move:
-                drawLine = false;
-                if(Vector3.Distance(transform.position,target.transform.position) <= distanceTreshold)
+                if (Vector3.Distance(transform.position, target.transform.position) <= distanceTreshold)
                 {
                     state = State.wait;
                     Invoke(nameof(StopWait), Random.Range(minWaitRange, maxWaitRange));
+                }
+                else
+                {
+                    Vector2 closerNodePos = new Vector2(0.0f, 0.0f);
+                    float close = Mathf.Infinity;
+                    for (int i = 0; i < _controller.AllNodes.Count; i++)
+                    {
+                        if (Vector2.Distance(target.transform.position, _controller.AllNodes[i].transform.position) < close)
+                        {
+                            close = Vector2.Distance(target.transform.position, _controller.AllNodes[i].transform.position);
+                            closerNodePos = _controller.AllNodes[i].transform.position;
+                        }
+                    }
+                    target.transform.position = closerNodePos;
                 }
                 break;
         }
@@ -69,16 +73,29 @@ public class AiStateMachine : MonoBehaviour
 
     private void GetRandomTarget()
     {
-        Node[] nodes = FindObjectsOfType<Node>();
         List<Node> tempNodes = new List<Node>();
-        for(int i = 0; i < nodes.Length; i++)
+        for(int i = 0; i < _controller.AllNodes.Count; i++)
         {
-            if (Vector2.Distance(transform.position, nodes[i].transform.position) <= randomRange)
+            if (Vector2.Distance(transform.position, _controller.AllNodes[i].transform.position) <= randomRange)
             {
-                tempNodes.Add(nodes[i]);
+                tempNodes.Add(_controller.AllNodes[i]);
             }
         }
         target.transform.position = tempNodes[Random.Range(0,tempNodes.Count)].transform.position;
+        state = State.move;
+    }
+
+    public void GetRandomInRange(int minRange, int maxRange)
+    {
+        List<Node> tempNodes = new List<Node>();
+        for (int i = 0; i < _controller.AllNodes.Count; i++)
+        {
+            if (Vector2.Distance(player.transform.position, _controller.AllNodes[i].transform.position) >= minRange && Vector2.Distance(player.transform.position, _controller.AllNodes[i].transform.position) <= maxRange)
+            {
+                tempNodes.Add(_controller.AllNodes[i]);
+            }
+        }
+        target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
         state = State.move;
     }
 
@@ -86,7 +103,16 @@ public class AiStateMachine : MonoBehaviour
     {
         if(state == State.wait)
         {
-            state = State.free;
+            int rnd = Random.Range(0, 3);
+            if (rnd < 2)
+            {
+                state = State.free;
+            }
+            else
+            {
+                GetRandomInRange(3, 8);
+                Debug.Log("Hello player");
+            }
         }
     }
     enum Locomotion
@@ -104,13 +130,5 @@ public class AiStateMachine : MonoBehaviour
         investigation,
         move,
         wait
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if(drawLine)
-        {
-            Gizmos.DrawRay(transform.position, player.transform.position);
-        }
     }
 }

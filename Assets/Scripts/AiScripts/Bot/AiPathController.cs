@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ public class AIPathController : MonoBehaviour
 
     [SerializeField] private List<Node> Path;
 
-    private List<Node> AllNodes = new List<Node>();
+    public List<Node> AllNodes = new List<Node>();
 
-    private Node ClosestNode;
+    public Node ClosestNode;
     private Node TargetNode;
 
     private Rigidbody2D m_Rigidbody2D;
@@ -42,6 +43,7 @@ public class AIPathController : MonoBehaviour
     private bool canJump = true;
     private bool tryAgain = false;
     private float velocity;
+    private bool jumpDebugOn;
 
     public bool IsJumping { get; private set; }
     public float HorizontalMove { get; private set; }
@@ -210,6 +212,13 @@ public class AIPathController : MonoBehaviour
             float yMagNode = LastNode != currentNode ? pos.position.y - LastNode.transform.position.y : 0;
             bool direction = canJump && m_Rigidbody2D.velocity.y < -1 ? false : true;
 
+            if (!IsJumping)
+            {
+                if (Path[0].transform.position.y > transform.position.y && !jumpDebugOn)
+                {
+                    StartCoroutine(JumpDebug());
+                }
+            }
             if (direction)
             {
                 if (transform.position.x > pos.position.x)
@@ -227,7 +236,7 @@ public class AIPathController : MonoBehaviour
                 JumpForce = CalculateJumpForce(xMag, yMag);
                 canJump = false;
             }
-            HorizontalMove *= velocity * 10;
+            HorizontalMove *= velocity * 10;;
         }
         if(Path.Count == 0)
         {
@@ -292,6 +301,34 @@ public class AIPathController : MonoBehaviour
         }
     }
 
+    IEnumerator JumpDebug()
+    {
+        jumpDebugOn = true;
+        yield return new WaitForSeconds(0.5f);
+        if(!IsJumping )
+        {
+            List<float> temp = new List<float>();
+            for (int i = 0; i < 5; i++)
+            {
+                temp.Add(transform.position.y);
+            }
+            float tempY = temp[0];
+            int count = 0;
+            for (int i = 1; i < temp.Count; i++)
+            {
+                if (temp[i] == tempY)
+                {
+                    count++;
+                }
+            }
+            if (count >= 2 && !IsJumping)
+            {
+                FindPath();
+            }
+        }
+        jumpDebugOn = false;
+    }
+
     IEnumerator IsStopped()
     {
         yield return new WaitForSeconds(1);
@@ -300,5 +337,10 @@ public class AIPathController : MonoBehaviour
             canJump = true;
             tryAgain = true;
         }
+    }
+
+    private void OnGUI()
+    {
+        GUILayout.Label(transform.position.ToString());
     }
 }

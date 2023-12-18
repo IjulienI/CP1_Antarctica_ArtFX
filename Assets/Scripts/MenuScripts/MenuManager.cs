@@ -1,18 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class MenuManager : MonoBehaviour
 {
     [Header("Menus Canvas")]
+    [SerializeField] private Canvas titleScreenCanvas;
     [SerializeField] private Canvas mainMenuCanvas;
     [SerializeField] private Canvas optionMenuCanvas;
     [SerializeField] private Canvas creditsMenuCanvas;
+    [SerializeField] private Canvas pauseMenuCanvas;
     [Header("Buttons")]
     [SerializeField] private Button newGameBtn;
     [SerializeField] private Button volumeBtn;
     [SerializeField] private Button keybindsBtn;
     [SerializeField] private Button generalBtn;
+    [SerializeField] private Button resumeBtn;
     [Header("Volume Slider")]
     [SerializeField] private Slider globalVolumeSlider;
     [Header("General Options Toggles")]
@@ -22,7 +28,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
-    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral;
+    [SerializeField] private Image titleScreenBackgroundImg;
+    [SerializeField] private Image titleScreenIceImg;
+    [SerializeField] private Image logoImg;
+    [Header("Press Any Key Images")]
+    [SerializeField] private GameObject pressKeyKeyboard;
+    [SerializeField] private GameObject pressKeyGamepad;
+    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral, isGamePaused;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
     [Header("Gamepad Rumble settings - Return Button (For the frequencies, 1 is the max value)")]
@@ -33,10 +45,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float lowFrequencyVolumeSlider;
     [SerializeField] private float highFrequencyVolumeSlider;
     [SerializeField] private float rumbleDurationVolumeSlider;
+    [Header("AudioSounds")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip clickSoundFX;
 
     public static MenuManager instance;
 
     private bool hasLoad;
+    private bool isTitleScreenShowed;
     private int isVibrationsActivated;
     private void OnEnable()
     {
@@ -57,6 +73,12 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
+        if(titleScreenCanvas != null)
+        {
+            isTitleScreenShowed = true;
+            titleScreenCanvas.gameObject.SetActive(true);
+            mainMenuCanvas.gameObject.SetActive(false);
+        }
         isVibrationsActivated = PlayerPrefs.GetInt("Vibration activation", 1);
         if (isVibrationsActivated == 1)
         {
@@ -66,6 +88,71 @@ public class MenuManager : MonoBehaviour
         {
             gamepadVibrationsToggle.isOn = false;
         }
+    }
+    private void Update()
+    {
+        if (isTitleScreenShowed)
+        {
+            if (Gamepad.current != null)
+            {
+                pressKeyGamepad.SetActive(true);
+                pressKeyKeyboard.SetActive(false);
+            }
+            else
+            {
+                pressKeyGamepad.SetActive(false);
+                pressKeyKeyboard.SetActive(true);
+            }
+            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))
+            {
+                sfxSource.clip = clickSoundFX;
+                sfxSource.Play();
+                StartCoroutine(EnterMenu());
+            }
+        }
+    }
+
+    private IEnumerator EnterMenu()
+    {
+        float elapsedTime = 0f;
+        float fadeDuration = 1f;
+        isTitleScreenShowed = false;
+        pressKeyGamepad.SetActive(false);
+        pressKeyKeyboard.SetActive(false);
+        while(elapsedTime < fadeDuration)
+        {
+            titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
+            titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
+            elapsedTime += 1*Time.deltaTime;
+
+            yield return null;
+        }
+        titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,0f);
+        titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, 0f);
+        logoImg.GetComponent<Animator>().SetTrigger("Play");
+        Invoke(nameof(SetCanvasActive), 0.5f);
+        
+    }
+
+    private void SetCanvasActive()
+    {
+        titleScreenCanvas.gameObject.SetActive(false);
+        mainMenuCanvas.gameObject.SetActive(true);
+    }
+
+    public void PauseGame()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0f;
+        pauseMenuCanvas.gameObject.SetActive(true);
+        resumeBtn.Select();
+
+    }
+    public void UnPauseGame()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1f;
+        pauseMenuCanvas.gameObject.SetActive(false);
     }
 
     public void NewGame()
@@ -80,7 +167,14 @@ public class MenuManager : MonoBehaviour
     {
         isInOptions = true;
         generalBtn.Select();
-        mainMenuCanvas.gameObject.SetActive(false);
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.gameObject.SetActive(false);
+        }
+        else if (pauseMenuCanvas != null)
+        {
+            pauseMenuCanvas.gameObject.SetActive(false);
+        }
         optionMenuCanvas.gameObject.SetActive(true);
     }
     public void Credits()
@@ -95,10 +189,18 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitOptionsMenu()
     {
-        mainMenuCanvas.gameObject.SetActive(true);
-        optionMenuCanvas.gameObject.SetActive(false);
-        newGameBtn.Select();
+        if (mainMenuCanvas != null)
+        {
+            newGameBtn.Select();
+            mainMenuCanvas.gameObject.SetActive(true);
+        }
+        else if (pauseMenuCanvas != null)
+        {
+            resumeBtn.Select();
+            pauseMenuCanvas.gameObject.SetActive(true);
+        }
         isInOptions = false;
+        optionMenuCanvas.gameObject.SetActive(false);
     }
     public void ExitCreditsMenu() 
     {
@@ -156,6 +258,11 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitOptionsMenu();
         }
+        else if (!isInOptions && isGamePaused && obj.control.device is Gamepad)
+        {
+            PlayerMovement.instance.SetCanFlip();
+            UnPauseGame();
+        }
         if (isInCredits)
         {
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
@@ -176,6 +283,7 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitGraphics();
         }
+        
     }
     public void ChangeValueSliders()
     {
@@ -216,5 +324,14 @@ public class MenuManager : MonoBehaviour
     public void setHasLoad()
     {
         hasLoad = true;
+    }
+    public void QuitMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void ResumeGame()
+    {
+        PlayerMovement.instance.SetCanFlip();
+        UnPauseGame();
     }
 }
