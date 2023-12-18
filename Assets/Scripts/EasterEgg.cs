@@ -28,7 +28,7 @@ public class EasterEgg : MonoBehaviour
     private void FirstInput(InputAction.CallbackContext obj)
     {
         step1 = true;
-        Invoke("RestartEegg", 5f);
+        Invoke("RestartEegg", 3f);
         step2 = false;
         step3 = false;
     }

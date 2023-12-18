@@ -49,6 +49,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EE_Input1",
+                    "type": "Button",
+                    "id": "4704d074-12af-4dd2-bf9c-d3af9deeae59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EE_Input2",
+                    "type": "Button",
+                    "id": "f7661abd-d251-4088-9295-dfc27350b7ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EE_Input3",
+                    "type": "Button",
+                    "id": "f061f6ca-5253-4fe8-94c2-4958e684b605",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -260,72 +287,37 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "EasterEgg",
-            "id": "458acf70-12b1-4aaa-a546-4a3e87c3b740",
-            "actions": [
-                {
-                    "name": "Input1",
-                    "type": "Button",
-                    "id": "c72f75db-e21f-44f1-831a-735b8cef7d0f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
-                {
-                    "name": "Input2",
-                    "type": "Button",
-                    "id": "a630fd48-da94-4168-94d8-a57677532ac6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Input3",
-                    "type": "Button",
-                    "id": "2178bd71-d851-4f3c-b1f1-aaa847aab5e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
                 {
                     "name": "",
-                    "id": "705eaa69-7076-4609-b28b-d7e0fe81f450",
+                    "id": "699b041c-9898-47d3-b5b1-48a3aac0b679",
                     "path": "<Keyboard>/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Input1",
+                    "action": "EE_Input1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "6207aa8b-6915-4af5-a017-b2a97f348ad1",
+                    "id": "cdfd7ffe-728f-41a0-9e59-16e23cf91932",
                     "path": "<Keyboard>/o",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Input2",
+                    "action": "EE_Input2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "53031383-eb6c-426f-8b3e-4c775907d911",
+                    "id": "dea62dc8-b34d-4e72-b18b-84ae0d43f150",
                     "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Input3",
+                    "action": "EE_Input3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
