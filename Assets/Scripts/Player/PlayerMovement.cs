@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -7,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Don't Touch")]
     [SerializeField] private BoxCollider2D _collider;
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
     [SerializeField] private Light2D _fire;
@@ -39,14 +38,13 @@ public class PlayerMovement : MonoBehaviour
     
     private bool isFacingRight = true;
     private bool isGrounded;
-    private bool hasPullTrigger;
 
-    bool _ladderInteraction = false;
-    bool _onTriggerLadder = false;
-    bool _canDown = false;
+    bool ladderInteraction = false;
+    bool onTriggerLadder = false;
+    bool canDown = false;
     bool canJump = true;
-    float _fall = 1;
-    bool _lunchFallAcceleration = false;
+    float fall = 1;
+    bool launchFallAcceleration = false;
     int stateOfFire = 1;
     bool progressiveFire = false;
 
@@ -77,28 +75,28 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             coyoteTimer = coyoteTime;
-            _lunchFallAcceleration = false;
+            launchFallAcceleration = false;
         }
         else
         {
             coyoteTimer -= Time.deltaTime;
         }
-        if (_onTriggerLadder == false)
+        if (onTriggerLadder == false)
         {
-            _ladderInteraction = false;
-            rb.gravityScale = fallingGravityScale;
+            ladderInteraction = false;
+            _rb.gravityScale = fallingGravityScale;
             speedY = 0f;
         }
     }
 
     private void FixedUpdate()
     {
-        if (_lunchFallAcceleration == true)
+        if (launchFallAcceleration == true)
         {
-            _fall = Mathf.SmoothStep(_fall, 1, 0.2f);
-            if (_fall == 0)
+            fall = Mathf.SmoothStep(fall, 1, 0.2f);
+            if (fall == 0)
             {
-                _lunchFallAcceleration = false;
+                launchFallAcceleration = false;
             }
         }
 
@@ -125,27 +123,27 @@ public class PlayerMovement : MonoBehaviour
            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
-        if (_ladderInteraction == true && isGrounded == false)
+        if (ladderInteraction == true && isGrounded == false)
         {
 
-            rb.velocity = new Vector2(0, speedY);
+            _rb.velocity = new Vector2(0, speedY);
         }
         else
         {
-            rb.velocity = new Vector2(speedX, rb.velocity.y);
+            _rb.velocity = new Vector2(speedX, _rb.velocity.y);
         }
 
 
-        if (_ladderInteraction == true && isGrounded == true)
+        if (ladderInteraction == true && isGrounded == true)
         {
-            rb.gravityScale = 0;
+            _rb.gravityScale = 0;
             if (vertical != 0)
             {
                 speedY = maxSpeed * vertical;
             }
             else { speedY = 0; }
 
-            if (vertical < 0 && _canDown == true)
+            if (vertical < 0 && canDown == true)
             {
                 _collider.isTrigger = true;
             }
@@ -154,19 +152,19 @@ public class PlayerMovement : MonoBehaviour
                 _collider.isTrigger = false;
             }
 
-            rb.velocity = new Vector2(speedX, speedY);
+            _rb.velocity = new Vector2(speedX, speedY);
         }
-        else if (_ladderInteraction == true)
+        else if (ladderInteraction == true)
         {
 
-            rb.gravityScale = 0;
+            _rb.gravityScale = 0;
             if (vertical != 0)
             {
                 speedY = maxSpeed * vertical;
             }
             else { speedY = 0; }
 
-            if (vertical < 0 && _canDown == true)
+            if (vertical < 0 && canDown == true)
             {
                 _collider.isTrigger = true;
             }
@@ -175,23 +173,23 @@ public class PlayerMovement : MonoBehaviour
                 _collider.isTrigger = false;
             }
         }
-        else if (vertical < 0 && _canDown == true && isGrounded ==true)
+        else if (vertical < 0 && canDown == true && isGrounded ==true)
         {
             _collider.isTrigger = true;
-            _lunchFallAcceleration = true;
+            launchFallAcceleration = true;
             Invoke("GoDown", 0.25f);
         }
         else
         {
             
-            if (rb.velocity.y >= 0)
+            if (_rb.velocity.y >= 0)
             {
-                rb.gravityScale = normalGravityScale;
+                _rb.gravityScale = normalGravityScale;
             }
-            else if (rb.velocity.y < 0)
+            else if (_rb.velocity.y < 0)
             {
-                _lunchFallAcceleration = true;
-                rb.gravityScale = fallingGravityScale * _fall;
+                launchFallAcceleration = true;
+                _rb.gravityScale = fallingGravityScale * fall;
             }
         }
         if (progressiveFire == true)
@@ -222,22 +220,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private void GoDown()
-    {
-        _collider.isTrigger = false;
-    }
+    //private void GoDown()
+    //{
+    //    _collider.isTrigger = false;
+    //}
 
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && coyoteTimer > 0f && canJump)
         {   
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
+            _rb.velocity = new Vector2(_rb.velocity.x, 0f);
+            _rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
         }
 
-        if (context.canceled && rb.velocity.y > 0f)
+        if (context.canceled && _rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
         }
     }
 
@@ -249,9 +247,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Interaction(InputAction.CallbackContext obj)
     {
-        if (_onTriggerLadder)
+        if (onTriggerLadder)
         {
-            _ladderInteraction = !_ladderInteraction;
+            ladderInteraction = !ladderInteraction;
             //if (_ladderInteraction == true)
             //{
             //    _collider.isTrigger = true;
@@ -259,28 +257,30 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void UpLight(InputAction.CallbackContext light)
+    public void UpLight(InputAction.CallbackContext light)
     {
-
-        if (stateOfFire == 1)
+        if (light.performed)
         {
-            stateOfFire = 2;
-            progressiveFire = true;
-        }
-        else if (stateOfFire == 2)
-        {
-            stateOfFire = 3;
-            progressiveFire = true;
-        }
-        else
-        {
-            stateOfFire = 1;
-            progressiveFire = true;
-        }
-        
+            if (stateOfFire == 1)
+            {
+                stateOfFire = 2;
+                progressiveFire = true;
+            }
+            else if (stateOfFire == 2)
+            {
+                stateOfFire = 3;
+                progressiveFire = true;
+            }
+            else
+            {
+                stateOfFire = 1;
+                progressiveFire = true;
+            }
+        }   
     }
-    private void DownLight(InputAction.CallbackContext light)
+    public void DownLight(InputAction.CallbackContext light)
     {
+        if (light.performed)
         {
             if (stateOfFire == 3)
             {
@@ -304,40 +304,44 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "GoUp")
         {
-            _onTriggerLadder = true;
+            onTriggerLadder = true;
         }
-        if (collision.gameObject.tag == "FlyingPlatform")
-        {
-            _canDown = true;
-        }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = true;
-            _fall = 0;
-            _lunchFallAcceleration = false;
-        }
+        //if (collision.gameObject.tag == "FlyingPlatform")
+        //{
+        //    _canDown = true;
+        //}
+        
         if (collision.gameObject.tag == "Untagged")
         {
             _collider.isTrigger = false;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
+            fall = 0;
+            launchFallAcceleration = false;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GoUp")
         {
-            _onTriggerLadder = false;
+            onTriggerLadder = false;
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = false;
-            _lunchFallAcceleration = true;
+            launchFallAcceleration = true;
         }
-        if (collision.gameObject.tag == "FlyingPlatform")
-        {
-            print("exit");
-            _canDown = false;
+        //if (collision.gameObject.tag == "FlyingPlatform")
+        //{
+        //    print("exit");
+        //    _canDown = false;
 
-        }
+        //}
     }
 
     private void Flip()
