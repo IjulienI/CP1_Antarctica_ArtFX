@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
     [SerializeField] private Light2D _fire;
+    [SerializeField] private Image coldStep1;
+    [SerializeField] private Image coldStep2;
+    [SerializeField] private Image coldStep3;
+    [SerializeField] private Image coldStep4;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -27,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float normalGravityScale = 1f;
     [SerializeField] private float fallingGravityScale = 3f;
+
+    [Header("Cold")]
+    [SerializeField] private float coldness = 1000f;
+    public float actualCold = 0f;
 
     private float coyoteTimer;
     private float horizontal;
@@ -90,6 +98,21 @@ public class PlayerMovement : MonoBehaviour
             _rb.gravityScale = fallingGravityScale;
             speedY = 0f;
         }
+
+        if (stateOfFire == 1)
+        {
+            actualCold -= Time.deltaTime;
+        }
+        else if (stateOfFire == 2)
+        {
+            actualCold += Time.deltaTime;
+        }
+        else
+        {
+            actualCold += Time.deltaTime *3;
+        }
+
+        //coldStep1.
     }
 
     private void FixedUpdate()

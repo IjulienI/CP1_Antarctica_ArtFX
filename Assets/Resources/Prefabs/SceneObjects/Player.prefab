@@ -131,7 +131,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4209790239159031966}
+  - {fileID: 6250087685030992768}
   - {fileID: 2037765053866169501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -423,16 +423,20 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/Keyboard/q]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 4704d074-12af-4dd2-bf9c-d3af9deeae59
-    m_ActionName: Player/EE_Input1[/Keyboard/y]
+    m_ActionId: 0717977e-689c-4393-b28a-f5b72215b113
+    m_ActionName: Player/PauseGame[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f7661abd-d251-4088-9295-dfc27350b7ec
-    m_ActionName: Player/EE_Input2[/Keyboard/o]
+    m_ActionId: 95f5aa00-751e-4fb0-9b1d-1b5362f093bf
+    m_ActionName: Player/EE_Yobb1[/Keyboard/y]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f061f6ca-5253-4fe8-94c2-4958e684b605
-    m_ActionName: Player/EE_Input3[/Keyboard/b]
+    m_ActionId: 084f10ce-100a-458e-9555-62558b541178
+    m_ActionName: Player/EE_Yobb2[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f18cba0f-72f7-46d6-af38-cc0273d50b88
+    m_ActionName: Player/EE_Yobb3[/Keyboard/b]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -470,6 +474,7 @@ MonoBehaviour:
   interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   upLight: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   downLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  numpadImg: {fileID: 0}
 --- !u!114 &690294753982122032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,11 +487,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a0300ed6e1b3444b8db05cdeb11cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input1: {fileID: -2096255421902797810, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
-  input2: {fileID: -4089864407519481803, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
-  input3: {fileID: -6196848069755352227, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
-  Yobb: {fileID: 5397911743236785058}
---- !u!1 &5397911743236785058
+  input1: {fileID: -8099571956699057472, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  input2: {fileID: -6468828642034712217, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  input3: {fileID: -5649255439561932457, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
+  Yobb: {fileID: 4427955192233089398}
+--- !u!1 &4427955192233089398
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -494,8 +499,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4209790239159031966}
-  - component: {fileID: 355824454866723739}
+  - component: {fileID: 6250087685030992768}
+  - component: {fileID: 4470592747714113332}
   m_Layer: 0
   m_Name: Yobb
   m_TagString: Untagged
@@ -503,13 +508,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &4209790239159031966
+--- !u!4 &6250087685030992768
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5397911743236785058}
+  m_GameObject: {fileID: 4427955192233089398}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.63, z: 0}
@@ -518,13 +523,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8004435236793628628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &355824454866723739
+--- !u!212 &4470592747714113332
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5397911743236785058}
+  m_GameObject: {fileID: 4427955192233089398}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
