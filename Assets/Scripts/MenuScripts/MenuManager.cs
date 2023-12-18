@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -188,6 +189,11 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitOptionsMenu();
         }
+        else if (!isInOptions && isGamePaused && obj.control.device is Gamepad)
+        {
+            PlayerMovement.instance.SetCanFlip();
+            UnPauseGame();
+        }
         if (isInCredits)
         {
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
@@ -208,11 +214,7 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitGraphics();
         }
-        if (isGamePaused && !isInOptions && obj.control.device is Gamepad)
-        {
-            PlayerMovement.instance.SetCanFlip();
-            UnPauseGame();
-        }
+        
     }
     public void ChangeValueSliders()
     {
@@ -253,5 +255,14 @@ public class MenuManager : MonoBehaviour
     public void setHasLoad()
     {
         hasLoad = true;
+    }
+    public void QuitMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void ResumeGame()
+    {
+        PlayerMovement.instance.SetCanFlip();
+        UnPauseGame();
     }
 }

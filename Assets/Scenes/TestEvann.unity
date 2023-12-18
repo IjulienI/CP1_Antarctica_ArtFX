@@ -272,9 +272,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 640366050}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: General
+        m_MethodName: QuitMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -807,7 +807,7 @@ PrefabInstance:
     - target: {fileID: 2441312709480768121, guid: 7d5d84abbd01e2b4d94b3f1197501334, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 9e3a84e1766b2dc4fbac46e259cc0223, type: 3}
     - target: {fileID: 3734741200825297917, guid: 7d5d84abbd01e2b4d94b3f1197501334, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -881,6 +881,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 48821353}
     m_Modifications:
+    - target: {fileID: 1890104491822212360, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 640366050}
+    - target: {fileID: 1890104491822212360, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeValueSliders
+      objectReference: {fileID: 0}
     - target: {fileID: 1961089763984797276, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1008,6 +1016,22 @@ PrefabInstance:
     - target: {fileID: 5538130835581456146, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
       propertyPath: m_SortingLayerID
       value: -162466701
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172719749679957901, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 640366050}
+    - target: {fileID: 7172719749679957901, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeValueSliders
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051376178292087110, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 640366050}
+    - target: {fileID: 8051376178292087110, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeValueSliders
       objectReference: {fileID: 0}
     - target: {fileID: 9138705473440105740, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1396,6 +1420,22 @@ PrefabInstance:
       propertyPath: gamepadVibrationsToggle
       value: 
       objectReference: {fileID: 368518674}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: highFrequencyReturnButton
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: highFrequencyVolumeSlider
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: rumbleDurationReturnButton
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: rumbleDurationVolumeSlider
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 6991435470375390374, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: m_Name
       value: MenuManager
@@ -1617,6 +1657,7 @@ Transform:
   - {fileID: 1350179051}
   - {fileID: 640366049}
   - {fileID: 387645005}
+  - {fileID: 1828655964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1462084310
@@ -1889,12 +1930,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828655961}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1412664592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1828655965
 MonoBehaviour:
@@ -2025,9 +2066,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 640366050}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: General
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2728,6 +2769,5 @@ SceneRoots:
   - {fileID: 1720902009}
   - {fileID: 1348737840}
   - {fileID: 6766963056180217680}
-  - {fileID: 1828655964}
   - {fileID: 6565363684115450371}
   - {fileID: 48821353}
