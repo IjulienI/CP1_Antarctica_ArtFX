@@ -262,6 +262,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "EasterEgg",
+            "id": "458acf70-12b1-4aaa-a546-4a3e87c3b740",
+            "actions": [
+                {
+                    "name": "Input1",
+                    "type": "Button",
+                    "id": "c72f75db-e21f-44f1-831a-735b8cef7d0f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Input2",
+                    "type": "Button",
+                    "id": "a630fd48-da94-4168-94d8-a57677532ac6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Input3",
+                    "type": "Button",
+                    "id": "2178bd71-d851-4f3c-b1f1-aaa847aab5e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "705eaa69-7076-4609-b28b-d7e0fe81f450",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6207aa8b-6915-4af5-a017-b2a97f348ad1",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53031383-eb6c-426f-8b3e-4c775907d911",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
