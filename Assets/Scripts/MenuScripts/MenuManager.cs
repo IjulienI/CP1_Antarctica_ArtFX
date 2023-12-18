@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -8,11 +9,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas mainMenuCanvas;
     [SerializeField] private Canvas optionMenuCanvas;
     [SerializeField] private Canvas creditsMenuCanvas;
+    [SerializeField] private Canvas pauseMenuCanvas;
     [Header("Buttons")]
     [SerializeField] private Button newGameBtn;
     [SerializeField] private Button volumeBtn;
     [SerializeField] private Button keybindsBtn;
     [SerializeField] private Button generalBtn;
+    [SerializeField] private Button resumeBtn;
     [Header("Volume Slider")]
     [SerializeField] private Slider globalVolumeSlider;
     [Header("General Options Toggles")]
@@ -22,7 +25,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
-    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral;
+    private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral, isGamePaused;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
     [Header("Gamepad Rumble settings - Return Button (For the frequencies, 1 is the max value)")]
@@ -68,6 +71,21 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void PauseGame()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0f;
+        pauseMenuCanvas.gameObject.SetActive(true);
+        resumeBtn.Select();
+
+    }
+    public void UnPauseGame()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1f;
+        pauseMenuCanvas.gameObject.SetActive(false);
+    }
+
     public void NewGame()
     {
         print("test");
@@ -80,7 +98,14 @@ public class MenuManager : MonoBehaviour
     {
         isInOptions = true;
         generalBtn.Select();
-        mainMenuCanvas.gameObject.SetActive(false);
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.gameObject.SetActive(false);
+        }
+        else if (pauseMenuCanvas != null)
+        {
+            pauseMenuCanvas.gameObject.SetActive(false);
+        }
         optionMenuCanvas.gameObject.SetActive(true);
     }
     public void Credits()
@@ -95,10 +120,18 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitOptionsMenu()
     {
-        mainMenuCanvas.gameObject.SetActive(true);
-        optionMenuCanvas.gameObject.SetActive(false);
-        newGameBtn.Select();
+        if (mainMenuCanvas != null)
+        {
+            newGameBtn.Select();
+            mainMenuCanvas.gameObject.SetActive(true);
+        }
+        else if (pauseMenuCanvas != null)
+        {
+            resumeBtn.Select();
+            pauseMenuCanvas.gameObject.SetActive(true);
+        }
         isInOptions = false;
+        optionMenuCanvas.gameObject.SetActive(false);
     }
     public void ExitCreditsMenu() 
     {
@@ -156,6 +189,11 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitOptionsMenu();
         }
+        else if (!isInOptions && isGamePaused && obj.control.device is Gamepad)
+        {
+            PlayerMovement.instance.SetCanFlip();
+            UnPauseGame();
+        }
         if (isInCredits)
         {
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
@@ -176,6 +214,7 @@ public class MenuManager : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyReturnButton, highFrequencyReturnButton, rumbleDurationReturnButton);
             ExitGraphics();
         }
+        
     }
     public void ChangeValueSliders()
     {
@@ -216,5 +255,14 @@ public class MenuManager : MonoBehaviour
     public void setHasLoad()
     {
         hasLoad = true;
+    }
+    public void QuitMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void ResumeGame()
+    {
+        PlayerMovement.instance.SetCanFlip();
+        UnPauseGame();
     }
 }
