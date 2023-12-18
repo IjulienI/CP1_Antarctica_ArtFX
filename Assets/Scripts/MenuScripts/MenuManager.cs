@@ -30,6 +30,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image generalImg;
     [SerializeField] private Image titleScreenBackgroundImg;
     [SerializeField] private Image titleScreenIceImg;
+    [SerializeField] private Image logoImg;
     [Header("Press Any Key Images")]
     [SerializeField] private GameObject pressKeyKeyboard;
     [SerializeField] private GameObject pressKeyGamepad;
@@ -44,6 +45,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float lowFrequencyVolumeSlider;
     [SerializeField] private float highFrequencyVolumeSlider;
     [SerializeField] private float rumbleDurationVolumeSlider;
+    [Header("AudioSounds")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip clickSoundFX;
 
     public static MenuManager instance;
 
@@ -101,6 +105,8 @@ public class MenuManager : MonoBehaviour
             }
             if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))
             {
+                sfxSource.clip = clickSoundFX;
+                sfxSource.Play();
                 StartCoroutine(EnterMenu());
             }
         }
@@ -123,6 +129,13 @@ public class MenuManager : MonoBehaviour
         }
         titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,0f);
         titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, 0f);
+        logoImg.GetComponent<Animator>().SetTrigger("Play");
+        Invoke(nameof(SetCanvasActive), 0.5f);
+        
+    }
+
+    private void SetCanvasActive()
+    {
         titleScreenCanvas.gameObject.SetActive(false);
         mainMenuCanvas.gameObject.SetActive(true);
     }
