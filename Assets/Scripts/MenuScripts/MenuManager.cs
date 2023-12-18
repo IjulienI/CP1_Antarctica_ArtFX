@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class MenuManager : MonoBehaviour
 {
@@ -26,6 +28,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
+    [SerializeField] private Image titleScreenBackgroundImg;
+    [SerializeField] private Image titleScreenIceImg;
     [Header("Press Any Key Images")]
     [SerializeField] private GameObject pressKeyKeyboard;
     [SerializeField] private GameObject pressKeyGamepad;
@@ -87,30 +91,40 @@ public class MenuManager : MonoBehaviour
         {
             if (Gamepad.current != null)
             {
-                pressKeyGamepad.SetActive (true);
-                pressKeyKeyboard.SetActive (false);
-                if (Gamepad.current.buttonSouth.wasPressedThisFrame)
-                {
-                    EnterMenu();
-                }
+                pressKeyGamepad.SetActive(true);
+                pressKeyKeyboard.SetActive(false);
             }
             else
             {
                 pressKeyGamepad.SetActive(false);
                 pressKeyKeyboard.SetActive(true);
-                if (Keyboard.current.anyKey.wasPressedThisFrame)
-                {
-                    EnterMenu();
-                }
+            }
+            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))
+            {
+                StartCoroutine(EnterMenu());
             }
         }
     }
 
-    private void EnterMenu()
+    private IEnumerator EnterMenu()
     {
+        float elapsedTime = 0f;
+        float fadeDuration = 1f;
         isTitleScreenShowed = false;
-        titleScreenCanvas.gameObject.SetActive(true);
-        mainMenuCanvas.gameObject.SetActive(false);
+        pressKeyGamepad.SetActive(false);
+        pressKeyKeyboard.SetActive(false);
+        while(elapsedTime < fadeDuration)
+        {
+            titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
+            titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration));
+            elapsedTime += 1*Time.deltaTime;
+
+            yield return null;
+        }
+        titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,0f);
+        titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, 0f);
+        titleScreenCanvas.gameObject.SetActive(false);
+        mainMenuCanvas.gameObject.SetActive(true);
     }
 
     public void PauseGame()
