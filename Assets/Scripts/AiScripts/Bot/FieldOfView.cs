@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
@@ -19,6 +20,10 @@ public class FieldOfView : MonoBehaviour
     [Header("Ai Sound Detection")]
     [Range(5f, 45f)]
     [SerializeField] private float soundRange;
+    [Range(0f, 15f)]
+    [SerializeField] private float minRange;
+    [Range(0f, 15f)]
+    [SerializeField] private float maxRange;
 
     private GameObject player;
     private AiStateMachine _stateMachine;
@@ -67,6 +72,14 @@ public class FieldOfView : MonoBehaviour
         return false;
     }
 
+    public void ReceiveNoise()
+    {
+        if(Vector2.Distance(player.transform.position, transform.position) < soundRange)
+        {
+            _stateMachine.GetRandomInRange((int)minRange, (int)maxRange);
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -92,6 +105,8 @@ public class FieldOfView : MonoBehaviour
         Gizmos.color = Color.green;
 
         Gizmos.DrawWireSphere(transform.position, forceVisioRange);
+
+
     }
 
     private void OnGUI()

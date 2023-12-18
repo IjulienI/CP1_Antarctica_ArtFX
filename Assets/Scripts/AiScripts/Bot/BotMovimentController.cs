@@ -7,7 +7,6 @@ public class BotMovimentController : MonoBehaviour
 
     private float m_MovementSmoothing = .05f;
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  
     private Vector3 m_Velocity = Vector3.zero;
 
     private AIPathController Control;
@@ -62,7 +61,6 @@ public class BotMovimentController : MonoBehaviour
 
     private void Flip()
     {
-        Debug.Log(oldPos.x - transform.position.x);
         if(oldPos.x != transform.position.x)
         {
             if (oldPos.x - transform.position.x < 0)
