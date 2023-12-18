@@ -261,27 +261,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (light.performed)
         {
-            if (stateOfFire == 1)
-            {
-                stateOfFire = 2;
-                progressiveFire = true;
-            }
-            else if (stateOfFire == 2)
-            {
-                stateOfFire = 3;
-                progressiveFire = true;
-            }
-            else
-            {
-                stateOfFire = 1;
-                progressiveFire = true;
-            }
-        }   
-    }
-    public void DownLight(InputAction.CallbackContext light)
-    {
-        if (light.performed)
-        {
             if (stateOfFire == 3)
             {
                 stateOfFire = 2;
@@ -295,6 +274,27 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 stateOfFire = 3;
+                progressiveFire = true;
+            }
+        }
+    }
+    public void DownLight(InputAction.CallbackContext light)
+    {
+        if (light.performed)
+        {
+            if (stateOfFire == 1)
+            {
+                stateOfFire = 2;
+                progressiveFire = true;
+            }
+            else if (stateOfFire == 2)
+            {
+                stateOfFire = 3;
+                progressiveFire = true;
+            }
+            else
+            {
+                stateOfFire = 1;
                 progressiveFire = true;
             }
         }
