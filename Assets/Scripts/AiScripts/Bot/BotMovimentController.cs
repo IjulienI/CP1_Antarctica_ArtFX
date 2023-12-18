@@ -63,7 +63,6 @@ public class BotMovimentController : MonoBehaviour
 
     private void Flip()
     {
-        Debug.Log("Gez");
         m_FacingRight = !m_FacingRight;
 
         float rotation = transform.rotation.y;

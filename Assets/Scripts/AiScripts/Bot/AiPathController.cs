@@ -26,7 +26,7 @@ public class AIPathController : MonoBehaviour
 
     [SerializeField] private List<Node> Path;
 
-    private List<Node> AllNodes = new List<Node>();
+    public List<Node> AllNodes = new List<Node>();
 
     private Node ClosestNode;
     private Node TargetNode;
