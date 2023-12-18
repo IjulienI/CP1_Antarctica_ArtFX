@@ -28,7 +28,7 @@ public class AIPathController : MonoBehaviour
 
     public List<Node> AllNodes = new List<Node>();
 
-    private Node ClosestNode;
+    public Node ClosestNode;
     private Node TargetNode;
 
     private Rigidbody2D m_Rigidbody2D;

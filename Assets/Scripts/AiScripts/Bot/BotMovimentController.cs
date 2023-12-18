@@ -16,6 +16,8 @@ public class BotMovimentController : MonoBehaviour
     public Vector2 m_JumpForce { get; set; }
     public bool IsJump { get; set; }
 
+    private Vector2 oldPos;
+
 
 
     private void Awake()
@@ -49,10 +51,7 @@ public class BotMovimentController : MonoBehaviour
         Vector3 targetVelocity = new Vector2(move, m_Rigidbody2D.velocity.y);
         m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
-        if (move > 0 && !m_FacingRight)
-            Flip();
-        else if (move < 0 && m_FacingRight)
-            Flip();
+        Flip();
 
         if (jump)
         {
@@ -63,12 +62,19 @@ public class BotMovimentController : MonoBehaviour
 
     private void Flip()
     {
-        m_FacingRight = !m_FacingRight;
-
-        float rotation = transform.rotation.y;
-        rotation = - rotation;
-        transform.rotation = Quaternion.Euler(0, rotation, 0);
-        //transform.localScale = theScale;
+        Debug.Log(oldPos.x - transform.position.x);
+        if(oldPos.x != transform.position.x)
+        {
+            if (oldPos.x - transform.position.x < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+        oldPos = transform.position;
     }
 
 
