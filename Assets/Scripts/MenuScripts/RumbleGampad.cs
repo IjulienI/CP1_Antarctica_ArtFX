@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,9 +18,14 @@ public class RumbleGamepad : MonoBehaviour
         if (Gamepad.current != null && !playing && isActivated == 1)
         {
             playing = true;
-            Gamepad.current.SetMotorSpeeds(0.2f, 1f);
-            Invoke(nameof(StopRumble), rumbleDuration);
+            Gamepad.current.SetMotorSpeeds(lowFrequency, highFrequency);
+            StartCoroutine(InvokeStopRumble(rumbleDuration));
         }
+    }
+    private IEnumerator InvokeStopRumble(float rumbleDuration)
+    {
+        yield return new WaitForSecondsRealtime(rumbleDuration);
+        StopRumble();
     }
     private void StopRumble()
     {

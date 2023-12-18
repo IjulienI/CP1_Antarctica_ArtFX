@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool isFacingRight = true;
     private bool isGrounded;
+    private bool canFlip = true;
 
     bool ladderInteraction = false;
     bool onTriggerLadder = false;
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference interact;
     public InputActionReference upLight;
     public InputActionReference downLight;
+    [SerializeField] private Image numpadImg;
 
     public static PlayerMovement instance;
 
@@ -227,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && coyoteTimer > 0f && canJump)
+        if (context.performed && coyoteTimer > 0f && canJump && canFlip)
         {   
             _rb.velocity = new Vector2(_rb.velocity.x, 0f);
             _rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
@@ -300,6 +303,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void PauseGame(InputAction.CallbackContext pause)
+    {
+        if (pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)
+        {
+            canFlip = false;
+            MenuManager.instance.PauseGame();
+        }
+        else if (pause.performed && !canFlip)
+        {
+            canFlip = true;
+            MenuManager.instance.UnPauseGame();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GoUp")
@@ -346,10 +363,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
+        if (canFlip)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -361,5 +381,9 @@ public class PlayerMovement : MonoBehaviour
     public void SetCanJump(bool x)
     {
         canJump = x;
+    }
+    public void SetCanFlip()
+    {
+        canFlip = true;
     }
 }
