@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     [Header("Menus Canvas")]
+    [SerializeField] private Canvas titleScreenCanvas;
     [SerializeField] private Canvas mainMenuCanvas;
     [SerializeField] private Canvas optionMenuCanvas;
     [SerializeField] private Canvas creditsMenuCanvas;
@@ -25,6 +26,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
+    [Header("Press Any Key Images")]
+    [SerializeField] private GameObject pressKeyKeyboard;
+    [SerializeField] private GameObject pressKeyGamepad;
     private bool isInOptions, isInCredits, isInVolume, isInKeybinds, isInGeneral, isGamePaused;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
@@ -40,6 +44,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager instance;
 
     private bool hasLoad;
+    private bool isTitleScreenShowed;
     private int isVibrationsActivated;
     private void OnEnable()
     {
@@ -60,6 +65,12 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
+        if(titleScreenCanvas != null)
+        {
+            isTitleScreenShowed = true;
+            titleScreenCanvas.gameObject.SetActive(true);
+            mainMenuCanvas.gameObject.SetActive(false);
+        }
         isVibrationsActivated = PlayerPrefs.GetInt("Vibration activation", 1);
         if (isVibrationsActivated == 1)
         {
@@ -69,6 +80,37 @@ public class MenuManager : MonoBehaviour
         {
             gamepadVibrationsToggle.isOn = false;
         }
+    }
+    private void Update()
+    {
+        if (isTitleScreenShowed)
+        {
+            if (Gamepad.current != null)
+            {
+                pressKeyGamepad.SetActive (true);
+                pressKeyKeyboard.SetActive (false);
+                if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+                {
+                    EnterMenu();
+                }
+            }
+            else
+            {
+                pressKeyGamepad.SetActive(false);
+                pressKeyKeyboard.SetActive(true);
+                if (Keyboard.current.anyKey.wasPressedThisFrame)
+                {
+                    EnterMenu();
+                }
+            }
+        }
+    }
+
+    private void EnterMenu()
+    {
+        isTitleScreenShowed = false;
+        titleScreenCanvas.gameObject.SetActive(true);
+        mainMenuCanvas.gameObject.SetActive(false);
     }
 
     public void PauseGame()
