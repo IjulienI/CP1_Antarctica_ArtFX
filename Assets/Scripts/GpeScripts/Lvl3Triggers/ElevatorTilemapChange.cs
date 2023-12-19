@@ -14,5 +14,6 @@ public class ElevatorTilemapChange : MonoBehaviour
         tilemapBefore.SetActive(false);
         tilemapAfter.SetActive(true);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
