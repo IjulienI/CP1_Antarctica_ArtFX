@@ -15,6 +15,7 @@ public class Debris : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Invoke("playDebrisAnim", debrisAnimDelay);
         particles1.Play();
         particles2.Play();
