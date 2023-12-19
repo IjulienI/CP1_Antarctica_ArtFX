@@ -12,6 +12,9 @@ public class LeverDoor : MonoBehaviour
     bool doorIsOpen = false;
 
     [SerializeField] Animator animator;
+    [SerializeField] Sprite leverOff;
+    [SerializeField] Sprite leverOn;
+    [SerializeField] SpriteRenderer leverRenderer;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -39,6 +42,9 @@ public class LeverDoor : MonoBehaviour
         if (onLeverZone) 
         {
             doorIsOpen = !doorIsOpen;
+
+            Sprite nextSprite = leverRenderer.sprite == leverOff ? leverOn : leverOff;
+            leverRenderer.sprite = nextSprite;
 
             if (doorIsOpen == true)
             {

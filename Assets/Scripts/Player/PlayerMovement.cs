@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
     public int stateOfFire = 1;
     bool progressiveFire = false;
 
+    bool onMucus = false;
+
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
     public InputActionReference upLight;
@@ -205,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
-        if (ladderInteraction == true && isGrounded == false)
+        if (ladderInteraction == true)
         {
 
             _rb.velocity = new Vector2(0, speedY);
@@ -216,27 +218,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (ladderInteraction == true && isGrounded == true)
-        {
-            _rb.gravityScale = 0;
-            if (vertical != 0)
-            {
-                speedY = maxSpeed * vertical;
-            }
-            else { speedY = 0; }
-
-            if (vertical < 0 && canDown == true)
-            {
-                _collider.isTrigger = true;
-            }
-            else
-            {
-                _collider.isTrigger = false;
-            }
-
-            _rb.velocity = new Vector2(speedX, speedY);
-        }
-        else if (ladderInteraction == true)
+        if (ladderInteraction == true)
         {
 
             _rb.gravityScale = 0;
@@ -278,7 +260,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (stateOfFire == 2)
             {
-                //_fire.color = new Color(255, 183, 136, 0.005f);
                 _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 5.1f, 0.2f);
                 if (_fire.pointLightOuterRadius <= 5.2 && _fire.pointLightOuterRadius >= 5)
                 {
@@ -342,11 +323,7 @@ public class PlayerMovement : MonoBehaviour
         if (onTriggerLadder)
         {
             ladderInteraction = !ladderInteraction;
-            transform.position = new Vector3(ladderPosition, transform.position.y, transform.position.z);
-            //if (_ladderInteraction == true)
-            //{
-            //    _collider.isTrigger = true;
-            //}
+            transform.position = new Vector3(ladderPosition, transform.position.y, transform.position.z);   
         }
     }
 
@@ -423,6 +400,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _collider.isTrigger = false;
         }
+
+        if (collision.gameObject.tag == "Mucus")
+        {
+            onMucus = true;
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -443,6 +425,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
             launchFallAcceleration = true;
+        }
+        if (collision.gameObject.tag == "Mucus")
+        {
+            onMucus = false;
         }
         //if (collision.gameObject.tag == "FlyingPlatform")
         //{
