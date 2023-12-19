@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
-        if (ladderInteraction == true && isGrounded == false)
+        if (ladderInteraction == true)
         {
 
             _rb.velocity = new Vector2(0, speedY);
@@ -215,27 +215,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (ladderInteraction == true && isGrounded == true)
-        {
-            _rb.gravityScale = 0;
-            if (vertical != 0)
-            {
-                speedY = maxSpeed * vertical;
-            }
-            else { speedY = 0; }
-
-            if (vertical < 0 && canDown == true)
-            {
-                _collider.isTrigger = true;
-            }
-            else
-            {
-                _collider.isTrigger = false;
-            }
-
-            _rb.velocity = new Vector2(speedX, speedY);
-        }
-        else if (ladderInteraction == true)
+        if (ladderInteraction == true)
         {
 
             _rb.gravityScale = 0;
