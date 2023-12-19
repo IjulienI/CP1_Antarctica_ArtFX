@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
                         coldStep4.color = new Color(255, 255, 255, (actualCold - 3f * coldness) / coldness);
                         if (stateOfFire != 1)
                         {
-                            _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 137, 0.05f), Mathf.SmoothStep(_fire.color.g, 170, 0.05f), Mathf.SmoothStep(_fire.color.b, 195, 0.05f), 0.005f);
+                            _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 128, 0.05f), Mathf.SmoothStep(_fire.color.g, 113, 0.05f), Mathf.SmoothStep(_fire.color.b, 116, 0.05f), 0.005f);
                         }
                         
                     }
@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
                     coldStep3.color = new Color(255, 255, 255, (actualCold - 2f * coldness) / coldness);
                     if (stateOfFire != 1)
                     {
-                        _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 235, 0.05f), Mathf.SmoothStep(_fire.color.g, 255, 0.1f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
+                        _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 173, 0.05f), Mathf.SmoothStep(_fire.color.g, 138, 0.05f), Mathf.SmoothStep(_fire.color.b, 123, 0.05f), 0.005f);
                     }
                 }
 
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
                 coldStep2.color = new Color(255, 255, 255, (actualCold - coldness) / coldness);
                 if (stateOfFire != 1)
                 {
-                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 255, 0.05f), Mathf.SmoothStep(_fire.color.g, 183, 0.1f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 255, 0.05f), Mathf.SmoothStep(_fire.color.g, 183, 0.05f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
                 }
             }
 
@@ -299,7 +299,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (_fire.pointLightOuterRadius <= 2)
                 {
-                    if (_fire.color == new Color (96,96,96,0.005f))
+                    if (_fire.color == new Color (96,95,111,0.005f))
                     progressiveFire = false;
                     _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
                 }
