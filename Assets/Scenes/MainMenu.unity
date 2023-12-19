@@ -3474,6 +3474,10 @@ PrefabInstance:
       propertyPath: Priority
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 2441312709480768121, guid: 7d5d84abbd01e2b4d94b3f1197501334, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7218bcb7bfb743e4a807cf1348851f33, type: 3}
     - target: {fileID: 2900975299941886216, guid: 7d5d84abbd01e2b4d94b3f1197501334, type: 3}
       propertyPath: Priority
       value: 0
