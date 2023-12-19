@@ -58,7 +58,7 @@ MonoBehaviour:
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
+  m_OverlapOperation: 1
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
@@ -461,6 +461,10 @@ MonoBehaviour:
     m_Bits: 8
   playerMaterial: {fileID: 6200000, guid: 28e8e767122712749a17a9497da70d9c, type: 2}
   _fire: {fileID: 5067934507839991930}
+  coldStep1: {fileID: 0}
+  coldStep2: {fileID: 0}
+  coldStep3: {fileID: 0}
+  coldStep4: {fileID: 0}
   accelerationFactorOnGround: 70
   brakeFactorOnGround: 70
   maxSpeedOnGround: 7
@@ -471,6 +475,8 @@ MonoBehaviour:
   coyoteTime: 0.1
   normalGravityScale: 4
   fallingGravityScale: 10
+  coldness: 10
+  actualCold: 0
   interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   upLight: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   downLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
