@@ -17,7 +17,6 @@ public class ClassicDoor : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             animator.SetBool("OpenDoor", true);
-            //animation ouverture porte collider
         }
     }
 
@@ -26,7 +25,6 @@ public class ClassicDoor : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             animator.SetBool("OpenDoor", false);
-            //animation fermeture porte collider
         }
     }
 
