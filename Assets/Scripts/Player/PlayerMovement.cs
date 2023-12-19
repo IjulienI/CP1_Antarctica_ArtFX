@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canFlip = true;
 
     bool ladderInteraction = false;
+    float ladderPosition;
     bool onTriggerLadder = false;
     bool canDown = false;
     bool canJump = true;
@@ -341,6 +342,7 @@ public class PlayerMovement : MonoBehaviour
         if (onTriggerLadder)
         {
             ladderInteraction = !ladderInteraction;
+            transform.position = new Vector3(ladderPosition, transform.position.y, transform.position.z);
             //if (_ladderInteraction == true)
             //{
             //    _collider.isTrigger = true;
@@ -410,6 +412,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "GoUp")
         {
             onTriggerLadder = true;
+            ladderPosition = collision.transform.position.x;
         }
         //if (collision.gameObject.tag == "FlyingPlatform")
         //{
