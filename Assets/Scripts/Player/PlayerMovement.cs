@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
     float fall = 1;
     bool launchFallAcceleration = false;
-    int stateOfFire = 1;
+    public int stateOfFire = 1;
     bool progressiveFire = false;
 
     [Header("Input Manager (don't touch)")]
