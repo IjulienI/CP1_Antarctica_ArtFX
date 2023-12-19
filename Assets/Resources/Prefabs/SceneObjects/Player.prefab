@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 1864259789821008929}
   - component: {fileID: 3843487037794754977}
   - component: {fileID: 690294753982122032}
+  - component: {fileID: 7018664744614051440}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -418,13 +419,37 @@ MonoBehaviour:
     m_ActionId: 3d3af258-a365-4fdc-ad80-93d18ee4e171
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ecc6d2d5-641a-44b6-a864-0a501ca4e31b
     m_ActionName: Player/Interact[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3843487037794754977}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0717977e-689c-4393-b28a-f5b72215b113
-    m_ActionName: Player/PauseGame[/Keyboard/escape]
+    m_ActionName: Player/PauseGame[/XInputControllerWindows/start,/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 95f5aa00-751e-4fb0-9b1d-1b5362f093bf
@@ -477,6 +502,7 @@ MonoBehaviour:
   fallingGravityScale: 10
   coldness: 10
   actualCold: 0
+  stateOfFire: 1
   interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   upLight: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   downLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
@@ -497,6 +523,18 @@ MonoBehaviour:
   input2: {fileID: -6468828642034712217, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   input3: {fileID: -5649255439561932457, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   Yobb: {fileID: 4427955192233089398}
+--- !u!114 &7018664744614051440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677651126098139841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fd88b11b884db478bbad84603655b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4427955192233089398
 GameObject:
   m_ObjectHideFlags: 0
