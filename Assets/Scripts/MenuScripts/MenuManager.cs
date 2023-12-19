@@ -75,7 +75,8 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
-        if(titleScreenCanvas != null)
+        Time.timeScale = 1.0f;
+        if (titleScreenCanvas != null)
         {
             isTitleScreenShowed = true;
             titleScreenCanvas.gameObject.SetActive(true);
