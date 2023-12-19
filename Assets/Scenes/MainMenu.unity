@@ -123,6 +123,32 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &103180419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5943311192651762643, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+  m_PrefabInstance: {fileID: 1309663864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &103180422
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103180419}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ff944b8c0beb7874f85d61f7e328034e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &147462075 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9138705473440105740, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
@@ -1386,6 +1412,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 439621864041628750, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439621864041628750, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983677016368940577, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2205351556863348446, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217265981162708070, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: m_SortingOrder
+      value: 32767
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459813588187173843, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459813588187173843, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2509165059886475378, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4593491424112325381, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1426,6 +1484,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5620918040142218462, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648534663417296358, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7556995431046390897, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
       propertyPath: m_Name
       value: GameObject
@@ -1433,8 +1499,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1945795197219441785, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1309663866}
+    - targetCorrespondingSourceObject: {fileID: 5943311192651762643, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 103180422}
   m_SourcePrefab: {fileID: 100100000, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+--- !u!1 &1309663865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1945795197219441785, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+  m_PrefabInstance: {fileID: 1309663864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1309663866
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309663865}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29a581c679a2fa449ab08faabc81a69c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1370015214 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5203196320758612162, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
@@ -2201,7 +2299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c431578896b43304eb54f5c348f088d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3388,7 +3486,7 @@ PrefabInstance:
     - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: clickSoundFX
       value: 
-      objectReference: {fileID: 8300000, guid: 735a2e6454bdd40419aa7ff6ec559cf4, type: 3}
+      objectReference: {fileID: 8300000, guid: f88061e7f64287540930b0f0d288e71a, type: 3}
     - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: mainMenuCanvas
       value: 
@@ -3430,6 +3528,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 710888677}
     - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: backgroundLandscape
+      value: 
+      objectReference: {fileID: 1309663865}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: gamepadVibrationsToggle
       value: 
       objectReference: {fileID: 1472273875}
@@ -3447,7 +3549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: rumbleDurationReturnButton
-      value: 0.4
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: rumbleDurationVolumeSlider
