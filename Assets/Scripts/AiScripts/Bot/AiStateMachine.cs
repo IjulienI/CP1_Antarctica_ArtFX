@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -15,6 +16,11 @@ public class AiStateMachine : MonoBehaviour
     [SerializeField] private int minWaitRange;
     [SerializeField] private int maxWaitRange;
     [SerializeField] public int maxDistance;
+    [Header("LightsRange")]
+    [SerializeField] private int medMinRange;
+    [SerializeField] private int medMaxRange;
+    [SerializeField] private int highMinRange;
+    [SerializeField] private int highMaxRange;
     [Header("State")]
     public State state;
     [Header("Other")]
@@ -46,7 +52,7 @@ public class AiStateMachine : MonoBehaviour
                 goSound = false;
                 break;
             case State.free:
-                if(_fov.cycle > 0 )
+                if (_fov.cycle > 0 )
                 {
                     GetRandomInRange(transform, 2,5);
                     _controller.speed = _controller.baseSpeed / 2;
@@ -54,8 +60,7 @@ public class AiStateMachine : MonoBehaviour
                 }
                 else
                 {
-                    _controller.speed = _controller.baseSpeed;
-                    GetRandomTarget();
+                   GetRandomTarget();
                 }
                 break;
             case State.move:
@@ -80,6 +85,10 @@ public class AiStateMachine : MonoBehaviour
                     target.transform.position = closerNodePos;
                 }
                 break;
+        }
+        if(PlayerMovement.instance.stateOfFire == 3)
+        {
+            state = State.chase;
         }
     }
 

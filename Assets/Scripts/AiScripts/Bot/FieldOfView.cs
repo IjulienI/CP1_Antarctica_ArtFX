@@ -18,10 +18,13 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private float forceVisioRange;
 
     [Header("Ai Sound Detection")]
-    [Range(5f, 45f)]
+
+    [Range(5f, 25f)]
     [SerializeField] private float soundRange;
+
     [Range(0f, 15f)]
     [SerializeField] private float minRange;
+
     [Range(0f, 15f)]
     [SerializeField] private float maxRange;
 
@@ -46,7 +49,7 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange)
+        if ((IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange) && !(PlayerMovement.instance.stateOfFire == 1))
         {
             _stateMachine.state = AiStateMachine.State.chase;
             doOnce = true;
