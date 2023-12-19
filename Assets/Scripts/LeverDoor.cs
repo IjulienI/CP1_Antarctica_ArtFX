@@ -36,15 +36,19 @@ public class LeverDoor : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext obj)
     {
-        doorIsOpen = !doorIsOpen;
+        if (onLeverZone) 
+        {
+            doorIsOpen = !doorIsOpen;
 
-        if (doorIsOpen == true)
-        {
-            animator.SetBool("OpenDoor", true);
+            if (doorIsOpen == true)
+            {
+                animator.SetBool("OpenDoor", true);
+            }
+            else if (doorIsOpen == false)
+            {
+                animator.SetBool("OpenDoor", false);
+            }
         }
-        else if (doorIsOpen == false)
-        {
-            animator.SetBool("OpenDoor", false);
-        }
+
     }
 }
