@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 606696856}
   - component: {fileID: 606696855}
   - component: {fileID: 606696854}
+  - component: {fileID: 606696857}
   m_Layer: 0
   m_Name: ContinueBtn
   m_TagString: Untagged
@@ -655,6 +656,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606696852}
   m_CullTransparentMesh: 1
+--- !u!114 &606696857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606696852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daed38d441af264db0ef90f16278810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSFX: {fileID: 0}
+  selectedButtonSFX: {fileID: 0}
 --- !u!114 &705997248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 891314006169169218, guid: 0b55fb894154ca6468b60528d65c9b08, type: 3}
@@ -689,6 +704,7 @@ GameObject:
   - component: {fileID: 725687055}
   - component: {fileID: 725687054}
   - component: {fileID: 725687053}
+  - component: {fileID: 725687056}
   m_Layer: 0
   m_Name: OptionBtn
   m_TagString: Untagged
@@ -810,6 +826,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725687051}
   m_CullTransparentMesh: 1
+--- !u!114 &725687056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725687051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daed38d441af264db0ef90f16278810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSFX: {fileID: 0}
+  selectedButtonSFX: {fileID: 0}
 --- !u!1 &823670547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1055,7 @@ GameObject:
   - component: {fileID: 1020109168}
   - component: {fileID: 1020109167}
   - component: {fileID: 1020109166}
+  - component: {fileID: 1020109169}
   m_Layer: 0
   m_Name: NewGameBtn
   m_TagString: Untagged
@@ -1146,6 +1177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020109164}
   m_CullTransparentMesh: 1
+--- !u!114 &1020109169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020109164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daed38d441af264db0ef90f16278810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSFX: {fileID: 0}
+  selectedButtonSFX: {fileID: 0}
 --- !u!1 &1036047543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2366,7 @@ GameObject:
   - component: {fileID: 1824881939}
   - component: {fileID: 1824881938}
   - component: {fileID: 1824881937}
+  - component: {fileID: 1824881940}
   m_Layer: 0
   m_Name: CreditsBtn
   m_TagString: Untagged
@@ -2442,6 +2488,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824881935}
   m_CullTransparentMesh: 1
+--- !u!114 &1824881940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824881935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daed38d441af264db0ef90f16278810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSFX: {fileID: 0}
+  selectedButtonSFX: {fileID: 0}
 --- !u!1 &1844302906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2838,6 +2898,7 @@ GameObject:
   - component: {fileID: 2058192735}
   - component: {fileID: 2058192734}
   - component: {fileID: 2058192733}
+  - component: {fileID: 2058192736}
   m_Layer: 0
   m_Name: QuitBtn
   m_TagString: Untagged
@@ -2959,6 +3020,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058192731}
   m_CullTransparentMesh: 1
+--- !u!114 &2058192736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058192731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daed38d441af264db0ef90f16278810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSFX: {fileID: 0}
+  selectedButtonSFX: {fileID: 0}
 --- !u!1 &2077168435
 GameObject:
   m_ObjectHideFlags: 0
