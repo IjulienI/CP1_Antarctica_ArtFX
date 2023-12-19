@@ -66,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
 
     public static PlayerMovement instance;
 
+    private void Start()
+    {
+        _fire.color = new Color(96, 96, 96, 0.005f);
+    }
     private void Awake()
     {
         if (instance == null)
@@ -128,24 +132,41 @@ public class PlayerMovement : MonoBehaviour
                     else
                     {
                         coldStep4.color = new Color(255, 255, 255, (actualCold - 3f * coldness) / coldness);
+                        if (stateOfFire != 1)
+                        {
+                            _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 137, 0.05f), Mathf.SmoothStep(_fire.color.g, 170, 0.05f), Mathf.SmoothStep(_fire.color.b, 195, 0.05f), 0.005f);
+                        }
+                        
                     }
 
                 }
                 else
                 {
                     coldStep3.color = new Color(255, 255, 255, (actualCold - 2f * coldness) / coldness);
+                    if (stateOfFire != 1)
+                    {
+                        _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 235, 0.05f), Mathf.SmoothStep(_fire.color.g, 255, 0.1f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
+                    }
                 }
 
             }
             else
             {
                 coldStep2.color = new Color(255, 255, 255, (actualCold - coldness) / coldness);
+                if (stateOfFire != 1)
+                {
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 255, 0.05f), Mathf.SmoothStep(_fire.color.g, 183, 0.1f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
+                }
             }
 
         }
         else
         {
             coldStep1.color = new Color(255, 255, 255, actualCold / coldness);
+            if(stateOfFire != 1)
+            {
+                _fire.color = new Color(255, 183, 136, 0.005f);
+            }
         }
     }
 
@@ -256,6 +277,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (stateOfFire == 2)
             {
+                //_fire.color = new Color(255, 183, 136, 0.005f);
                 _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 5.1f, 0.2f);
                 if (_fire.pointLightOuterRadius <= 5.2 && _fire.pointLightOuterRadius >= 5)
                 {
@@ -264,6 +286,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (stateOfFire == 3)
             {
+                
                 _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 10.1f, 0.2f);
                 if (_fire.pointLightOuterRadius >= 10)
                 {
@@ -272,10 +295,18 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 1.9f, 0.2f);
+
+
                 if (_fire.pointLightOuterRadius <= 2)
                 {
+                    if (_fire.color == new Color (96,96,96,0.005f))
                     progressiveFire = false;
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
+                }
+                else
+                {
+                    _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 1.9f, 0.2f);
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
                 }
             }
         }
