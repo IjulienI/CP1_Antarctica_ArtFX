@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float coldness = 10f;
     public float actualCold = 0f;
 
+    private Animator anim;
+
     private float coyoteTimer;
     private float horizontal;
     private float vertical;
@@ -69,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
+
         if (instance == null)
         {
             instance = this;
@@ -152,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        anim.SetFloat("yVelocity", _rb.velocity.y);
+
         if (launchFallAcceleration == true)
         {
             fall = Mathf.SmoothStep(fall, 1, 0.2f);
@@ -165,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
         {
+            anim.SetBool("isWalking", true);
             if (!isGrounded)
             {
                 maxSpeed = maxSpeedInAir;
@@ -181,7 +188,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-           speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
+            anim.SetBool("isWalking", false);
+            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
         if (ladderInteraction == true && isGrounded == false)
@@ -289,13 +297,19 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && coyoteTimer > 0f && canJump && canFlip)
-        {   
+        {
+            anim.SetBool("isJumping", true);
             _rb.velocity = new Vector2(_rb.velocity.x, 0f);
             _rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
+        }
+        else
+        {
+            anim.SetBool("isJumping", false);
         }
 
         if (context.canceled && _rb.velocity.y > 0f)
         {
+            anim.SetBool("isJumping", false);
             _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
         }
     }
@@ -397,6 +411,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            anim.SetBool("isGrounded", true);
             isGrounded = true;
             fall = 0;
             launchFallAcceleration = false;
@@ -410,6 +425,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            anim.SetBool("isGrounded", false);
             isGrounded = false;
             launchFallAcceleration = true;
         }
