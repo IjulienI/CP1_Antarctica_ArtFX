@@ -10,19 +10,17 @@ public class AiStateMachine : MonoBehaviour
     private GameObject target;
     private AIPathController _controller;
     private Locomotion locomotion;
+
     [Header("Movements")]
     [SerializeField] private int randomRange;
     [SerializeField] private int distanceTreshold;
     [SerializeField] private int minWaitRange;
     [SerializeField] private int maxWaitRange;
     [SerializeField] public int maxDistance;
-    [Header("LightsRange")]
-    [SerializeField] private int medMinRange;
-    [SerializeField] private int medMaxRange;
-    [SerializeField] private int highMinRange;
-    [SerializeField] private int highMaxRange;
+
     [Header("State")]
     public State state;
+
     [Header("Other")]
     public GameObject player;
     public bool goSound;
@@ -47,7 +45,7 @@ public class AiStateMachine : MonoBehaviour
         switch (state)
         {
             case State.chase:
-                _controller.speed = _controller.baseSpeed;
+                //_controller.speed = _controller.baseSpeed;
                 target.transform.position = player.transform.position;
                 goSound = false;
                 break;
@@ -55,7 +53,7 @@ public class AiStateMachine : MonoBehaviour
                 if (_fov.cycle > 0 )
                 {
                     GetRandomInRange(transform, 2,5);
-                    _controller.speed = _controller.baseSpeed / 2;
+                    //_controller.speed = _controller.baseSpeed / 1.5f;
                     _fov.cycle--;
                 }
                 else

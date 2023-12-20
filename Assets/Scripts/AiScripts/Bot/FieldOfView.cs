@@ -49,7 +49,7 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        if ((IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange) && !(PlayerMovement.instance.stateOfFire == 1))
+        if ((IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange) && !(PlayerMovement.instance.stateOfFire == 1 && player.GetComponent<Rigidbody2D>().velocity == new Vector2(0,0)))
         {
             _stateMachine.state = AiStateMachine.State.chase;
             doOnce = true;
@@ -125,5 +125,6 @@ public class FieldOfView : MonoBehaviour
     private void OnGUI()
     {
         GUI.Label(new Rect(10,10,100,20),touchTag);
+        GUI.Label(new Rect(10, 20, 100, 20), player.GetComponent<Rigidbody2D>().velocity.ToString());
     }
 }
