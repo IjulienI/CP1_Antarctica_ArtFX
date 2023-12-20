@@ -31,9 +31,12 @@ public class SaveSystem : MonoBehaviour
             }
             else
             {
-                File.Delete(Application.persistentDataPath + "/data.save");
-                if (cheatScreen != null) cheatScreen.SetActive(true);
-                else Debug.Log("Don't Cheat !");
+                LoadLevel();
+                LoadPlayer();
+                LoadDoors();
+                //File.Delete(Application.persistentDataPath + "/data.save");
+                //if (cheatScreen != null) cheatScreen.SetActive(true);
+                //else Debug.Log("Don't Cheat !");
             }
         }
     }
@@ -119,9 +122,13 @@ public class SaveSystem : MonoBehaviour
 
     public void LoadLevel()
     {
-        if(SceneManager.GetActiveScene().name != gameInfo.levelName)
+        if(gameInfo.levelName != null)
         {
-            SceneManager.LoadScene(gameInfo.levelName);
+            if (SceneManager.GetActiveScene().name == gameInfo.levelName)
+            {
+                SceneManager.LoadScene(gameInfo.levelName);
+            }
+            else SceneManager.LoadScene("Level1");
         }
     }
 }
