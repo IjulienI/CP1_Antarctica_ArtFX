@@ -8,8 +8,10 @@ public class PlantTheSpike : MonoBehaviour
     private bool isInZone;
     [SerializeField] private InputActionReference interact;
     [SerializeField] private GameObject spikeGo;
+    [SerializeField] private GameObject progressBar;
     private bool isInteractPressed;
     private bool bombPlanted;
+
 
     private void OnEnable()
     {
@@ -44,13 +46,16 @@ public class PlantTheSpike : MonoBehaviour
         if (isInZone && !bombPlanted)
         {
             isInteractPressed = true;
+            progressBar.SetActive(true);
+            progressBar.GetComponent<Animator>().SetBool("Play", true);
             Invoke("CheckHoldDuration", 4f);
         }
     }
     private void OnInteractCanceled(InputAction.CallbackContext context)
     {
-        print("testasfasfasf");
         isInteractPressed = false;
+        progressBar.SetActive(false);
+        progressBar.GetComponent<Animator>().SetBool("Play", false);
         CancelInvoke("CheckHoldDuration");
     }
     void CheckHoldDuration()
@@ -63,7 +68,6 @@ public class PlantTheSpike : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            print("player");
             isInZone = true;
         }
         
@@ -71,5 +75,8 @@ public class PlantTheSpike : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isInZone = false;
+        print("non");
+        isInteractPressed = false;
+        CancelInvoke("CheckHoldDuration");
     }
 }

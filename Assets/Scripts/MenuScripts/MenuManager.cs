@@ -157,7 +157,7 @@ public class MenuManager : MonoBehaviour
     {
         isGamePaused = true;  
         pauseMenuCanvas.gameObject.SetActive(true);
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
         resumeBtn.Select();
 
     }
