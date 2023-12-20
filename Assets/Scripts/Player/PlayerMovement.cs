@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -11,10 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
     [SerializeField] private Light2D _fire;
-    [SerializeField] private Image coldStep1;
-    [SerializeField] private Image coldStep2;
-    [SerializeField] private Image coldStep3;
-    [SerializeField] private Image coldStep4;
+    [SerializeField] private Image coldStep1, coldStep2, coldStep3, coldStep4;
+    [SerializeField] private GameObject glassHit1, glassHit2, glassHit3;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -64,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     bool progressiveFire = false;
 
     bool onMucus = false;
+    float timeInMucus = 0;
+    float timeOutMucus = 0;
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
@@ -312,8 +313,60 @@ public class PlayerMovement : MonoBehaviour
                     _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
                 }
             }
+
+
+        }
+
+        if (onMucus == true)
+        {
+
+            timeInMucus += Time.deltaTime;
+            if(timeInMucus > 0.1f && timeInMucus <= 3f)
+            {
+                glassHit1.SetActive(true);
+                timeOutMucus = 10f;
+            }
+            else if (timeInMucus > 3f && timeInMucus <= 6f)
+            {
+                glassHit2.SetActive(true);
+                timeOutMucus = 15f;
+            }
+            else if (timeInMucus > 6f && timeInMucus <= 9f)
+            {
+                glassHit3.SetActive(true);
+                timeOutMucus = 20f;
+            }
+            else if (timeInMucus > 9f)
+            {
+                print("Die");
+            }
+        }
+        else
+        {
+            if (timeOutMucus < 0)
+            {
+                timeOutMucus = 0;
+            }
+            else if(timeOutMucus > 0)
+            {
+                timeOutMucus -= Time.deltaTime;
+            }
+
+            if (timeOutMucus > 14.5f && timeOutMucus < 15f)
+            {
+                glassHit3.SetActive(false);
+            }
+            else if (timeOutMucus > 9.5f && timeOutMucus < 10f)
+            {
+                glassHit2.SetActive(false);
+            }
+            else if (timeOutMucus > 4.5f && timeOutMucus < 5f)
+            {
+                glassHit1.SetActive(false);
+            }
         }
     }
+
     //private void GoDown()
     //{
     //    _collider.isTrigger = false;
@@ -430,6 +483,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "Mucus")
         {
+            if (glassHit1.activeSelf == false)
+            {
+                timeInMucus = 0f;
+            }
+            else if (glassHit2.activeSelf == false)
+            {
+                timeInMucus = 2.9f;
+            }
+            else if (glassHit3.activeSelf == false)
+            {
+                timeInMucus = 6.9f;
+            }
+            else
+            {
+                print("Die");
+            }
+
             onMucus = true;
         }
     }
