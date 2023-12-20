@@ -2819,22 +2819,6 @@ PrefabInstance:
       propertyPath: numpadImg
       value: 
       objectReference: {fileID: 1381073703}
-    - target: {fileID: 7018664744614051440, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: tutorialImage
-      value: 
-      objectReference: {fileID: 1169555264}
-    - target: {fileID: 7018664744614051440, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: tutorialBackgroundImg
-      value: 
-      objectReference: {fileID: 2067259016}
-    - target: {fileID: 7018664744614051440, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: tutorialSprite.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018664744614051440, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
-      propertyPath: tutorialSprite.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 4fe28d7fe53b1324484f90b7940a152b, type: 3}
     - target: {fileID: 8004435236793628628, guid: 84741415dc6f1854cad8a38f1692a5ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.16
@@ -2989,13 +2973,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5169844980938626034, guid: 6f26adcfad2f151449847dea44a8089f, type: 3}
+      propertyPath: tutorialImage
+      value: 
+      objectReference: {fileID: 1169555264}
+    - target: {fileID: 5169844980938626034, guid: 6f26adcfad2f151449847dea44a8089f, type: 3}
+      propertyPath: tutorialBackgroundImg
+      value: 
+      objectReference: {fileID: 2067259016}
     - target: {fileID: 5203595436488094378, guid: 6f26adcfad2f151449847dea44a8089f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5203595436488094378, guid: 6f26adcfad2f151449847dea44a8089f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.74
+      value: -3.914
       objectReference: {fileID: 0}
     - target: {fileID: 5203595436488094378, guid: 6f26adcfad2f151449847dea44a8089f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3031,7 +3023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6522227983027447573, guid: 6f26adcfad2f151449847dea44a8089f, type: 3}
       propertyPath: m_Name
-      value: Tuto1
+      value: Tuto
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
