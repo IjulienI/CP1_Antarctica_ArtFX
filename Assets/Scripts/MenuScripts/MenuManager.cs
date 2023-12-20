@@ -27,6 +27,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Toggle gamepadVibrationsToggle;
     [SerializeField] private Toggle fullscreenToggle;
     [Header("Options Menus Backgrounds")]
+    [SerializeField] private Image carnetImg;
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
@@ -144,6 +145,7 @@ public class MenuManager : MonoBehaviour
     {
         titleScreenCanvas.gameObject.SetActive(false);
         mainMenuCanvas.gameObject.SetActive(true);
+        carnetImg.GetComponent<Animator>().SetTrigger("Play");
     }
 
     public void PauseGame()
