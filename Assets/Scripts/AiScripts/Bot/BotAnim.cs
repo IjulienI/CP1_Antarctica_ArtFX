@@ -28,7 +28,7 @@ public class BotAnim : MonoBehaviour
         }
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
         //Debug.Log(hit.collider.gameObject.layer);
-        if(hit.distance > 1)
+        if(hit.distance > 2)
         {
             _animator.SetBool("isJumping", true);
         }
