@@ -31,9 +31,8 @@ public class PlantTheSpike : MonoBehaviour
         {
             if(Gamepad.current != null)
             {
-                Gamepad.current.SetMotorSpeeds(0.1f, 0.2f);
+                Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
             }
-            Debug.Log("Interact is being held!");
         }
         else if(Gamepad.current != null && isInZone)
         {
@@ -48,7 +47,7 @@ public class PlantTheSpike : MonoBehaviour
             isInteractPressed = true;
             progressBar.SetActive(true);
             progressBar.GetComponent<Animator>().SetBool("Play", true);
-            Invoke("CheckHoldDuration", 4f);
+            Invoke("CheckHoldDuration", 2.4f);
         }
     }
     private void OnInteractCanceled(InputAction.CallbackContext context)
@@ -62,7 +61,6 @@ public class PlantTheSpike : MonoBehaviour
     {
         bombPlanted = true;
         spikeGo.GetComponent<Animator>().SetTrigger("Play");
-        Debug.Log("Interact held for 4 seconds!");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -75,7 +73,6 @@ public class PlantTheSpike : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isInZone = false;
-        print("non");
         isInteractPressed = false;
         CancelInvoke("CheckHoldDuration");
     }

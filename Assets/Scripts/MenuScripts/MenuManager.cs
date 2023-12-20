@@ -114,7 +114,7 @@ public class MenuManager : MonoBehaviour
                 pressKeyGamepad.SetActive(false);
                 pressKeyKeyboard.SetActive(true);
             }
-            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))
+            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) || Mouse.current.leftButton.wasPressedThisFrame)
             {
                 sfxSource.clip = clickSoundFX;
                 sfxSource.Play();
