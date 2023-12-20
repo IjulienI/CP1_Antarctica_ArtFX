@@ -31,12 +31,10 @@ public class PlantTheSpike : MonoBehaviour
             }
             Debug.Log("Interact is being held!");
         }
-        else
+        else if(Gamepad.current != null && isInZone)
         {
-            if (Gamepad.current != null)
-            {
-                Gamepad.current.SetMotorSpeeds(0, 0);
-            }
+
+            Gamepad.current.SetMotorSpeeds(0, 0);
         }
     }
     private void OnInteractStarted(InputAction.CallbackContext context)
