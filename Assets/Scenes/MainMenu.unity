@@ -1534,6 +1534,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2459813588187173843, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459813588187173843, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4593491424112325381, guid: 2c14081886a52fa41803f062d6e2f064, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3568,6 +3576,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 705997248}
     - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 1914789589093306235}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
+      propertyPath: menuMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7218bcb7bfb743e4a807cf1348851f33, type: 3}
+    - target: {fileID: 3175287670379973302, guid: 9c81c7ec4953afe4197d111d85b238fd, type: 3}
       propertyPath: mainMenuCanvas
       value: 
       objectReference: {fileID: 1944978991}
@@ -3681,6 +3697,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d5d84abbd01e2b4d94b3f1197501334, type: 3}
+--- !u!82 &1914789589093306235 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2441312709480768121, guid: 7d5d84abbd01e2b4d94b3f1197501334, type: 3}
+  m_PrefabInstance: {fileID: 1914789589093306234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8648039499907121539
 PrefabInstance:
   m_ObjectHideFlags: 0

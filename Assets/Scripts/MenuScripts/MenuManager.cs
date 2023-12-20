@@ -51,7 +51,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float rumbleDurationVolumeSlider;
     [Header("AudioSounds")]
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip clickSoundFX;
+    [SerializeField] private AudioClip menuMusicClip;
     [Header("Background")]
     [SerializeField] private GameObject backgroundLandscape;
 
@@ -83,6 +85,8 @@ public class MenuManager : MonoBehaviour
         if (titleScreenCanvas != null)
         {
             isTitleScreenShowed = true;
+            musicSource.clip = menuMusicClip;
+            musicSource.Play();
             titleScreenCanvas.gameObject.SetActive(true);
             mainMenuCanvas.gameObject.SetActive(false);
         }

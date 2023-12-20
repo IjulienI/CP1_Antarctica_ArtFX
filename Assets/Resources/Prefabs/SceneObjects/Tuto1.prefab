@@ -92,10 +92,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialBackgroundImg: {fileID: 0}
   tutorialSprite:
+  - {fileID: 21300000, guid: 651d2cc38096ba94cb199e34702a601d, type: 3}
   - {fileID: 21300000, guid: 1a2a5ce1abf75984899f94ca75648982, type: 3}
   - {fileID: 21300000, guid: 9e9edcf357cabc8499cca107c9b518d3, type: 3}
-  - {fileID: 21300000, guid: 448bb15bc78307844b8157751576081e, type: 3}
-  - {fileID: 21300000, guid: 27a6f3d5dd7d5da498a1976d102190a7, type: 3}
   - {fileID: 21300000, guid: 64977bdc0da1ec34b93eebaec375802e, type: 3}
-  - {fileID: 21300000, guid: 651d2cc38096ba94cb199e34702a601d, type: 3}
+  - {fileID: 21300000, guid: 27a6f3d5dd7d5da498a1976d102190a7, type: 3}
   tutorialImage: {fileID: 0}
+  showTimer: 10
+  tutoType: 3
