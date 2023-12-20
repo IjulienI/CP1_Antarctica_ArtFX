@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -11,10 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private PhysicsMaterial2D playerMaterial;
     [SerializeField] private Light2D _fire;
-    [SerializeField] private Image coldStep1;
-    [SerializeField] private Image coldStep2;
-    [SerializeField] private Image coldStep3;
-    [SerializeField] private Image coldStep4;
+    [SerializeField] private Image coldStep1, coldStep2, coldStep3, coldStep4;
+    [SerializeField] private GameObject glassHit1, glassHit2, glassHit3;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -32,9 +31,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float normalGravityScale = 1f;
     [SerializeField] private float fallingGravityScale = 3f;
 
-    [Header("Cold")]
+    [Header("Flame")]
     [SerializeField] private float coldness = 10f;
-    public float actualCold = 0f;
+    float actualCold = 0f;
+    [SerializeField] Animator flameAnim;
+    private Animator anim;
+    
+
 
     private float coyoteTimer;
     private float horizontal;
@@ -60,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     bool progressiveFire = false;
 
     bool onMucus = false;
+    float timeInMucus = 0;
+    float timeOutMucus = 0;
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
@@ -75,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
+        anim = GetComponent<Animator>();
+
         if (instance == null)
         {
             instance = this;
@@ -108,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (stateOfFire == 1)
         {
+            flameAnim.SetBool("State1", true);
             if (actualCold > 0f)
             {
                 actualCold -= Time.deltaTime * 2;
@@ -115,10 +123,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (stateOfFire == 2)
         {
+            flameAnim.SetBool("State1", false);
             actualCold += Time.deltaTime;
         }
         else
         {
+            flameAnim.SetBool("State1", false);
             actualCold += Time.deltaTime *3;
         }
         if(actualCold > coldness)
@@ -175,6 +185,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        anim.SetFloat("yVelocity", _rb.velocity.y);
+
         if (launchFallAcceleration == true)
         {
             fall = Mathf.SmoothStep(fall, 1, 0.2f);
@@ -188,6 +200,8 @@ public class PlayerMovement : MonoBehaviour
         vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
         {
+
+            anim.SetBool("isWalking", true);
             if (!isGrounded)
             {
                 maxSpeed = maxSpeedInAir;
@@ -204,16 +218,19 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-           speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
+
+            anim.SetBool("isWalking", false);
+            speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
         if (ladderInteraction == true)
         {
-
+            anim.SetBool("isClimb", true);
             _rb.velocity = new Vector2(0, speedY);
         }
         else
         {
+            anim.SetBool("isClimb", false);
             _rb.velocity = new Vector2(speedX, _rb.velocity.y);
         }
 
@@ -224,9 +241,14 @@ public class PlayerMovement : MonoBehaviour
             _rb.gravityScale = 0;
             if (vertical != 0)
             {
+                anim.SetBool("isClimbing", true);
                 speedY = maxSpeed * vertical;
             }
-            else { speedY = 0; }
+            else 
+            {
+                anim.SetBool("isClimbing", false);
+                speedY = 0;
+            }
 
             if (vertical < 0 && canDown == true)
             {
@@ -291,8 +313,60 @@ public class PlayerMovement : MonoBehaviour
                     _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
                 }
             }
+
+
+        }
+
+        if (onMucus == true)
+        {
+
+            timeInMucus += Time.deltaTime;
+            if(timeInMucus > 0.1f && timeInMucus <= 3f)
+            {
+                glassHit1.SetActive(true);
+                timeOutMucus = 10f;
+            }
+            else if (timeInMucus > 3f && timeInMucus <= 6f)
+            {
+                glassHit2.SetActive(true);
+                timeOutMucus = 15f;
+            }
+            else if (timeInMucus > 6f && timeInMucus <= 9f)
+            {
+                glassHit3.SetActive(true);
+                timeOutMucus = 20f;
+            }
+            else if (timeInMucus > 9f)
+            {
+                print("Die");
+            }
+        }
+        else
+        {
+            if (timeOutMucus < 0)
+            {
+                timeOutMucus = 0;
+            }
+            else if(timeOutMucus > 0)
+            {
+                timeOutMucus -= Time.deltaTime;
+            }
+
+            if (timeOutMucus > 14.5f && timeOutMucus < 15f)
+            {
+                glassHit3.SetActive(false);
+            }
+            else if (timeOutMucus > 9.5f && timeOutMucus < 10f)
+            {
+                glassHit2.SetActive(false);
+            }
+            else if (timeOutMucus > 4.5f && timeOutMucus < 5f)
+            {
+                glassHit1.SetActive(false);
+            }
         }
     }
+
     //private void GoDown()
     //{
     //    _collider.isTrigger = false;
@@ -301,13 +375,19 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && coyoteTimer > 0f && canJump && canFlip)
-        {   
+        {
+            anim.SetBool("isJumping", true);
             _rb.velocity = new Vector2(_rb.velocity.x, 0f);
             _rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
+        }
+        else
+        {
+            anim.SetBool("isJumping", false);
         }
 
         if (context.canceled && _rb.velocity.y > 0f)
         {
+            anim.SetBool("isJumping", false);
             _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
         }
     }
@@ -331,27 +411,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (light.performed)
         {
-            if (stateOfFire == 3)
-            {
-                stateOfFire = 2;
-                progressiveFire = true;
-            }
-            else if (stateOfFire == 2)
-            {
-                stateOfFire = 1;
-                progressiveFire = true;
-            }
-            else
-            {
-                stateOfFire = 3;
-                progressiveFire = true;
-            }
-        }
-    }
-    public void DownLight(InputAction.CallbackContext light)
-    {
-        if (light.performed)
-        {
             if (stateOfFire == 1)
             {
                 stateOfFire = 2;
@@ -367,6 +426,27 @@ public class PlayerMovement : MonoBehaviour
                 stateOfFire = 1;
                 progressiveFire = true;
             }
+        }
+    }
+    public void DownLight(InputAction.CallbackContext light)
+    {
+        if (light.performed)
+        {
+            /*if (stateOfFire == 1)
+            {
+                stateOfFire = 2;
+                progressiveFire = true;
+            }
+            else if (stateOfFire == 2)
+            {
+                stateOfFire = 3;
+                progressiveFire = true;
+            }
+            else
+            {*/
+                stateOfFire = 1;
+                progressiveFire = true;
+            //}
         }
     }
 
@@ -403,6 +483,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "Mucus")
         {
+            if (glassHit1.activeSelf == false)
+            {
+                timeInMucus = 0f;
+            }
+            else if (glassHit2.activeSelf == false)
+            {
+                timeInMucus = 2.9f;
+            }
+            else if (glassHit3.activeSelf == false)
+            {
+                timeInMucus = 6.9f;
+            }
+            else
+            {
+                print("Die");
+            }
+
             onMucus = true;
         }
     }
@@ -410,6 +507,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            anim.SetBool("isGrounded", true);
             isGrounded = true;
             fall = 0;
             launchFallAcceleration = false;
@@ -423,6 +521,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            anim.SetBool("isGrounded", false);
             isGrounded = false;
             launchFallAcceleration = true;
         }
