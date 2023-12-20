@@ -224,11 +224,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (ladderInteraction == true)
         {
-
+            anim.SetBool("isClimb", true);
             _rb.velocity = new Vector2(0, speedY);
         }
         else
         {
+            anim.SetBool("isClimb", false);
             _rb.velocity = new Vector2(speedX, _rb.velocity.y);
         }
 
@@ -239,9 +240,14 @@ public class PlayerMovement : MonoBehaviour
             _rb.gravityScale = 0;
             if (vertical != 0)
             {
+                anim.SetBool("isClimbing", true);
                 speedY = maxSpeed * vertical;
             }
-            else { speedY = 0; }
+            else 
+            {
+                anim.SetBool("isClimbing", false);
+                speedY = 0;
+            }
 
             if (vertical < 0 && canDown == true)
             {

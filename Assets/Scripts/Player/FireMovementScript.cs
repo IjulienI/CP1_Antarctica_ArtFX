@@ -14,12 +14,12 @@ public class FireMovementScript : MonoBehaviour
 
     void Update()
     {
-        if (anim.GetBool("isWalking") == true)
+        if (anim.GetBool("isWalking") == true || anim.GetBool("isClimbing") == true || anim.GetBool("isClimb") == true)
         {
             PositionFlame.x = 0.62f;
             PositionFlame.y = 1.24f;
         }
-        else if (anim.GetBool("isWalking") == false)
+        else if (anim.GetBool("isWalking") == false && anim.GetBool("isClimbing") == false && anim.GetBool("isClimb") == false)
         {
             PositionFlame.x = 0.45f;
             PositionFlame.y = 1.19f;
