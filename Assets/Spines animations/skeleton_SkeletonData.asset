@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: skeleton_SkeletonData
   m_EditorClassIdentifier: 
-  atlasAssets: []
+  atlasAssets:
+  - {fileID: 11400000, guid: 461cada8338532f4d95ca1201caf9778, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 1fda46b0b2cb74f4fa3c05e0e9c3688a, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 6488c0ba034eeed488fe988bf3dd0513, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 0
+    requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
     additiveMaterials: []
     multiplyMaterials: []
-    screenMaterials: []
+    screenMaterials:
+    - pageName: skeleton.png
+      material: {fileID: 2100000, guid: 304807fd73f029e48aaaaa99adf9bc24, type: 2}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []
