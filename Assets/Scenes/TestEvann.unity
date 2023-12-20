@@ -3195,18 +3195,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1831711434602203648, guid: ef775a1596bd29340963b4368c22440c, type: 3}
-      propertyPath: m_Size.x
-      value: 1.0908899
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831711434602203648, guid: ef775a1596bd29340963b4368c22440c, type: 3}
-      propertyPath: m_Size.y
-      value: 0.43408725
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831711434602203648, guid: ef775a1596bd29340963b4368c22440c, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.28522092
-      objectReference: {fileID: 0}
     - target: {fileID: 7953437287974281534, guid: ef775a1596bd29340963b4368c22440c, type: 3}
       propertyPath: m_Name
       value: NumpadDoor
