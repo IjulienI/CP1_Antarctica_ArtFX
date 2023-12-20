@@ -13,7 +13,7 @@ public class TutorialManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Tuto1") && !isFullShow)
+        if (collision.CompareTag("Player") && !isFullShow)
         {
             tutorialImage.sprite = tutorialSprite[0];
             tutorialBackgroundImg.GetComponent<Animator>().SetBool("FadeIn", true);

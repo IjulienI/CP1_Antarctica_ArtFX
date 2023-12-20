@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5203595436488094378}
   - component: {fileID: 8665498106466525509}
+  - component: {fileID: 5169844980938626034}
   m_Layer: 0
   m_Name: Tuto1
   m_TagString: Tuto1
@@ -77,3 +78,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5169844980938626034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6522227983027447573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fd88b11b884db478bbad84603655b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialBackgroundImg: {fileID: 0}
+  tutorialSprite:
+  - {fileID: 21300000, guid: 1a2a5ce1abf75984899f94ca75648982, type: 3}
+  - {fileID: 21300000, guid: 9e9edcf357cabc8499cca107c9b518d3, type: 3}
+  - {fileID: 21300000, guid: 448bb15bc78307844b8157751576081e, type: 3}
+  - {fileID: 21300000, guid: 27a6f3d5dd7d5da498a1976d102190a7, type: 3}
+  - {fileID: 21300000, guid: 64977bdc0da1ec34b93eebaec375802e, type: 3}
+  - {fileID: 21300000, guid: 651d2cc38096ba94cb199e34702a601d, type: 3}
+  tutorialImage: {fileID: 0}
