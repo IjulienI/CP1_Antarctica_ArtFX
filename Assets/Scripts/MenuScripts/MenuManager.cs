@@ -34,6 +34,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image titleScreenBackgroundImg;
     [SerializeField] private Image titleScreenIceImg;
     [SerializeField] private Image logoImg;
+    [SerializeField] private Image pauseMenuImg;
     [Header("Press Any Key Images")]
     [SerializeField] private GameObject pressKeyKeyboard;
     [SerializeField] private GameObject pressKeyGamepad;
@@ -150,9 +151,9 @@ public class MenuManager : MonoBehaviour
 
     public void PauseGame()
     {
-        isGamePaused = true;
-        Time.timeScale = 0f;
+        isGamePaused = true;  
         pauseMenuCanvas.gameObject.SetActive(true);
+        Time.timeScale = 1f;
         resumeBtn.Select();
 
     }
@@ -162,7 +163,6 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         pauseMenuCanvas.gameObject.SetActive(false);
     }
-
     public void NewGame()
     {
         print("test");

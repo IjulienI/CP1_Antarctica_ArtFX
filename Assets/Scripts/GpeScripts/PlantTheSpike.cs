@@ -7,6 +7,7 @@ public class PlantTheSpike : MonoBehaviour
 {
     private bool isInZone;
     [SerializeField] private InputActionReference interact;
+    [SerializeField] private GameObject spikeGo;
     private bool isInteractPressed;
     private bool bombPlanted;
 
@@ -23,7 +24,8 @@ public class PlantTheSpike : MonoBehaviour
     }
     private void Update()
     {
-        if (isInteractPressed && !bombPlanted)
+        int isActivated = PlayerPrefs.GetInt("Vibration activation", 1);
+        if (isInteractPressed && !bombPlanted && isActivated == 1)
         {
             if(Gamepad.current != null)
             {
@@ -54,7 +56,7 @@ public class PlantTheSpike : MonoBehaviour
     void CheckHoldDuration()
     {
         bombPlanted = true;
-        // Code à exécuter après que la touche Interact a été maintenue pendant 4 secondes
+        spikeGo.GetComponent<Animator>().SetTrigger("Play");
         Debug.Log("Interact held for 4 seconds!");
     }
     private void OnTriggerEnter2D(Collider2D collision)
