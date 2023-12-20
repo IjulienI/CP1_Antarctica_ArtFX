@@ -54,6 +54,7 @@ public class NumpadDoor : MonoBehaviour
 
     private void Start()
     {
+        
         numpadButtons[0].onClick.AddListener(() => addNumberInCode(1));
         numpadButtons[1].onClick.AddListener(() => addNumberInCode(2));
         numpadButtons[2].onClick.AddListener(() => addNumberInCode(3));
@@ -91,7 +92,7 @@ public class NumpadDoor : MonoBehaviour
             screenRedImg.gameObject.SetActive(false);
             keybindGo.SetActive(false);
             isNumpadShowed = true;
-            numpadButtons[1].Select();
+            numpadButtons[0].Select();
             if (DeviceDetection.instance.GetIsGamepad())
             {
                 keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
@@ -203,6 +204,8 @@ public class NumpadDoor : MonoBehaviour
         numpadGo.SetActive(false);
         PlayerMovement.instance.enabled = true;
         PlayerMovement.instance.SetCanJump(true);
+
+        GameObject.Find("FinalElevator").GetComponent<Animator>().enabled = true;
     }
     
 }

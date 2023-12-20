@@ -1,0 +1,118 @@
+skeleton.png
+size:62,205
+filter:Linear,Linear
+Body_rest
+bounds:2,166,43,37
+offsets:4,87,128,128
+L1-Claw little
+bounds:2,49,15,18
+offsets:23,92,128,128
+L10-Leg 3
+bounds:39,77,16,18
+offsets:47,40,128,128
+rotate:90
+L11-Leg 2
+bounds:22,79,15,20
+offsets:47,20,128,128
+L12-Leg 1
+bounds:2,69,17,17
+offsets:38,11,128,128
+L14-F0-Extra joint
+bounds:17,15,12,12
+offsets:90,104,128,128
+L16-F0-F.r. Leg claw big
+bounds:47,179,24,11
+offsets:96,73,128,128
+rotate:90
+L17-F0-F.r. Leg claw small
+bounds:52,30,16,7
+offsets:92,66,128,128
+rotate:90
+L18-F0-F.r. Leg 7
+bounds:33,24,14,11
+offsets:83,70,128,128
+L19-F0-F.r. Leg 6
+bounds:47,155,12,22
+offsets:76,75,128,128
+L2-Claw main
+bounds:2,124,18,21
+offsets:13,95,128,128
+rotate:90
+L20-F0-F.r. Leg 5
+bounds:46,114,20,14
+offsets:61,90,128,128
+rotate:90
+L21-F0-F.r. Leg 4
+bounds:49,15,11,13
+offsets:50,90,128,128
+L22-F0-F.r. Leg 3
+bounds:2,6,12,12
+offsets:42,82,128,128
+L23-F0-F.r. Leg 2
+bounds:42,95,17,18
+offsets:28,70,128,128
+rotate:90
+L24-F0-F.r. Leg 1
+bounds:21,58,19,15
+offsets:9,69,128,128
+rotate:90
+L3-Leg 10
+bounds:38,51,13,14
+offsets:55,93,128,128
+rotate:90
+L37-F0-RB Leg finger 5
+bounds:38,66,20,9
+offsets:105,1,128,128
+L38-F0-RB Leg finger 4
+bounds:2,107,15,21
+offsets:101,7,128,128
+rotate:90
+L39-F0-RB Leg finger 3
+bounds:54,48,16,6
+offsets:75,6,128,128
+rotate:90
+L4-Leg 9
+bounds:16,2,11,12
+offsets:48,83,128,128
+rotate:90
+L40-F0-RB Leg finger 2
+bounds:19,43,14,13
+offsets:91,4,128,128
+L41-F0-RB Leg finger 1
+bounds:31,10,12,12
+offsets:92,17,128,128
+L42-F0-RB Leg 5
+bounds:18,29,13,12
+offsets:102,26,128,128
+L43-F0-RB Leg 4
+bounds:47,136,11,17
+offsets:101,38,128,128
+L44-F0-RB Leg 3
+bounds:25,124,18,19
+offsets:81,44,128,128
+rotate:90
+L45-F0-RB Leg 2
+bounds:2,88,17,18
+offsets:64,36,128,128
+rotate:90
+L46-F0-RB Leg 1
+bounds:28,144,17,20
+offsets:58,15,128,128
+L5-Leg 8
+bounds:2,34,13,14
+offsets:40,75,128,128
+rotate:90
+L6-Leg 7
+bounds:35,37,12,15
+offsets:33,64,128,128
+rotate:90
+L7-Leg 6
+bounds:2,144,20,24
+offsets:18,43,128,128
+rotate:90
+L8-Leg 5
+bounds:2,20,13,12
+offsets:15,34,128,128
+L9-Leg 4
+bounds:25,101,15,21
+offsets:55,58,128,128
