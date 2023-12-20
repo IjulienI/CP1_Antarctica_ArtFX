@@ -32,11 +32,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float normalGravityScale = 1f;
     [SerializeField] private float fallingGravityScale = 3f;
 
-    [Header("Cold")]
+    [Header("Flame")]
     [SerializeField] private float coldness = 10f;
-    public float actualCold = 0f;
-
+    float actualCold = 0f;
+    [SerializeField] Animator flameAnim;
     private Animator anim;
+    
+
 
     private float coyoteTimer;
     private float horizontal;
@@ -112,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (stateOfFire == 1)
         {
+            flameAnim.SetBool("State1", true);
             if (actualCold > 0f)
             {
                 actualCold -= Time.deltaTime * 2;
@@ -119,10 +122,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (stateOfFire == 2)
         {
+            flameAnim.SetBool("State1", false);
             actualCold += Time.deltaTime;
         }
         else
         {
+            flameAnim.SetBool("State1", false);
             actualCold += Time.deltaTime *3;
         }
         if(actualCold > coldness)
@@ -194,6 +199,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
         {
+
             anim.SetBool("isWalking", true);
             if (!isGrounded)
             {
@@ -211,6 +217,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+
             anim.SetBool("isWalking", false);
             speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
