@@ -8,7 +8,7 @@ public class RumbleGamepad : MonoBehaviour
     private bool playing = false;
     private int isActivated;
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
     }

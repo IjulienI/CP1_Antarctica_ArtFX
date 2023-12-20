@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -50,8 +48,6 @@ public class MenuManager : MonoBehaviour
     [Header("AudioSounds")]
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip clickSoundFX;
-    [Header("Background")]
-    [SerializeField] private GameObject backgroundLandscape;
 
     public static MenuManager instance;
 
@@ -77,8 +73,7 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
-        Time.timeScale = 1.0f;
-        if (titleScreenCanvas != null)
+        if(titleScreenCanvas != null)
         {
             isTitleScreenShowed = true;
             titleScreenCanvas.gameObject.SetActive(true);
@@ -134,9 +129,8 @@ public class MenuManager : MonoBehaviour
         }
         titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,0f);
         titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, 0f);
-        backgroundLandscape.GetComponent<Animator>().SetTrigger("PlayLandscape");
         logoImg.GetComponent<Animator>().SetTrigger("Play");
-        Invoke(nameof(SetCanvasActive), 1f);
+        Invoke(nameof(SetCanvasActive), 0.5f);
         
     }
 

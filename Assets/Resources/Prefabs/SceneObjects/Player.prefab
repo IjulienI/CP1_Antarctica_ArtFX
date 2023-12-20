@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1614945863296901823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 1.16, z: 0}
+  m_LocalPosition: {x: 0.5799999, y: 0.21700001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,12 +53,12 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000008154e010217e7ab39fb9fc9919f76a3b
+  m_ApplyToSortingLayers: 000000008154e01019f76a3b9fb9fc99217e7ab3
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 1
+  m_OverlapOperation: 0
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 1864259789821008929}
   - component: {fileID: 3843487037794754977}
   - component: {fileID: 690294753982122032}
-  - component: {fileID: 6570337831474173402}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -175,9 +174,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 996865817
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 5
-  m_Sprite: {fileID: 1677991756720607464, guid: 763d5c06970124643b27b383da3fce72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2781e2aba517c474585a0b67debd8788, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -220,18 +219,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009046555, y: 0.8791504}
+  m_Offset: {x: -0.009046555, y: -0.080366135}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4666667, y: 0}
-    oldSize: {x: 0.9375, y: 1.78125}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6265564, y: 1.7564697}
+  m_Size: {x: 0.6265564, y: 1.8392677}
   m_EdgeRadius: 0
 --- !u!50 &5141975564484948127
 Rigidbody2D:
@@ -292,18 +291,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009178162, y: -0.04}
+  m_Offset: {x: 0.0008621216, y: -1.0468873}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4666667, y: 0}
-    oldSize: {x: 0.9375, y: 1.78125}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6054535, y: 0.13049912}
+  m_Size: {x: 0.53611755, y: 0.13049912}
   m_EdgeRadius: 0
 --- !u!114 &1864259789821008929
 MonoBehaviour:
@@ -419,37 +418,13 @@ MonoBehaviour:
     m_ActionId: 3d3af258-a365-4fdc-ad80-93d18ee4e171
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
-        m_MethodName: DeviceDetector
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: ecc6d2d5-641a-44b6-a864-0a501ca4e31b
     m_ActionName: Player/Interact[/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3843487037794754977}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 0717977e-689c-4393-b28a-f5b72215b113
-    m_ActionName: Player/PauseGame[/XInputControllerWindows/start,/Keyboard/escape]
+    m_ActionName: Player/PauseGame[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 95f5aa00-751e-4fb0-9b1d-1b5362f093bf
@@ -486,13 +461,9 @@ MonoBehaviour:
     m_Bits: 8
   playerMaterial: {fileID: 6200000, guid: 28e8e767122712749a17a9497da70d9c, type: 2}
   _fire: {fileID: 5067934507839991930}
-  coldStep1: {fileID: 0}
-  coldStep2: {fileID: 0}
-  coldStep3: {fileID: 0}
-  coldStep4: {fileID: 0}
   accelerationFactorOnGround: 70
   brakeFactorOnGround: 70
-  maxSpeedOnGround: 5
+  maxSpeedOnGround: 7
   accelerationFactorInAir: 40
   brakeFactorInAir: 20
   maxSpeedInAir: 7
@@ -500,9 +471,6 @@ MonoBehaviour:
   coyoteTime: 0.1
   normalGravityScale: 4
   fallingGravityScale: 10
-  coldness: 10
-  actualCold: 0
-  stateOfFire: 1
   interact: {fileID: -6740896932539510985, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   upLight: {fileID: 6517752676218031320, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   downLight: {fileID: 495654155532094430, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
@@ -523,27 +491,6 @@ MonoBehaviour:
   input2: {fileID: -6468828642034712217, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   input3: {fileID: -5649255439561932457, guid: 63e6eb4290a92fd4483bc1f40a2ac336, type: 3}
   Yobb: {fileID: 4427955192233089398}
---- !u!95 &6570337831474173402
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2677651126098139841}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fc55b5cdd7bbc334d9beeb3c12dd0fdf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4427955192233089398
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +562,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 996865817
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 4fe28d7fe53b1324484f90b7940a152b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

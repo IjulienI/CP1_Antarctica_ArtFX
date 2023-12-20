@@ -11,8 +11,7 @@ public class AIPathController : MonoBehaviour
 
 
     [Tooltip("Speed to apply velocity")]
-    [SerializeField] public float speed;
-    public float baseSpeed;
+    [SerializeField] private float speed;
 
     private float minDist;
 
@@ -52,7 +51,6 @@ public class AIPathController : MonoBehaviour
 
     void Awake()
     {
-        baseSpeed = speed;
         tempTarget = Target;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         if (m_Rigidbody2D == null)
