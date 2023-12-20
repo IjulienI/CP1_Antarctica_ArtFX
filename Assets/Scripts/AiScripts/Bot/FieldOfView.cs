@@ -18,12 +18,19 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private float forceVisioRange;
 
     [Header("Ai Sound Detection")]
-    [Range(5f, 45f)]
+
+    [Range(5f, 25f)]
     [SerializeField] private float soundRange;
+
     [Range(0f, 15f)]
     [SerializeField] private float minRange;
+
     [Range(0f, 15f)]
     [SerializeField] private float maxRange;
+
+    [Header("Snif")]
+    [SerializeField] private int minCycle;
+    [SerializeField] private int maxCycle;
 
     private GameObject player;
     private AiStateMachine _stateMachine;
@@ -32,6 +39,7 @@ public class FieldOfView : MonoBehaviour
 
     bool doOnce;
     bool detected;
+    public int cycle;
 
     private void Start()
     {
@@ -41,16 +49,18 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange)
+        if ((IsPlayerInFov() || detected && Vector2.Distance(transform.position, player.transform.position) < forceVisioRange) && !(PlayerMovement.instance.stateOfFire == 1 && player.GetComponent<Rigidbody2D>().velocity == new Vector2(0,0)))
         {
             _stateMachine.state = AiStateMachine.State.chase;
             doOnce = true;
             detected = true;
+            cycle = 0;
         }
         else if (doOnce)
         {
             doOnce = false;
             detected = false;
+            cycle = Random.Range(minCycle, maxCycle);
             _stateMachine.state = AiStateMachine.State.move;
         }       
     }
@@ -62,8 +72,8 @@ public class FieldOfView : MonoBehaviour
 
         if(angleToPlayer < visionConeAngle / 2)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - player.transform.position) * -1,visionRange);
-            Debug.DrawRay(transform.position, (transform.position - player.transform.position) * -1);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position),visionRange);
+            Debug.DrawRay(transform.position, (player.transform.position - transform.position));
             if (hit.collider != null && hit.collider.tag == "Player")
                 {
                 return true;
@@ -74,9 +84,12 @@ public class FieldOfView : MonoBehaviour
 
     public void ReceiveNoise()
     {
-        if(Vector2.Distance(player.transform.position, transform.position) < soundRange)
+        if(Vector2.Distance(player.transform.position, transform.position) < soundRange && !_stateMachine.goSound)
         {
-            _stateMachine.GetRandomInRange((int)minRange, (int)maxRange);
+            _stateMachine.goSound = true;
+            float distance = Vector2.Distance(player.transform.position, transform.position) / 4;
+            _stateMachine.GetRandomInRange(player.transform,(int)(minRange * distance), (int)(maxRange * distance));
+            Debug.Log((int)(minRange * distance)/4);
         }
     }
 
@@ -112,5 +125,6 @@ public class FieldOfView : MonoBehaviour
     private void OnGUI()
     {
         GUI.Label(new Rect(10,10,100,20),touchTag);
+        GUI.Label(new Rect(10, 20, 100, 20), player.GetComponent<Rigidbody2D>().velocity.ToString());
     }
 }

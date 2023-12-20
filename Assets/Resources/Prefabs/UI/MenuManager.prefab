@@ -44,23 +44,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfff850f9b7bd9042b0ccd00cb46cf62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleScreenCanvas: {fileID: 0}
   mainMenuCanvas: {fileID: 0}
   optionMenuCanvas: {fileID: 0}
   creditsMenuCanvas: {fileID: 0}
+  pauseMenuCanvas: {fileID: 0}
   newGameBtn: {fileID: 0}
   volumeBtn: {fileID: 0}
   keybindsBtn: {fileID: 0}
   generalBtn: {fileID: 0}
+  resumeBtn: {fileID: 0}
   globalVolumeSlider: {fileID: 0}
   gamepadVibrationsToggle: {fileID: 0}
   fullscreenToggle: {fileID: 0}
   volumeImg: {fileID: 0}
   keybindsImg: {fileID: 0}
   generalImg: {fileID: 0}
+  titleScreenBackgroundImg: {fileID: 0}
+  titleScreenIceImg: {fileID: 0}
+  logoImg: {fileID: 0}
+  pressKeyKeyboard: {fileID: 0}
+  pressKeyGamepad: {fileID: 0}
   escape: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   lowFrequencyReturnButton: 0.1
-  highFrequencyReturnButton: 0.2
-  rumbleDurationReturnButton: 0.2
+  highFrequencyReturnButton: 0.3
+  rumbleDurationReturnButton: 0.25
   lowFrequencyVolumeSlider: 0.1
-  highFrequencyVolumeSlider: 0.1
-  rumbleDurationVolumeSlider: 0.08
+  highFrequencyVolumeSlider: 0.15
+  rumbleDurationVolumeSlider: 0.12
+  sfxSource: {fileID: 0}
+  clickSoundFX: {fileID: 8300000, guid: b25654582cb3c4c40980e4e067766d98, type: 3}
+  backgroundLandscape: {fileID: 0}

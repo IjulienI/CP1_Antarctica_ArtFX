@@ -58,8 +58,10 @@ public class PlayerMovement : MonoBehaviour
     bool canJump = true;
     float fall = 1;
     bool launchFallAcceleration = false;
-    int stateOfFire = 1;
+    public int stateOfFire = 1;
     bool progressiveFire = false;
+
+    bool onMucus = false;
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
@@ -69,6 +71,10 @@ public class PlayerMovement : MonoBehaviour
 
     public static PlayerMovement instance;
 
+    private void Start()
+    {
+        _fire.color = new Color(96, 96, 96, 0.005f);
+    }
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -133,24 +139,41 @@ public class PlayerMovement : MonoBehaviour
                     else
                     {
                         coldStep4.color = new Color(255, 255, 255, (actualCold - 3f * coldness) / coldness);
+                        if (stateOfFire != 1)
+                        {
+                            _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 128, 0.05f), Mathf.SmoothStep(_fire.color.g, 113, 0.05f), Mathf.SmoothStep(_fire.color.b, 116, 0.05f), 0.005f);
+                        }
+                        
                     }
 
                 }
                 else
                 {
                     coldStep3.color = new Color(255, 255, 255, (actualCold - 2f * coldness) / coldness);
+                    if (stateOfFire != 1)
+                    {
+                        _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 173, 0.05f), Mathf.SmoothStep(_fire.color.g, 138, 0.05f), Mathf.SmoothStep(_fire.color.b, 123, 0.05f), 0.005f);
+                    }
                 }
 
             }
             else
             {
                 coldStep2.color = new Color(255, 255, 255, (actualCold - coldness) / coldness);
+                if (stateOfFire != 1)
+                {
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 255, 0.05f), Mathf.SmoothStep(_fire.color.g, 183, 0.05f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
+                }
             }
 
         }
         else
         {
             coldStep1.color = new Color(255, 255, 255, actualCold / coldness);
+            if(stateOfFire != 1)
+            {
+                _fire.color = new Color(255, 183, 136, 0.005f);
+            }
         }
     }
 
@@ -192,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
             speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
         }
 
-        if (ladderInteraction == true && isGrounded == false)
+        if (ladderInteraction == true)
         {
 
             _rb.velocity = new Vector2(0, speedY);
@@ -203,27 +226,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (ladderInteraction == true && isGrounded == true)
-        {
-            _rb.gravityScale = 0;
-            if (vertical != 0)
-            {
-                speedY = maxSpeed * vertical;
-            }
-            else { speedY = 0; }
-
-            if (vertical < 0 && canDown == true)
-            {
-                _collider.isTrigger = true;
-            }
-            else
-            {
-                _collider.isTrigger = false;
-            }
-
-            _rb.velocity = new Vector2(speedX, speedY);
-        }
-        else if (ladderInteraction == true)
+        if (ladderInteraction == true)
         {
 
             _rb.gravityScale = 0;
@@ -273,6 +276,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (stateOfFire == 3)
             {
+                
                 _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 10.1f, 0.2f);
                 if (_fire.pointLightOuterRadius >= 10)
                 {
@@ -281,10 +285,18 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 1.9f, 0.2f);
+
+
                 if (_fire.pointLightOuterRadius <= 2)
                 {
+                    if (_fire.color == new Color (96,95,111,0.005f))
                     progressiveFire = false;
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
+                }
+                else
+                {
+                    _fire.pointLightOuterRadius = Mathf.SmoothStep(_fire.pointLightOuterRadius, 1.9f, 0.2f);
+                    _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 96, 0.1f), Mathf.SmoothStep(_fire.color.g, 96, 0.1f), Mathf.SmoothStep(_fire.color.b, 96, 0.1f), 0.005f);
                 }
             }
         }
@@ -325,11 +337,7 @@ public class PlayerMovement : MonoBehaviour
         if (onTriggerLadder)
         {
             ladderInteraction = !ladderInteraction;
-            transform.position = new Vector3(ladderPosition, transform.position.y, transform.position.z);
-            //if (_ladderInteraction == true)
-            //{
-            //    _collider.isTrigger = true;
-            //}
+            transform.position = new Vector3(ladderPosition, transform.position.y, transform.position.z);   
         }
     }
 
@@ -406,6 +414,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _collider.isTrigger = false;
         }
+
+        if (collision.gameObject.tag == "Mucus")
+        {
+            onMucus = true;
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -428,6 +441,10 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isGrounded", false);
             isGrounded = false;
             launchFallAcceleration = true;
+        }
+        if (collision.gameObject.tag == "Mucus")
+        {
+            onMucus = false;
         }
         //if (collision.gameObject.tag == "FlyingPlatform")
         //{
