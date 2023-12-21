@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Light2D _fire;
     [SerializeField] private Image coldStep1, coldStep2, coldStep3, coldStep4;
     [SerializeField] private GameObject glassHit1, glassHit2, glassHit3;
+    [SerializeField] private bool hasNumpadCanvas;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -37,8 +38,11 @@ public class PlayerMovement : MonoBehaviour
     float actualCold = 0f;
     [SerializeField] Animator flameAnim;
     private Animator anim;
-    
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip[] clip;
+    [SerializeField] private AudioClip clipLanding;
+    [SerializeField] private AudioSource audioSource;
 
     private float coyoteTimer;
     private float horizontal;
@@ -203,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         anim.SetFloat("yVelocity", _rb.velocity.y);
+        anim.SetFloat("xVelocity", _rb.velocity.x);
 
         if (launchFallAcceleration == true)
         {
@@ -469,7 +474,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PauseGame(InputAction.CallbackContext pause)
     {
-        if (pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)
+        if ((pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)||(pause.performed && !hasNumpadCanvas))
         {
             canFlip = false;
             MenuManager.instance.PauseGame();
@@ -583,5 +588,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetCanFlip()
     {
         canFlip = true;
+    }
+    public void PlaySound()
+    {
+        int x = UnityEngine.Random.Range(0, 5);
+        audioSource.clip = clip[x];
+        audioSource.Play();
     }
 }

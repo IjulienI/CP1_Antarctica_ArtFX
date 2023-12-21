@@ -9,20 +9,19 @@ public class AudioManager : MonoBehaviour
     public const string MASTER_KEY = "MasterVolume";
     public const string MUSIC_KEY = "MusicVolume";
     public const string SFX_KEY = "SFXVolume";
-    //[SerializeField] private AudioSource musicSource;
-    //[SerializeField] private AudioSource musicSource2;
-    //[SerializeField] private AudioSource musicSource3;
-    //[SerializeField] private AudioClip musicChaseBeginningClip;
-    //[SerializeField] private AudioClip musicChaseMiddleClip;
-    //[SerializeField] private AudioClip musicChaseEndClip;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource musicSource2;
+    [SerializeField] private AudioSource musicSource3;
+    [SerializeField] private AudioClip musicChaseBeginningClip;
+    [SerializeField] private AudioClip musicChaseMiddleClip;
+    [SerializeField] private AudioClip musicChaseEndClip;
     public static AudioManager instance;
+    [SerializeField] private int Level = 0;
 
-    //private bool isTransitioning = false;
-    //public bool isLooping = true;
-    //private float time = 0;
-    //private float maxTime = 47.917f;
-    //bool i = false;
-    //bool l = false;
+    private bool isTransitioning = false;
+    public bool isLooping = true;
+    bool i = false;
+    bool l = false;
     private void Awake()
     {
         if (instance == null)
@@ -34,7 +33,10 @@ public class AudioManager : MonoBehaviour
     {
         //PlayerPrefs.DeleteAll();
         LoadVolume();
-        //ChaseMusic();
+        if(Level == 3)
+        {
+            ChaseMusic();
+        }
     }
 
     void LoadVolume()
@@ -47,32 +49,24 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat(VolumeSettings.AUDIOMIXER_SFX, Mathf.Log10(sfxVolume) * 20);
     }
 
-    //void ChaseMusic()
-    //{
-    //    musicSource.Play();
-    //    l = true;
-    //}
-    //private void Update()
-    //{
-    //    time += Time.deltaTime;
-    //    if (!isTransitioning && isLooping && l)
-    //    {
-    //        isTransitioning = true;
-    //        // Démarrer la lecture du morceau 2 en avance
-    //        musicSource2.PlayScheduled(AudioSettings.dspTime + 47.917);   
-    //    }
-    //    if (!isLooping && !i && isTransitioning)
-    //    {
-    //        print("oui");
-    //        i = true;
-    //        musicSource2.loop = false;
-    //        float a = maxTime - time;
-    //        musicSource3.PlayScheduled(AudioSettings.dspTime + a); // 1.0 est le décalage temporel, ajustez selon vos besoins
-    //    }
-    //    if (time >= maxTime)
-    //    {
-    //        time = 0;
-    //        maxTime = 16f;
-    //    }
-    //}
+    void ChaseMusic()
+    {
+        musicSource.Play();
+        l = true;
+    }
+    private void Update()
+    {
+        if (!isTransitioning && isLooping && l)
+        {
+            isTransitioning = true;
+            musicSource2.PlayScheduled(AudioSettings.dspTime + musicSource.clip.length);
+        }
+        if (!isLooping && !i && isTransitioning)
+        {
+            i= true;
+            musicSource2.loop = false;
+            float a = musicSource2.clip.length - musicSource2.time; ;
+            musicSource3.PlayScheduled(AudioSettings.dspTime + a); 
+        }
+    }
 }

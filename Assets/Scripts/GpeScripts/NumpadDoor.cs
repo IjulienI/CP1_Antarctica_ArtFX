@@ -206,6 +206,11 @@ public class NumpadDoor : MonoBehaviour
         PlayerMovement.instance.SetCanJump(true);
 
         GameObject.Find("FinalElevator").GetComponent<Animator>().enabled = true;
+        GameObject.Find("FinalElevator").GetComponent<AudioSource>().Play();
+
+        GameObject.Find("InivisbleWallR").GetComponent<BoxCollider2D>().enabled = true;
+        GameObject.Find("InivisbleWallL").GetComponent<BoxCollider2D>().enabled = true;
+        GameObject.Find("InivisbleWallT").GetComponent<BoxCollider2D>().enabled = true;
     }
     
 }

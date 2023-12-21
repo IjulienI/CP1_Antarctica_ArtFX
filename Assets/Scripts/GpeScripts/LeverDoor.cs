@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class LeverDoor : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class LeverDoor : MonoBehaviour
     public bool doorIsOpen = false;
     public int index;
 
-
+    [SerializeField] Light2D LEDlight;
     [SerializeField] Animator animator;
     [SerializeField] Sprite leverOff;
     [SerializeField] Sprite leverOn;
@@ -53,6 +54,8 @@ public class LeverDoor : MonoBehaviour
 
             Sprite nextSprite = leverRenderer.sprite == leverOff ? leverOn : leverOff;
             leverRenderer.sprite = nextSprite;
+
+            LEDlight.color = Color.green;
 
             if (doorIsOpen == true)
             {

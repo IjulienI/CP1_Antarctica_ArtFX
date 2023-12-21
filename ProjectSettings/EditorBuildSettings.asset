@@ -12,12 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: de48efd66bf604c48b28ce889a4faf10
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: 323d1d8c69d0aad4da8efcdbd1eb4adf
-  - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 5f1afb6172fa45548a0eacff63f6db4d
-  - enabled: 1
-    path: Assets/Scenes/Level3.unity
-    guid: 329dcd9fc832bf540a80b725ac814d26
+    path: Assets/Scenes/MucusGameOver.unity
+    guid: f2e532ee53916fe4b890bbe6fd7ad28e
   m_configObjects: {}

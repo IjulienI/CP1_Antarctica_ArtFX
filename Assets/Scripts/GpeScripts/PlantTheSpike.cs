@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -17,6 +15,7 @@ public class PlantTheSpike : MonoBehaviour
     [SerializeField] private Sprite keyboardKeybind;
     [SerializeField] private Sprite gamepadKeybind;
     [SerializeField] private AudioSource spikeAudioSource;
+    [SerializeField] private AudioSource pausingSpikeAudioSource;
     bool isSelectButtonShowed;
     bool justExitTrigger;
 
@@ -42,10 +41,13 @@ public class PlantTheSpike : MonoBehaviour
                 Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
             }
         }
-        else if((Gamepad.current != null && isInZone)||justExitTrigger)
+        else if((Gamepad.current != null && isInZone)||(Gamepad.current != null && justExitTrigger))
         {
 
             Gamepad.current.SetMotorSpeeds(0, 0);
+            progressBar.SetActive(false);
+            pausingSpikeAudioSource.Stop();
+            progressBar.GetComponent<Animator>().SetBool("Play", false);
         }
     }
     private void OnInteractStarted(InputAction.CallbackContext context)
@@ -57,6 +59,7 @@ public class PlantTheSpike : MonoBehaviour
             keybindGo.SetActive(false);
             progressBar.SetActive(true);
             progressBar.GetComponent<Animator>().SetBool("Play", true);
+            pausingSpikeAudioSource.Play();
             Invoke("CheckHoldDuration", 2.4f);
         }
     }
