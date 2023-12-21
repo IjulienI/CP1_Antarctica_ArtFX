@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -144,7 +145,11 @@ public class PlayerMovement : MonoBehaviour
                     }
                     else
                     {
+                        if (coldStep4 != null)
+                        {
                         coldStep4.color = new Color(255, 255, 255, (actualCold - 3f * coldness) / coldness);
+                        }
+
                         if (stateOfFire != 1)
                         {
                             _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 128, 0.05f), Mathf.SmoothStep(_fire.color.g, 113, 0.05f), Mathf.SmoothStep(_fire.color.b, 116, 0.05f), 0.005f);
@@ -155,7 +160,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    coldStep3.color = new Color(255, 255, 255, (actualCold - 2f * coldness) / coldness);
+                    if (coldStep3 != null)
+                    {
+                        coldStep3.color = new Color(255, 255, 255, (actualCold - 2f * coldness) / coldness);
+                    }
+
                     if (stateOfFire != 1)
                     {
                         _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 173, 0.05f), Mathf.SmoothStep(_fire.color.g, 138, 0.05f), Mathf.SmoothStep(_fire.color.b, 123, 0.05f), 0.005f);
@@ -165,7 +174,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                coldStep2.color = new Color(255, 255, 255, (actualCold - coldness) / coldness);
+                if (coldStep2 != null)
+                {
+                    coldStep2.color = new Color(255, 255, 255, (actualCold - coldness) / coldness);
+                }
+
                 if (stateOfFire != 1)
                 {
                     _fire.color = new Color(Mathf.SmoothStep(_fire.color.r, 255, 0.05f), Mathf.SmoothStep(_fire.color.g, 183, 0.05f), Mathf.SmoothStep(_fire.color.b, 136, 0.05f), 0.005f);
@@ -175,7 +188,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            coldStep1.color = new Color(255, 255, 255, actualCold / coldness);
+            if(coldStep1 != null)
+            {
+                 coldStep1.color = new Color(255, 255, 255, actualCold / coldness);
+            }
+
             if(stateOfFire != 1)
             {
                 _fire.color = new Color(255, 183, 136, 0.005f);
@@ -317,8 +334,8 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (onMucus == true)
-        {
+        if (onMucus == true && glassHit1 != null && glassHit2 != null && glassHit3 != null)
+            {
 
             timeInMucus += Time.deltaTime;
             if(timeInMucus > 0.1f && timeInMucus <= 3f)
@@ -338,10 +355,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (timeInMucus > 9f)
             {
-                print("Die");
+                SceneManager.LoadScene("MucusGameOver");
             }
         }
-        else
+        else if (glassHit1 != null && glassHit2 != null && glassHit3 != null)
         {
             if (timeOutMucus < 0)
             {
@@ -483,22 +500,27 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "Mucus")
         {
-            if (glassHit1.activeSelf == false)
+            if(glassHit1 != null && glassHit2 != null && glassHit3 != null)
             {
-                timeInMucus = 0f;
+                if (glassHit1.activeSelf == false)
+                {
+                    timeInMucus = 0f;
+                }
+                else if (glassHit2.activeSelf == false)
+                {
+                    timeInMucus = 2.9f;
+                }
+                else if (glassHit3.activeSelf == false)
+                {
+                    timeInMucus = 6.9f;
+                }
+                else
+                {
+                    SceneManager.LoadScene("MucusGameOver");
+                }
+
             }
-            else if (glassHit2.activeSelf == false)
-            {
-                timeInMucus = 2.9f;
-            }
-            else if (glassHit3.activeSelf == false)
-            {
-                timeInMucus = 6.9f;
-            }
-            else
-            {
-                print("Die");
-            }
+
 
             onMucus = true;
         }
