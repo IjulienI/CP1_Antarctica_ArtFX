@@ -51,7 +51,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float rumbleDurationVolumeSlider;
     [Header("AudioSounds")]
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource sfxSource2;
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip startSoundFX;
     [SerializeField] private AudioClip clickSoundFX;
     [SerializeField] private AudioClip menuMusicClip;
     [Header("Background")]
@@ -116,7 +118,7 @@ public class MenuManager : MonoBehaviour
             }
             if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) || Mouse.current.leftButton.wasPressedThisFrame)
             {
-                sfxSource.clip = clickSoundFX;
+                sfxSource.clip = startSoundFX;
                 sfxSource.Play();
                 StartCoroutine(EnterMenu());
             }
@@ -345,5 +347,9 @@ public class MenuManager : MonoBehaviour
     {
         PlayerMovement.instance.SetCanFlip();
         UnPauseGame();
+    }
+    public void OnclickSound()
+    {
+        sfxSource2.Play();
     }
 }
