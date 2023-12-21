@@ -73,7 +73,7 @@ public class AIPathController : MonoBehaviour
         maxXDist = maxYDist * 2;
         maxHypotenuse = Mathf.Sqrt(2 * Mathf.Pow(maxYDist, 2));
         velocity = speed;
-        m_Rigidbody2D.gravityScale = speed * 0.1f;
+        m_Rigidbody2D.gravityScale = speed * 0.122f;
     }
     void Update()
     {
