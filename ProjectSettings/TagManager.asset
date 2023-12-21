@@ -7,7 +7,6 @@ TagManager:
   - FlyingPlatform
   - GoUp
   - Target
-  - Tuto1
   layers:
   - Default
   - TransparentFX
@@ -56,9 +55,6 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 996865817
-    locked: 0
-  - name: foreground
-    uniqueID: 254679377
     locked: 0
   - name: UI
     uniqueID: 4132500595
