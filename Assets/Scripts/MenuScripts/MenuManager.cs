@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button keybindsBtn;
     [SerializeField] private Button generalBtn;
     [SerializeField] private Button resumeBtn;
+    [SerializeField] private Button ExitCreditsBtn;
     [Header("Volume Slider")]
     [SerializeField] private Slider globalVolumeSlider;
     [Header("General Options Toggles")]
@@ -51,11 +52,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float rumbleDurationVolumeSlider;
     [Header("AudioSounds")]
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource sfxSource2;
     [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip startSoundFX;
     [SerializeField] private AudioClip clickSoundFX;
     [SerializeField] private AudioClip menuMusicClip;
     [Header("Background")]
     [SerializeField] private GameObject backgroundLandscape;
+    [SerializeField] private GameObject credits;
 
     public static MenuManager instance;
 
@@ -116,7 +120,7 @@ public class MenuManager : MonoBehaviour
             }
             if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) || Mouse.current.leftButton.wasPressedThisFrame)
             {
-                sfxSource.clip = clickSoundFX;
+                sfxSource.clip = startSoundFX;
                 sfxSource.Play();
                 StartCoroutine(EnterMenu());
             }
@@ -169,7 +173,7 @@ public class MenuManager : MonoBehaviour
     }
     public void NewGame()
     {
-        print("test");
+        SceneManager.LoadScene("IntroScene");
     }
     public void Continue()
     {
@@ -192,8 +196,10 @@ public class MenuManager : MonoBehaviour
     public void Credits()
     {
         isInCredits = true;
+        ExitCreditsBtn.Select();
         mainMenuCanvas.gameObject.SetActive(false);
         creditsMenuCanvas.gameObject.SetActive(true);
+        credits.GetComponent<Animator>().SetBool("Play", true);
     }
     public void Quit()
     {
@@ -216,6 +222,7 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitCreditsMenu() 
     {
+        credits.GetComponent<Animator>().SetBool("Play", false);
         mainMenuCanvas.gameObject.SetActive(true);
         creditsMenuCanvas.gameObject.SetActive(false);
         newGameBtn.Select();
@@ -345,5 +352,9 @@ public class MenuManager : MonoBehaviour
     {
         PlayerMovement.instance.SetCanFlip();
         UnPauseGame();
+    }
+    public void OnclickSound()
+    {
+        //sfxSource2.Play();
     }
 }
