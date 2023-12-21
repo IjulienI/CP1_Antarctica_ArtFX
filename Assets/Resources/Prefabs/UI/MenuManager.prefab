@@ -57,6 +57,7 @@ MonoBehaviour:
   globalVolumeSlider: {fileID: 0}
   gamepadVibrationsToggle: {fileID: 0}
   fullscreenToggle: {fileID: 0}
+  carnetImg: {fileID: 0}
   volumeImg: {fileID: 0}
   keybindsImg: {fileID: 0}
   generalImg: {fileID: 0}
@@ -73,5 +74,5 @@ MonoBehaviour:
   highFrequencyVolumeSlider: 0.15
   rumbleDurationVolumeSlider: 0.12
   sfxSource: {fileID: 0}
-  clickSoundFX: {fileID: 8300000, guid: b25654582cb3c4c40980e4e067766d98, type: 3}
+  clickSoundFX: {fileID: 8300000, guid: 33f2f4994060c08439d016bf12b2e2d9, type: 3}
   backgroundLandscape: {fileID: 0}

@@ -50,7 +50,7 @@ public class EasterEgg : MonoBehaviour
         }
         else if (step3 == true)
         {
-            Yobb.SetActive(!Yobb.active);
+            Yobb.SetActive(!Yobb.activeSelf);
             step1 = false;
             step2 = false;
             step3 = false;

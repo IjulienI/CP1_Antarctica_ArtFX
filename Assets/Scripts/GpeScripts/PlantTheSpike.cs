@@ -7,8 +7,11 @@ public class PlantTheSpike : MonoBehaviour
 {
     private bool isInZone;
     [SerializeField] private InputActionReference interact;
+    [SerializeField] private GameObject spikeGo;
+    [SerializeField] private GameObject progressBar;
     private bool isInteractPressed;
     private bool bombPlanted;
+
 
     private void OnEnable()
     {
@@ -23,13 +26,13 @@ public class PlantTheSpike : MonoBehaviour
     }
     private void Update()
     {
-        if (isInteractPressed && !bombPlanted)
+        int isActivated = PlayerPrefs.GetInt("Vibration activation", 1);
+        if (isInteractPressed && !bombPlanted && isActivated == 1)
         {
             if(Gamepad.current != null)
             {
-                Gamepad.current.SetMotorSpeeds(0.1f, 0.2f);
+                Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
             }
-            Debug.Log("Interact is being held!");
         }
         else if(Gamepad.current != null && isInZone)
         {
@@ -42,26 +45,27 @@ public class PlantTheSpike : MonoBehaviour
         if (isInZone && !bombPlanted)
         {
             isInteractPressed = true;
-            Invoke("CheckHoldDuration", 4f);
+            progressBar.SetActive(true);
+            progressBar.GetComponent<Animator>().SetBool("Play", true);
+            Invoke("CheckHoldDuration", 2.4f);
         }
     }
     private void OnInteractCanceled(InputAction.CallbackContext context)
     {
-        print("testasfasfasf");
         isInteractPressed = false;
+        progressBar.SetActive(false);
+        progressBar.GetComponent<Animator>().SetBool("Play", false);
         CancelInvoke("CheckHoldDuration");
     }
     void CheckHoldDuration()
     {
         bombPlanted = true;
-        // Code à exécuter après que la touche Interact a été maintenue pendant 4 secondes
-        Debug.Log("Interact held for 4 seconds!");
+        spikeGo.GetComponent<Animator>().SetTrigger("Play");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            print("player");
             isInZone = true;
         }
         
@@ -69,5 +73,7 @@ public class PlantTheSpike : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isInZone = false;
+        isInteractPressed = false;
+        CancelInvoke("CheckHoldDuration");
     }
 }
