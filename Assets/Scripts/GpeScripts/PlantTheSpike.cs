@@ -16,6 +16,7 @@ public class PlantTheSpike : MonoBehaviour
     [SerializeField] private GameObject keybindGo;
     [SerializeField] private Sprite keyboardKeybind;
     [SerializeField] private Sprite gamepadKeybind;
+    [SerializeField] private AudioSource spikeAudioSource;
     bool isSelectButtonShowed;
     bool justExitTrigger;
 
@@ -76,6 +77,7 @@ public class PlantTheSpike : MonoBehaviour
         isSelectButtonShowed = false;
         keybindGo.SetActive(false);
         bombPlanted = true;
+        spikeAudioSource.Play();
         Invoke(nameof(LightOn), 0.3f);
         spikeGo.GetComponent<Animator>().SetTrigger("Play");
     }
@@ -123,5 +125,10 @@ public class PlantTheSpike : MonoBehaviour
     private void SetJustTriggerExit()
     {
         justExitTrigger = false;
+    }
+
+    public bool IsSpikePlanted()
+    {
+        return bombPlanted;
     }
 }
