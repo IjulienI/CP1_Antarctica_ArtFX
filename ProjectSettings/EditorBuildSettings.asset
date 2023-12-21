@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: de48efd66bf604c48b28ce889a4faf10
+  - enabled: 1
+    path: Assets/Scenes/MucusGameOver.unity
+    guid: f2e532ee53916fe4b890bbe6fd7ad28e
   m_configObjects: {}
