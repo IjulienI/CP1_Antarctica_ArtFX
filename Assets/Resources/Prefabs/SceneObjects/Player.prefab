@@ -496,6 +496,7 @@ MonoBehaviour:
   glassHit2: {fileID: 0}
   glassHit3: {fileID: 0}
   hasNumpadCanvas: 0
+  running: 0
   accelerationFactorOnGround: 70
   brakeFactorOnGround: 70
   maxSpeedOnGround: 5
@@ -573,6 +574,7 @@ MonoBehaviour:
   jump: {fileID: 2313709128390337505, guid: 13e1537bf4abbec488eba86f15e2c002, type: 3}
   land: {fileID: 6713558116771208549, guid: 06e389128d20cd041b4591e3143556a2, type: 3}
   walk: {fileID: 8768600426712250228, guid: 5269cbbb1b3c52b46825d087daf9ca60, type: 3}
+  run: {fileID: 8720957499623755884, guid: a991e3d690e9a6946817a8ffea5ac678, type: 3}
 --- !u!82 &2808498824369245216
 AudioSource:
   m_ObjectHideFlags: 0

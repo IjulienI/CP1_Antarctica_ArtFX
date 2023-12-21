@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Image coldStep1, coldStep2, coldStep3, coldStep4;
     [SerializeField] private GameObject glassHit1, glassHit2, glassHit3;
     [SerializeField] private bool hasNumpadCanvas;
+    [SerializeField] bool running = false;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     bool onMucus = false;
     float timeInMucus = 0;
     float timeOutMucus = 0;
+    
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
@@ -90,6 +92,11 @@ public class PlayerMovement : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+        }
+
+        if (running)
+        {
+            anim.SetBool("isRunning", true);
         }
     }
     void Update()
@@ -232,7 +239,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                maxSpeed = maxSpeedOnGround;
+                if (running == true)
+                {
+                    maxSpeed = maxSpeedOnGround + 2;
+                }
+                else
+                {
+                    maxSpeed = maxSpeedOnGround;
+                }
+                
                 accelerationFactor = accelerationFactorOnGround;
                 brakeFactor = brakeFactorOnGround;
             }

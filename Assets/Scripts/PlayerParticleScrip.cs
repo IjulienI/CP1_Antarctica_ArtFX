@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerParticleScrip : MonoBehaviour
 {
     private Animator anim;
-    [SerializeField] GameObject jump, land, walk;
+    [SerializeField] GameObject jump, land, walk, run;
     bool jumping = true;
     void Awake()
     {
@@ -34,5 +34,10 @@ public class PlayerParticleScrip : MonoBehaviour
     public void WalkParticle()
     {
         var walkDust = Instantiate(walk, transform.position, transform.rotation);
+    }
+
+    public void RunParticle()
+    {
+        var walkDust = Instantiate(run, transform.position, transform.rotation);
     }
 }
