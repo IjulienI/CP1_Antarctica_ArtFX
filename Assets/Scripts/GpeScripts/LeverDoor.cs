@@ -13,6 +13,7 @@ public class LeverDoor : MonoBehaviour
     public bool doorIsOpen = false;
     public int index;
 
+
     [SerializeField] Animator animator;
     [SerializeField] Sprite leverOff;
     [SerializeField] Sprite leverOn;
