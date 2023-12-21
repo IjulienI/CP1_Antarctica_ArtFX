@@ -169,7 +169,7 @@ public class MenuManager : MonoBehaviour
     }
     public void NewGame()
     {
-        print("test");
+        SceneManager.LoadScene("IntroScene");
     }
     public void Continue()
     {
