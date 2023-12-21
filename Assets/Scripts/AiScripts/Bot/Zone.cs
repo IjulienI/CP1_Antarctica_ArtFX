@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
-    public bool targetIn = false;
-    private void OnTriggerStay2D(Collider2D collision)
+    public GameObject Nodes;
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Alien"))
+        if(collision.tag == "Alien")
         {
-            collision.GetComponent<AiStateMachine>().zone = gameObject;
-        }
-        if(collision.tag == "Target")
-        {
-            targetIn = true;
+            Nodes.SetActive(true);
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Target")
+        if (collision.tag == "Alien")
         {
-            targetIn = false;
+            if(Nodes != null)
+            {
+                Nodes.SetActive(false);
+            }
         }
     }
 }
