@@ -52,4 +52,9 @@ public class ElevatorClamp : MonoBehaviour
             isInside = false;
         }
     }
+
+    public void DisabledAnimator()
+    {
+        gameObject.GetComponent<Animator>().enabled = false;
+    }
 }

@@ -99,7 +99,6 @@ public class AiStateMachine : MonoBehaviour
     private void GetRandomTarget()
     {
         List<Node> tempNodes = new List<Node>();
-        tempNodes.Clear();
         for (int i = 0; i < _controller.AllNodes.Count; i++)
         {
             if (Vector2.Distance(transform.position, _controller.AllNodes[i].transform.position) <= randomRange)
@@ -107,17 +106,17 @@ public class AiStateMachine : MonoBehaviour
                 tempNodes.Add(_controller.AllNodes[i]);
             }
         }
-        target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
-        if(zone.GetComponent<Zone>().targetIn == true)
+        if(tempNodes.Count > 0)
         {
+            target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
+            tempNodes.Clear();
             state = State.move;
-        }else GetRandomTarget();
+        }
     }
 
     public void GetRandomInRange(Transform targetRandom, int minRange, int maxRange)
     {
         List<Node> tempNodes = new List<Node>();
-        tempNodes.Clear();
         for (int i = 0; i < _controller.AllNodes.Count; i++)
         {
             if (Vector2.Distance(targetRandom.position, _controller.AllNodes[i].transform.position) >= minRange && Vector2.Distance(targetRandom.position, _controller.AllNodes[i].transform.position) <= maxRange)
@@ -125,12 +124,12 @@ public class AiStateMachine : MonoBehaviour
                 tempNodes.Add(_controller.AllNodes[i]);
             }
         }
-        target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
-        if (zone.GetComponent<Zone>().targetIn == true)
+        if(tempNodes.Count > 0)
         {
+            target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
+            tempNodes.Clear();
             state = State.move;
         }
-        else GetRandomInRange(targetRandom, minRange, maxRange);
     }
 
     private void StopWait()

@@ -9,5 +9,10 @@ public class SpotlightsSequence : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         spotlights.SetActive(true);
+
+        if (gameObject.name == "Spotlights3")
+        {
+            GameObject.Find("Virtual Camera").GetComponent<Animator>().SetTrigger("ZoomIn");
+        }
     }
 }

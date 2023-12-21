@@ -40,7 +40,7 @@ public class PlantTheSpike : MonoBehaviour
                 Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
             }
         }
-        else if((Gamepad.current != null && isInZone)||justExitTrigger)
+        else if((Gamepad.current != null && isInZone)||(Gamepad.current != null && justExitTrigger))
         {
 
             Gamepad.current.SetMotorSpeeds(0, 0);
