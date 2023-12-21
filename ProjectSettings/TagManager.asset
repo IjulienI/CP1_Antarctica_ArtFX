@@ -7,6 +7,8 @@ TagManager:
   - FlyingPlatform
   - GoUp
   - Target
+  - Tuto1
+  - Mucus
   layers:
   - Default
   - TransparentFX
@@ -50,11 +52,14 @@ TagManager:
   - name: props
     uniqueID: 3011149345
     locked: 0
+  - name: player
+    uniqueID: 996865817
+    locked: 0
   - name: ground
     uniqueID: 2583476639
     locked: 0
-  - name: player
-    uniqueID: 996865817
+  - name: foreground
+    uniqueID: 254679377
     locked: 0
   - name: UI
     uniqueID: 4132500595

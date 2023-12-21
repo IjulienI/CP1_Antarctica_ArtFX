@@ -8,9 +8,13 @@ using UnityEngine.UI;
 public class NumpadDoor : MonoBehaviour
 {
     [SerializeField] private GameObject keybindGo;
+    [SerializeField] private GameObject numpadGo;
     [SerializeField] private Image numpadImg;
+    [SerializeField] private Image screenGrayImg;
+    [SerializeField] private Image screenGreenImg;
+    [SerializeField] private Image screenRedImg;
     [Header("Numpad buttons")]
-    private Button[] numpadButtons = new Button[10];
+    private Button[] numpadButtons = new Button[11];
     [SerializeField] private Button numpadValidateBtn, numpadDeleteBtn;
     [Header("Keybinds References")]
     [SerializeField] private InputActionReference escape;
@@ -30,7 +34,7 @@ public class NumpadDoor : MonoBehaviour
     private bool isSelectButtonShowed;
     private bool isNumpadShowed;
     private bool isDoorOpened;
-    private int childCount;
+    private int childCounter;
     int count = 0;
 
 
@@ -41,25 +45,25 @@ public class NumpadDoor : MonoBehaviour
 
     private void Awake()
     {
-        childCount = numpadImg.transform.childCount;
-        for (int i = 1; i < childCount-3; i++)
+        childCounter = numpadImg.transform.childCount;
+        for (int i = 1; i < childCounter-2; i++)
         {
-            numpadButtons[i-1] = numpadImg.transform.GetChild(i).GetComponent<Button>();
+            numpadButtons[i-1] = numpadImg.transform.GetChild(i-1).GetComponent<Button>();
         }
     }
 
     private void Start()
     {
-        numpadButtons[0].onClick.AddListener(() => addNumberInCode(0));
-        numpadButtons[1].onClick.AddListener(() => addNumberInCode(1));
-        numpadButtons[2].onClick.AddListener(() => addNumberInCode(2));
-        numpadButtons[3].onClick.AddListener(() => addNumberInCode(3));
-        numpadButtons[4].onClick.AddListener(() => addNumberInCode(4));
-        numpadButtons[5].onClick.AddListener(() => addNumberInCode(5));
-        numpadButtons[6].onClick.AddListener(() => addNumberInCode(6));
-        numpadButtons[7].onClick.AddListener(() => addNumberInCode(7));
-        numpadButtons[8].onClick.AddListener(() => addNumberInCode(8));
-        numpadButtons[9].onClick.AddListener(() => addNumberInCode(9));
+        
+        numpadButtons[0].onClick.AddListener(() => addNumberInCode(1));
+        numpadButtons[1].onClick.AddListener(() => addNumberInCode(2));
+        numpadButtons[2].onClick.AddListener(() => addNumberInCode(3));
+        numpadButtons[3].onClick.AddListener(() => addNumberInCode(4));
+        numpadButtons[4].onClick.AddListener(() => addNumberInCode(5));
+        numpadButtons[5].onClick.AddListener(() => addNumberInCode(6));
+        numpadButtons[6].onClick.AddListener(() => addNumberInCode(7));
+        numpadButtons[7].onClick.AddListener(() => addNumberInCode(8));
+        numpadButtons[8].onClick.AddListener(() => addNumberInCode(9));
         numpadValidateBtn.onClick.AddListener(CodeValidate);
         numpadDeleteBtn.onClick.AddListener(CodeClear);
     }
@@ -82,25 +86,22 @@ public class NumpadDoor : MonoBehaviour
             PlayerMovement.instance.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             PlayerMovement.instance.SetCanJump(false);
             ResetCodeText("-");
-            numpadImg.gameObject.SetActive(true);
+            numpadGo.SetActive(true);
+            screenGrayImg.gameObject.SetActive(true);
+            screenGreenImg.gameObject.SetActive(false);
+            screenRedImg.gameObject.SetActive(false);
             keybindGo.SetActive(false);
             isNumpadShowed = true;
-            numpadButtons[1].Select();
+            numpadButtons[0].Select();
             if (DeviceDetection.instance.GetIsGamepad())
             {
                 keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
             }
         }
-        else if(DeviceDetection.instance.GetIsKeyboard())
+        else if (DeviceDetection.instance.GetIsKeyboard())
         {
-            codePlayer.Clear();
             keybindGo.GetComponent<SpriteRenderer>().sprite = keyboardKeybind;
-            count = 0;
-            PlayerMovement.instance.enabled = true;
-            PlayerMovement.instance.SetCanJump(true);
-            numpadImg.gameObject.SetActive(false);
-            keybindGo.SetActive(true);
-            isNumpadShowed = false;
+            ExitNumpad();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -130,13 +131,17 @@ public class NumpadDoor : MonoBehaviour
     }
     private void ReturnBack(InputAction.CallbackContext obj)
     {
+        ExitNumpad();
+    }
+    private void ExitNumpad()
+    {
         if (isNumpadShowed && !isDoorOpened)
         {
             codePlayer.Clear();
             count = 0;
             PlayerMovement.instance.enabled = true;
             PlayerMovement.instance.SetCanJump(true);
-            numpadImg.gameObject.SetActive(false);
+            numpadGo.SetActive(false);
             keybindGo.SetActive(true);
             isNumpadShowed = false;
         }
@@ -156,8 +161,11 @@ public class NumpadDoor : MonoBehaviour
         count = 0;
         foreach (TextMeshProUGUI numberTxt in numberText)
         {
-            numberTxt.color = Color.blue;
+            numberTxt.color = new Color(0xB1 / 255f, 0xF6 / 255f, 0xFF / 255f);
         }
+        screenGrayImg.gameObject.SetActive(true);
+        screenGreenImg.gameObject.SetActive(false);
+        screenRedImg.gameObject.SetActive(false);
         ResetCodeText("-");
         codePlayer.Clear();
     }
@@ -166,10 +174,9 @@ public class NumpadDoor : MonoBehaviour
         count = 0;
         if (code.SequenceEqual(codePlayer))
         {
-            foreach (TextMeshProUGUI numberTxt in numberText)
-            {
-                numberTxt.color = Color.green;
-            }
+            screenGrayImg.gameObject.SetActive(false);
+            screenGreenImg.gameObject.SetActive(true);
+            screenRedImg.gameObject.SetActive(false);
             Invoke(nameof(OpenDoor), 1f);
         }
         else
@@ -177,9 +184,11 @@ public class NumpadDoor : MonoBehaviour
             RumbleGamepad.instance.MakeGampadRumble(lowFrequencyWrongCode, highFrequencyWrongCode, rumbleDurationWrongCode);
             foreach (TextMeshProUGUI numberTxt in numberText)
             {
-                numberTxt.color = Color.red;
                 Invoke(nameof(CodeClear), 1f);
-            } 
+            }
+            screenGrayImg.gameObject.SetActive(false);
+            screenGreenImg.gameObject.SetActive(false);
+            screenRedImg.gameObject.SetActive(true);
         }
     }
     private void ResetCodeText(string text)
@@ -192,9 +201,11 @@ public class NumpadDoor : MonoBehaviour
     private void OpenDoor()
     {
         isDoorOpened = true;
-        numpadImg.gameObject.SetActive(false);
+        numpadGo.SetActive(false);
         PlayerMovement.instance.enabled = true;
         PlayerMovement.instance.SetCanJump(true);
+
+        GameObject.Find("FinalElevator").GetComponent<Animator>().enabled = true;
     }
     
 }

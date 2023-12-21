@@ -40,7 +40,7 @@ public class AIPathController : MonoBehaviour
     [SerializeField] private Node LastNode;
     private Node auxLastNode;
 
-    private bool canJump = true;
+    public bool canJump = true;
     private bool tryAgain = false;
     private float velocity;
     private bool jumpDebugOn;

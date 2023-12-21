@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,12 +27,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Toggle gamepadVibrationsToggle;
     [SerializeField] private Toggle fullscreenToggle;
     [Header("Options Menus Backgrounds")]
+    [SerializeField] private Image carnetImg;
     [SerializeField] private Image volumeImg;
     [SerializeField] private Image keybindsImg;
     [SerializeField] private Image generalImg;
     [SerializeField] private Image titleScreenBackgroundImg;
     [SerializeField] private Image titleScreenIceImg;
     [SerializeField] private Image logoImg;
+    [SerializeField] private Image pauseMenuImg;
     [Header("Press Any Key Images")]
     [SerializeField] private GameObject pressKeyKeyboard;
     [SerializeField] private GameObject pressKeyGamepad;
@@ -47,7 +51,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float rumbleDurationVolumeSlider;
     [Header("AudioSounds")]
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip clickSoundFX;
+    [SerializeField] private AudioClip menuMusicClip;
+    [Header("Background")]
+    [SerializeField] private GameObject backgroundLandscape;
 
     public static MenuManager instance;
 
@@ -73,9 +81,12 @@ public class MenuManager : MonoBehaviour
     }
     private void Start()
     {
-        if(titleScreenCanvas != null)
+        Time.timeScale = 1.0f;
+        if (titleScreenCanvas != null)
         {
             isTitleScreenShowed = true;
+            musicSource.clip = menuMusicClip;
+            musicSource.Play();
             titleScreenCanvas.gameObject.SetActive(true);
             mainMenuCanvas.gameObject.SetActive(false);
         }
@@ -103,7 +114,7 @@ public class MenuManager : MonoBehaviour
                 pressKeyGamepad.SetActive(false);
                 pressKeyKeyboard.SetActive(true);
             }
-            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))
+            if (Keyboard.current.anyKey.wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) || Mouse.current.leftButton.wasPressedThisFrame)
             {
                 sfxSource.clip = clickSoundFX;
                 sfxSource.Play();
@@ -129,8 +140,9 @@ public class MenuManager : MonoBehaviour
         }
         titleScreenBackgroundImg.color = new Color(titleScreenBackgroundImg.color.r,titleScreenBackgroundImg.color.g,titleScreenBackgroundImg.color.b,0f);
         titleScreenIceImg.color = new Color(titleScreenIceImg.color.r, titleScreenIceImg.color.g, titleScreenIceImg.color.b, 0f);
+        backgroundLandscape.GetComponent<Animator>().SetTrigger("PlayLandscape");
         logoImg.GetComponent<Animator>().SetTrigger("Play");
-        Invoke(nameof(SetCanvasActive), 0.5f);
+        Invoke(nameof(SetCanvasActive), 1f);
         
     }
 
@@ -138,13 +150,14 @@ public class MenuManager : MonoBehaviour
     {
         titleScreenCanvas.gameObject.SetActive(false);
         mainMenuCanvas.gameObject.SetActive(true);
+        carnetImg.GetComponent<Animator>().SetTrigger("Play");
     }
 
     public void PauseGame()
     {
-        isGamePaused = true;
-        Time.timeScale = 0f;
+        isGamePaused = true;  
         pauseMenuCanvas.gameObject.SetActive(true);
+        Time.timeScale = 0f;
         resumeBtn.Select();
 
     }
@@ -154,7 +167,6 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         pauseMenuCanvas.gameObject.SetActive(false);
     }
-
     public void NewGame()
     {
         print("test");
