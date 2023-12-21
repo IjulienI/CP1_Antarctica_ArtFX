@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class AIPathController : MonoBehaviour
@@ -344,6 +346,14 @@ public class AIPathController : MonoBehaviour
         {
             canJump = true;
             tryAgain = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            SceneManager.LoadScene("AlienGameOver");
         }
     }
 

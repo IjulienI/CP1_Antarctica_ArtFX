@@ -23,17 +23,12 @@ public class SaveSystem : MonoBehaviour
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
             gameInfo = JsonUtility.FromJson<GameInfo>(json);
 
-            if (File.GetLastWriteTime(Application.persistentDataPath + "/data.save").ToString(CultureInfo.CurrentCulture) == gameInfo.modificationDate)
+            LoadLevel();
+            LoadPlayer();
+            LoadAi();
+            LoadDoors();
+            if (File.GetLastWriteTime(Application.persistentDataPath + "/data.save").ToString(CultureInfo.CurrentCulture) != gameInfo.modificationDate)
             {
-                LoadLevel();
-                LoadPlayer();
-                LoadDoors();
-            }
-            else
-            {
-                LoadLevel();
-                LoadPlayer();
-                LoadDoors();
                 //File.Delete(Application.persistentDataPath + "/data.save");
                 //if (cheatScreen != null) cheatScreen.SetActive(true);
                 //else Debug.Log("Don't Cheat !");
@@ -43,6 +38,7 @@ public class SaveSystem : MonoBehaviour
     public void Save()
     {
         SavePlayer();
+        SaveAi();
         SaveDoors();
         SaveLevel();
 
@@ -77,6 +73,29 @@ public class SaveSystem : MonoBehaviour
             player.transform.position = gameInfo.player.pos;
         }
     }
+    //PLAYER
+    //:
+    //---------------------------------------------------------------------------------------
+    private void SaveAi()
+    {
+        GameObject ai = GameObject.FindGameObjectWithTag("Alien");
+
+        if (ai != null)
+        {
+            gameInfo.ai.pos = new Vector2(ai.transform.position.x + 2, ai.transform.position.y);
+        }
+    }
+
+    private void LoadAi()
+    {
+        GameObject ai = GameObject.FindGameObjectWithTag("Alien");
+
+        if (ai != null)
+        {
+            ai.transform.position = gameInfo.ai.pos;
+        }
+    }
+
 
     //LEVER DOORS :
     //---------------------------------------------------------------------------------------
@@ -124,11 +143,12 @@ public class SaveSystem : MonoBehaviour
     {
         if(gameInfo.levelName != null)
         {
-            if (SceneManager.GetActiveScene().name == gameInfo.levelName)
+            if (SceneManager.GetActiveScene().name != gameInfo.levelName)
             {
                 SceneManager.LoadScene(gameInfo.levelName);
+                Debug.Log("Hello");
             }
-            else SceneManager.LoadScene("Level1");
         }
+        else SceneManager.LoadScene("Level1");
     }
 }
