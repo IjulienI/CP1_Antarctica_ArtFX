@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlantTheSpike : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class PlantTheSpike : MonoBehaviour
     [SerializeField] private GameObject progressBar;
     private bool isInteractPressed;
     private bool bombPlanted;
+    [SerializeField] private Light2D lightSpike;
+    [SerializeField] private GameObject keybindGo;
+    [SerializeField] private Sprite keyboardKeybind;
+    [SerializeField] private Sprite gamepadKeybind;
+    bool isSelectButtonShowed;
+    bool justExitTrigger;
 
 
     private void OnEnable()
@@ -34,7 +41,7 @@ public class PlantTheSpike : MonoBehaviour
                 Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
             }
         }
-        else if(Gamepad.current != null && isInZone)
+        else if((Gamepad.current != null && isInZone)||justExitTrigger)
         {
 
             Gamepad.current.SetMotorSpeeds(0, 0);
@@ -45,6 +52,8 @@ public class PlantTheSpike : MonoBehaviour
         if (isInZone && !bombPlanted)
         {
             isInteractPressed = true;
+            isSelectButtonShowed = false;
+            keybindGo.SetActive(false);
             progressBar.SetActive(true);
             progressBar.GetComponent<Animator>().SetBool("Play", true);
             Invoke("CheckHoldDuration", 2.4f);
@@ -52,6 +61,11 @@ public class PlantTheSpike : MonoBehaviour
     }
     private void OnInteractCanceled(InputAction.CallbackContext context)
     {
+        if (isInZone && !bombPlanted)
+        {
+            isSelectButtonShowed = true;
+            keybindGo.SetActive(true);
+        }
         isInteractPressed = false;
         progressBar.SetActive(false);
         progressBar.GetComponent<Animator>().SetBool("Play", false);
@@ -59,21 +73,55 @@ public class PlantTheSpike : MonoBehaviour
     }
     void CheckHoldDuration()
     {
+        isSelectButtonShowed = false;
+        keybindGo.SetActive(false);
         bombPlanted = true;
+        Invoke(nameof(LightOn), 0.3f);
         spikeGo.GetComponent<Animator>().SetTrigger("Play");
+    }
+
+    void LightOn()
+    {
+        lightSpike.intensity = Mathf.Lerp(0.5f, 1, 2.5f);
+        lightSpike.pointLightOuterRadius = Mathf.Lerp(0.8f, 1.3f, 2.5f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             isInZone = true;
+            if (DeviceDetection.instance.GetIsKeyboard())
+            {
+                keybindGo.GetComponent<SpriteRenderer>().sprite = keyboardKeybind;
+
+            }
+            else if (DeviceDetection.instance.GetIsGamepad())
+            {
+                keybindGo.GetComponent<SpriteRenderer>().sprite = gamepadKeybind;
+            }
+            if (!bombPlanted)
+            {
+                keybindGo.SetActive(true);
+                isSelectButtonShowed = true;
+            }
         }
-        
+   
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        justExitTrigger = true;
+        Invoke(nameof(SetJustTriggerExit), 0.1f);
         isInZone = false;
         isInteractPressed = false;
         CancelInvoke("CheckHoldDuration");
+        if (collision.CompareTag("Player"))
+        {
+            keybindGo.SetActive(false);
+            isSelectButtonShowed = false;
+        }
+    }
+    private void SetJustTriggerExit()
+    {
+        justExitTrigger = false;
     }
 }
