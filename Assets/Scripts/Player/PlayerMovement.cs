@@ -37,8 +37,11 @@ public class PlayerMovement : MonoBehaviour
     float actualCold = 0f;
     [SerializeField] Animator flameAnim;
     private Animator anim;
-    
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip[] clip;
+    [SerializeField] private AudioClip clipLanding;
+    [SerializeField] private AudioSource audioSource;
 
     private float coyoteTimer;
     private float horizontal;
@@ -584,5 +587,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetCanFlip()
     {
         canFlip = true;
+    }
+    public void PlaySound()
+    {
+        int x = UnityEngine.Random.Range(0, 6);
+        audioSource.clip = clip[x];
+        audioSource.Play();
     }
 }
