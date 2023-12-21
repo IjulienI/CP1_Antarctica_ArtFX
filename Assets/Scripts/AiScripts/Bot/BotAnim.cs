@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-using Unity.PlasticSCM.Editor.WebApi;
 
 public class BotAnim : MonoBehaviour
 {
     [SerializeField] private SkeletonAnimation _ska;
     [SerializeField] private AnimationReferenceAsset idle, walk, startJump, idleJump, endJump, wallJump;
     private Rigidbody2D _rb;
-    private Animator _animator;
     private float velocity;
     private string currentAnimation;
     private bool isJumping;
@@ -19,7 +15,6 @@ public class BotAnim : MonoBehaviour
     private void Awake()
     { 
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -39,7 +34,6 @@ public class BotAnim : MonoBehaviour
         {
             SetCharacterState("idle");
         }
-        //Debug.Log(hit.collider.gameObject.layer);
         if(hit.distance > 1)
         {
             isJumping = true;
@@ -59,7 +53,7 @@ public class BotAnim : MonoBehaviour
     private void StartJump()
     {
         SetCharacterState("startJump");
-        Invoke(nameof(idleJump), 0.16f);
+        Invoke(nameof(IdleJump), 0.16f);
     }
 
     private void IdleJump()
@@ -76,7 +70,7 @@ public class BotAnim : MonoBehaviour
     private void WallJump()
     {
         SetCharacterState("wallJump");
-        Invoke(nameof(idleJump), 0.27f);
+        Invoke(nameof(IdleJump), 0.27f);
     }
 
     private void SetBool()
@@ -86,7 +80,7 @@ public class BotAnim : MonoBehaviour
     private void SetAnimation(AnimationReferenceAsset animation, bool loop, float timeScale)
     {
         if (animation.name.Equals(currentAnimation)) return;
-        _ska.state.SetAnimation(0,animation,loop).TimeScale = timeScale;
+        _ska.state.SetAnimation(0, animation, loop).TimeScale = timeScale;
         currentAnimation = animation.name;
     }
 
