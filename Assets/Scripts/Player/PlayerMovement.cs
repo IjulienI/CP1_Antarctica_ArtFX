@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Light2D _fire;
     [SerializeField] private Image coldStep1, coldStep2, coldStep3, coldStep4;
     [SerializeField] private GameObject glassHit1, glassHit2, glassHit3;
+    [SerializeField] private bool hasNumpadCanvas;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -473,7 +474,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PauseGame(InputAction.CallbackContext pause)
     {
-        if (pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)
+        if ((pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)||(pause.performed && !hasNumpadCanvas))
         {
             canFlip = false;
             MenuManager.instance.PauseGame();
