@@ -55,7 +55,11 @@ public class LeverDoor : MonoBehaviour
             Sprite nextSprite = leverRenderer.sprite == leverOff ? leverOn : leverOff;
             leverRenderer.sprite = nextSprite;
 
-            LEDlight.color = Color.green;
+            if (LEDlight != null)
+            {
+                LEDlight.color = Color.green;
+            }
+
 
             if (doorIsOpen == true)
             {
