@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -46,6 +44,8 @@ public class PlantTheSpike : MonoBehaviour
         {
 
             Gamepad.current.SetMotorSpeeds(0, 0);
+            progressBar.SetActive(false);
+            progressBar.GetComponent<Animator>().SetBool("Play", false);
         }
     }
     private void OnInteractStarted(InputAction.CallbackContext context)
