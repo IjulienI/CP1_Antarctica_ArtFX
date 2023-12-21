@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button keybindsBtn;
     [SerializeField] private Button generalBtn;
     [SerializeField] private Button resumeBtn;
+    [SerializeField] private Button ExitCreditsBtn;
     [Header("Volume Slider")]
     [SerializeField] private Slider globalVolumeSlider;
     [Header("General Options Toggles")]
@@ -58,6 +59,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private AudioClip menuMusicClip;
     [Header("Background")]
     [SerializeField] private GameObject backgroundLandscape;
+    [SerializeField] private GameObject credits;
 
     public static MenuManager instance;
 
@@ -194,8 +196,10 @@ public class MenuManager : MonoBehaviour
     public void Credits()
     {
         isInCredits = true;
+        ExitCreditsBtn.Select();
         mainMenuCanvas.gameObject.SetActive(false);
         creditsMenuCanvas.gameObject.SetActive(true);
+        credits.GetComponent<Animator>().SetBool("Play", true);
     }
     public void Quit()
     {
@@ -218,6 +222,7 @@ public class MenuManager : MonoBehaviour
     }
     public void ExitCreditsMenu() 
     {
+        credits.GetComponent<Animator>().SetBool("Play", false);
         mainMenuCanvas.gameObject.SetActive(true);
         creditsMenuCanvas.gameObject.SetActive(false);
         newGameBtn.Select();

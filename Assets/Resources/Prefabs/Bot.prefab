@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7145311556154508747}
   m_Layer: 6
   m_Name: Bot
-  m_TagString: Untagged
+  m_TagString: Alien
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   startJump: {fileID: 11400000, guid: a3bcd707c4163824989ff8d6e504ffa1, type: 2}
   idleJump: {fileID: 11400000, guid: d816a4c0eb3dcf4428dde2652d5b8536, type: 2}
   endJump: {fileID: 11400000, guid: dbc18c52e9cb8ee468cd0627e92d7c47, type: 2}
+  wallJump: {fileID: 0}
 --- !u!114 &7785916327004208723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,9 +192,10 @@ MonoBehaviour:
   minWaitRange: 3
   maxWaitRange: 10
   maxDistance: 15
-  state: 0
+  state: 1
   player: {fileID: 0}
   goSound: 0
+  zone: {fileID: 0}
 --- !u!1 &3663020417514689231
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,9 +276,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 996865817
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &8048274834085098173
 MonoBehaviour:
