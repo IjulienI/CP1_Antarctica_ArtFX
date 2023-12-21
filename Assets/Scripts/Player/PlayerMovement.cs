@@ -203,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         anim.SetFloat("yVelocity", _rb.velocity.y);
+        anim.SetFloat("xVelocity", _rb.velocity.x);
 
         if (launchFallAcceleration == true)
         {
