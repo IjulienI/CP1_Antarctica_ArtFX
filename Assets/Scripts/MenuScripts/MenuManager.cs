@@ -350,6 +350,6 @@ public class MenuManager : MonoBehaviour
     }
     public void OnclickSound()
     {
-        sfxSource2.Play();
+        //sfxSource2.Play();
     }
 }
