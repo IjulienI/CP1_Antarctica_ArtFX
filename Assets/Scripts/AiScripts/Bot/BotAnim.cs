@@ -7,14 +7,14 @@ using Unity.PlasticSCM.Editor.WebApi;
 public class BotAnim : MonoBehaviour
 {
     [SerializeField] private SkeletonAnimation _ska;
-    [SerializeField] private AnimationReferenceAsset idle, walk, startJump, idleJump, endJump;
+    [SerializeField] private AnimationReferenceAsset idle, walk, startJump, idleJump, endJump, wallJump;
     private Rigidbody2D _rb;
     private Animator _animator;
     private float velocity;
     private string currentAnimation;
     private bool isJumping;
-    private bool jumpAnim;
     RaycastHit2D hit;
+    RaycastHit2D wallHit;
 
     private void Awake()
     { 
@@ -27,41 +27,44 @@ public class BotAnim : MonoBehaviour
     }
     private void Update()
     {
+        hit = Physics2D.Raycast(transform.position, Vector2.down);
+        wallHit = Physics2D.Raycast(transform.position, Vector2.right);
+        Debug.DrawRay(transform.position, Vector2.right);
         velocity = _rb.velocity.x;
-        if(Mathf.Abs(velocity) > 0.1f && !jumpAnim)
+        if(Mathf.Abs(velocity) > 0.1f && !isJumping)
         {
             SetCharacterState("walk");
         }
-        else if(!jumpAnim)
+        else if(!isJumping)
         {
             SetCharacterState("idle");
         }
-        hit = Physics2D.Raycast(transform.position, Vector2.down);
         //Debug.Log(hit.collider.gameObject.layer);
         if(hit.distance > 1)
         {
             isJumping = true;
-            jumpAnim = true;
             StartJump();
         }
-        else EndJump();
+        else if(isJumping)
+        {
+            EndJump();
+        }
+
+        if(isJumping && wallHit.distance < 2)
+        {
+            WallJump();
+        }
     }
 
     private void StartJump()
     {
-        if(isJumping)
-        {
-            SetCharacterState("startJump");
-            Invoke(nameof(idleJump), 0.16f);
-        }
+        SetCharacterState("startJump");
+        Invoke(nameof(idleJump), 0.16f);
     }
 
     private void IdleJump()
     {
-        if (isJumping)
-        {
-            SetCharacterState("idleJump");
-        }
+        SetCharacterState("idleJump");
     }
 
     private void EndJump()
@@ -70,9 +73,15 @@ public class BotAnim : MonoBehaviour
         Invoke(nameof(SetBool), 0.43f);
     }
 
+    private void WallJump()
+    {
+        SetCharacterState("wallJump");
+        Invoke(nameof(idleJump), 0.27f);
+    }
+
     private void SetBool()
     {
-        jumpAnim = false;
+        isJumping = false;
     }
     private void SetAnimation(AnimationReferenceAsset animation, bool loop, float timeScale)
     {
@@ -89,7 +98,7 @@ public class BotAnim : MonoBehaviour
         }
         if (state.Equals("walk"))
         {
-            SetAnimation(walk, true, 2.5f);
+            SetAnimation(walk, true, 2f);
         }
         if (state.Equals("startJump"))
         {
@@ -102,6 +111,10 @@ public class BotAnim : MonoBehaviour
         if (state.Equals("idleJump"))
         {
             SetAnimation(idleJump, true, 1f);
+        }
+        if (state.Equals("wallJump"))
+        {
+            SetAnimation(wallJump, true, 3f);
         }
     }
 }
