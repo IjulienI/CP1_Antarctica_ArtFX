@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip musicChaseMiddleClip;
     [SerializeField] private AudioClip musicChaseEndClip;
     public static AudioManager instance;
+    [SerializeField] private int Level = 0;
 
     private bool isTransitioning = false;
     public bool isLooping = true;
@@ -30,9 +31,12 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         LoadVolume();
-        ChaseMusic();
+        if(Level == 3)
+        {
+            ChaseMusic();
+        }
     }
 
     void LoadVolume()
@@ -55,16 +59,14 @@ public class AudioManager : MonoBehaviour
         if (!isTransitioning && isLooping && l)
         {
             isTransitioning = true;
-            // Démarrer la lecture du morceau 2 en avance
             musicSource2.PlayScheduled(AudioSettings.dspTime + musicSource.clip.length);
         }
         if (!isLooping && !i && isTransitioning)
         {
             i= true;
-            print("oui");
             musicSource2.loop = false;
             float a = musicSource2.clip.length - musicSource2.time; ;
-            musicSource3.PlayScheduled(AudioSettings.dspTime + a); // 1.0 est le décalage temporel, ajustez selon vos besoins
+            musicSource3.PlayScheduled(AudioSettings.dspTime + a); 
         }
     }
 }

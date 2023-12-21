@@ -495,6 +495,7 @@ MonoBehaviour:
   glassHit1: {fileID: 0}
   glassHit2: {fileID: 0}
   glassHit3: {fileID: 0}
+  hasNumpadCanvas: 0
   accelerationFactorOnGround: 70
   brakeFactorOnGround: 70
   maxSpeedOnGround: 5
@@ -509,7 +510,6 @@ MonoBehaviour:
   flameAnim: {fileID: 1571283504482728278}
   clip:
   - {fileID: 8300000, guid: 760a87622c79e0f41b23192e25939a3d, type: 3}
-  - {fileID: 8300000, guid: fc08ffd2b916a4846866063f4688d538, type: 3}
   - {fileID: 8300000, guid: 1bafff960b6cee64a92b0f4e0bb634df, type: 3}
   - {fileID: 8300000, guid: 9bb8a0075f14f4741bc9a09a197e198a, type: 3}
   - {fileID: 8300000, guid: c602debf7b4f9754e9f8d11f496aaa59, type: 3}
@@ -582,10 +582,10 @@ AudioSource:
   m_GameObject: {fileID: 2677651126098139841}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1794179990248664827, guid: 043df4f37d4bcbb46891ab4e265a27ab, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.07
   m_Pitch: 1
   Loop: 0
   Mute: 0

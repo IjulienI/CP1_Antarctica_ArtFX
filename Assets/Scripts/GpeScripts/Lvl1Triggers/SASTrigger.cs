@@ -14,10 +14,13 @@ public class SASTrigger : MonoBehaviour
     [SerializeField] private Light2D LightR;
     [SerializeField] private Light2D LightL;
 
+    [SerializeField] private AudioSource sasAudioSource;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         SASparticlesR.Play();
         SASparticlesL.Play();
+        sasAudioSource.Play();
 
         DoorColR.enabled = false;
         if(DoorColL != null)
@@ -35,7 +38,13 @@ public class SASTrigger : MonoBehaviour
 
     private void EnableDoors()
     {
-        DoorColR.enabled = true;
-        DoorColL.enabled = true;
+        if(DoorColR != null)
+        {
+            DoorColR.enabled = true;
+        }
+        if (DoorColL != null)
+        {
+            DoorColL.enabled = true;
+        }    
     }
 }
