@@ -590,7 +590,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void PlaySound()
     {
-        int x = UnityEngine.Random.Range(0, 6);
+        int x = UnityEngine.Random.Range(0, 5);
         audioSource.clip = clip[x];
         audioSource.Play();
     }

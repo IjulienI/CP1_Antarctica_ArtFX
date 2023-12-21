@@ -17,7 +17,6 @@ public class TutorialManager : MonoBehaviour
     {
         X,
         A,
-        B,
         Triggers,
         Pause
     }
@@ -33,17 +32,13 @@ public class TutorialManager : MonoBehaviour
             {
                 tutorialImage.sprite = tutorialSprite[1];
             }
-            else if (tutoType == TutoType.B)
+            else if (tutoType == TutoType.Triggers)
             {
                 tutorialImage.sprite = tutorialSprite[2];
             }
-            else if (tutoType == TutoType.Triggers)
-            {
-                tutorialImage.sprite = tutorialSprite[3];
-            }
             else if (tutoType == TutoType.Pause)
             {
-                tutorialImage.sprite = tutorialSprite[4];
+                tutorialImage.sprite = tutorialSprite[3];
             }
             tutorialBackgroundImg.GetComponent<Animator>().SetBool("FadeIn", true);
             isFullShow = true;

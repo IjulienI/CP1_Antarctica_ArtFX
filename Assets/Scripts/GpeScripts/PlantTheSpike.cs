@@ -15,6 +15,7 @@ public class PlantTheSpike : MonoBehaviour
     [SerializeField] private Sprite keyboardKeybind;
     [SerializeField] private Sprite gamepadKeybind;
     [SerializeField] private AudioSource spikeAudioSource;
+    [SerializeField] private AudioSource pausingSpikeAudioSource;
     bool isSelectButtonShowed;
     bool justExitTrigger;
 
@@ -45,6 +46,7 @@ public class PlantTheSpike : MonoBehaviour
 
             Gamepad.current.SetMotorSpeeds(0, 0);
             progressBar.SetActive(false);
+            pausingSpikeAudioSource.Stop();
             progressBar.GetComponent<Animator>().SetBool("Play", false);
         }
     }
@@ -57,6 +59,7 @@ public class PlantTheSpike : MonoBehaviour
             keybindGo.SetActive(false);
             progressBar.SetActive(true);
             progressBar.GetComponent<Animator>().SetBool("Play", true);
+            pausingSpikeAudioSource.Play();
             Invoke("CheckHoldDuration", 2.4f);
         }
     }
