@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Image coldStep1, coldStep2, coldStep3, coldStep4;
     [SerializeField] private GameObject glassHit1, glassHit2, glassHit3;
     [SerializeField] private bool hasNumpadCanvas;
+    [SerializeField] bool running = false;
 
     [Header("Ground Control")]
     [SerializeField] private float accelerationFactorOnGround = 2f;
@@ -70,6 +71,9 @@ public class PlayerMovement : MonoBehaviour
     bool onMucus = false;
     float timeInMucus = 0;
     float timeOutMucus = 0;
+    float timeIddle = 0;
+    bool stopTriggerDance = false;
+    
 
     [Header("Input Manager (don't touch)")]
     public InputActionReference interact;
@@ -90,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+        }
+
+        if (running)
+        {
+            anim.SetBool("isRunning", true);
         }
     }
     void Update()
@@ -222,7 +231,8 @@ public class PlayerMovement : MonoBehaviour
         vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
         {
-
+            timeIddle = 0;
+            stopTriggerDance = false;
             anim.SetBool("isWalking", true);
             if (!isGrounded)
             {
@@ -232,7 +242,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                maxSpeed = maxSpeedOnGround;
+                if (running == true)
+                {
+                    maxSpeed = maxSpeedOnGround + 2;
+                }
+                else
+                {
+                    maxSpeed = maxSpeedOnGround;
+                }
+                
                 accelerationFactor = accelerationFactorOnGround;
                 brakeFactor = brakeFactorOnGround;
             }
@@ -243,6 +261,16 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("isWalking", false);
             speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
+
+            if (timeIddle <= 20)
+            {
+                timeIddle += Time.deltaTime;
+            }
+            else if (timeIddle > 20 && stopTriggerDance == false)
+            {
+                anim.SetTrigger("Dance");
+                stopTriggerDance = true;
+            }
         }
 
         if (ladderInteraction == true)
@@ -528,6 +556,12 @@ public class PlayerMovement : MonoBehaviour
 
 
             onMucus = true;
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            timeIddle = 0;
+            stopTriggerDance = false;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

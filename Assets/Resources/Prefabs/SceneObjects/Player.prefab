@@ -184,7 +184,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9375, y: 1.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -227,7 +227,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4666667, y: 0}
     oldSize: {x: 0.9375, y: 1.8125}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.9375, y: 1.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -299,7 +299,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4666667, y: 0}
     oldSize: {x: 0.9375, y: 1.8125}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.9375, y: 1.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -496,6 +496,7 @@ MonoBehaviour:
   glassHit2: {fileID: 0}
   glassHit3: {fileID: 0}
   hasNumpadCanvas: 0
+  running: 0
   accelerationFactorOnGround: 70
   brakeFactorOnGround: 70
   maxSpeedOnGround: 5
@@ -573,6 +574,7 @@ MonoBehaviour:
   jump: {fileID: 2313709128390337505, guid: 13e1537bf4abbec488eba86f15e2c002, type: 3}
   land: {fileID: 6713558116771208549, guid: 06e389128d20cd041b4591e3143556a2, type: 3}
   walk: {fileID: 8768600426712250228, guid: 5269cbbb1b3c52b46825d087daf9ca60, type: 3}
+  run: {fileID: 8720957499623755884, guid: a991e3d690e9a6946817a8ffea5ac678, type: 3}
 --- !u!82 &2808498824369245216
 AudioSource:
   m_ObjectHideFlags: 0
@@ -817,9 +819,9 @@ Transform:
   m_GameObject: {fileID: 4427955192233089398}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.018, y: 1.631, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8004435236793628628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
