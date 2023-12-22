@@ -1,7 +1,3 @@
-using Spine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -19,6 +15,11 @@ public class LeverDoor : MonoBehaviour
     [SerializeField] Sprite leverOff;
     [SerializeField] Sprite leverOn;
     [SerializeField] SpriteRenderer leverRenderer;
+
+    [SerializeField] AudioSource leverSource;
+    [SerializeField] AudioClip leverClipOn;
+    [SerializeField] AudioClip leverClipOff;
+
 
     private void Start()
     {
@@ -55,15 +56,26 @@ public class LeverDoor : MonoBehaviour
             Sprite nextSprite = leverRenderer.sprite == leverOff ? leverOn : leverOff;
             leverRenderer.sprite = nextSprite;
 
-            LEDlight.color = Color.green;
 
             if (doorIsOpen == true)
             {
                 animator.SetBool("OpenDoor", true);
+                if (LEDlight != null)
+                {
+                    LEDlight.color = Color.green;
+                    leverSource.clip = leverClipOn;
+                    leverSource.Play();
+                }
             }
             else if (doorIsOpen == false)
             {
                 animator.SetBool("OpenDoor", false);
+                if (LEDlight != null)
+                {
+                    LEDlight.color = Color.red;
+                    leverSource.clip = leverClipOff;
+                    leverSource.Play();
+                }
             }
         }
 

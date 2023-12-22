@@ -177,14 +177,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 996865817
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 709707257386229057, guid: 763d5c06970124643b27b383da3fce72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9375, y: 1.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -227,7 +227,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4666667, y: 0}
     oldSize: {x: 0.9375, y: 1.8125}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.9375, y: 1.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -299,7 +299,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4666667, y: 0}
     oldSize: {x: 0.9375, y: 1.8125}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.9375, y: 1.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -374,6 +374,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1dce644f-2104-423e-a911-082f274e8f7e
     m_ActionName: Player/MidLight[/Mouse/rightButton]
   - m_PersistentCalls:
@@ -381,6 +393,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3843487037794754977}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: UpLight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -495,6 +519,8 @@ MonoBehaviour:
   glassHit1: {fileID: 0}
   glassHit2: {fileID: 0}
   glassHit3: {fileID: 0}
+  hasNumpadCanvas: 0
+  running: 0
   accelerationFactorOnGround: 70
   brakeFactorOnGround: 70
   maxSpeedOnGround: 5
@@ -509,7 +535,6 @@ MonoBehaviour:
   flameAnim: {fileID: 1571283504482728278}
   clip:
   - {fileID: 8300000, guid: 760a87622c79e0f41b23192e25939a3d, type: 3}
-  - {fileID: 8300000, guid: fc08ffd2b916a4846866063f4688d538, type: 3}
   - {fileID: 8300000, guid: 1bafff960b6cee64a92b0f4e0bb634df, type: 3}
   - {fileID: 8300000, guid: 9bb8a0075f14f4741bc9a09a197e198a, type: 3}
   - {fileID: 8300000, guid: c602debf7b4f9754e9f8d11f496aaa59, type: 3}
@@ -573,6 +598,7 @@ MonoBehaviour:
   jump: {fileID: 2313709128390337505, guid: 13e1537bf4abbec488eba86f15e2c002, type: 3}
   land: {fileID: 6713558116771208549, guid: 06e389128d20cd041b4591e3143556a2, type: 3}
   walk: {fileID: 8768600426712250228, guid: 5269cbbb1b3c52b46825d087daf9ca60, type: 3}
+  run: {fileID: 8720957499623755884, guid: a991e3d690e9a6946817a8ffea5ac678, type: 3}
 --- !u!82 &2808498824369245216
 AudioSource:
   m_ObjectHideFlags: 0
@@ -582,10 +608,10 @@ AudioSource:
   m_GameObject: {fileID: 2677651126098139841}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1794179990248664827, guid: 043df4f37d4bcbb46891ab4e265a27ab, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -743,7 +769,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 996865817
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2206038786780382458, guid: 3ccac4d2afbf5254baceaa5301e94a28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -817,9 +843,9 @@ Transform:
   m_GameObject: {fileID: 4427955192233089398}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.018, y: 1.631, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8004435236793628628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -862,7 +888,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 996865817
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 4fe28d7fe53b1324484f90b7940a152b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

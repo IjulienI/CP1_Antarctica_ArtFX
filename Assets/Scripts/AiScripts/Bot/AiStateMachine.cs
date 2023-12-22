@@ -1,15 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class AiStateMachine : MonoBehaviour
 {
     private GameObject target;
     private AIPathController _controller;
     private Locomotion locomotion;
+    private CircleCollider2D _circleCollider;
 
     [Header("Movements")]
     [SerializeField] private int randomRange;
@@ -26,14 +23,19 @@ public class AiStateMachine : MonoBehaviour
     public bool goSound;
     private FieldOfView _fov;
     public GameObject zone;
+    public AudioSource _monsterSource;
+    public AudioClip monsterMovements, monsterBite, monsterScream;
+    public bool canResream = true;
 
     private void Awake()
     {
+        //_circleCollider = GetComponent<CircleCollider2D>();
+        //_circleCollider.enabled = false;
+        _monsterSource = GetComponent<AudioSource>();
         target = GameObject.FindGameObjectWithTag("Target");
         player = GameObject.FindAnyObjectByType<PlayerMovement>().gameObject;
         _controller = GetComponent<AIPathController>();
-        _fov = GetComponent<FieldOfView>();
-        
+        _fov = GetComponent<FieldOfView>();        
     }
 
     private void Start()
@@ -89,6 +91,20 @@ public class AiStateMachine : MonoBehaviour
         {
             state = State.chase;
         }
+        //if(state == State.chase)
+        //{
+        //    if (_circleCollider.enabled == false)
+        //    {
+        //        _circleCollider.enabled = true;
+        //    }
+        //}
+        //else
+        //{
+        //    if (_circleCollider.enabled == true)
+        //    {
+        //        _circleCollider.enabled = false;
+        //    }
+        //}
     }
 
     private void Initialize()
@@ -99,7 +115,6 @@ public class AiStateMachine : MonoBehaviour
     private void GetRandomTarget()
     {
         List<Node> tempNodes = new List<Node>();
-        tempNodes.Clear();
         for (int i = 0; i < _controller.AllNodes.Count; i++)
         {
             if (Vector2.Distance(transform.position, _controller.AllNodes[i].transform.position) <= randomRange)
@@ -107,17 +122,17 @@ public class AiStateMachine : MonoBehaviour
                 tempNodes.Add(_controller.AllNodes[i]);
             }
         }
-        target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
-        if(zone.GetComponent<Zone>().targetIn == true)
+        if(tempNodes.Count > 0)
         {
+            target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
+            tempNodes.Clear();
             state = State.move;
-        }else GetRandomTarget();
+        }
     }
 
     public void GetRandomInRange(Transform targetRandom, int minRange, int maxRange)
     {
         List<Node> tempNodes = new List<Node>();
-        tempNodes.Clear();
         for (int i = 0; i < _controller.AllNodes.Count; i++)
         {
             if (Vector2.Distance(targetRandom.position, _controller.AllNodes[i].transform.position) >= minRange && Vector2.Distance(targetRandom.position, _controller.AllNodes[i].transform.position) <= maxRange)
@@ -125,18 +140,19 @@ public class AiStateMachine : MonoBehaviour
                 tempNodes.Add(_controller.AllNodes[i]);
             }
         }
-        target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
-        if (zone.GetComponent<Zone>().targetIn == true)
+        if(tempNodes.Count > 0)
         {
+            target.transform.position = tempNodes[Random.Range(0, tempNodes.Count)].transform.position;
+            tempNodes.Clear();
             state = State.move;
         }
-        else GetRandomInRange(targetRandom, minRange, maxRange);
     }
 
     private void StopWait()
     {
         if(state == State.wait)
         {
+            canResream = true;
             int rnd = Random.Range(0, 3);
             if (rnd < 2)
             {

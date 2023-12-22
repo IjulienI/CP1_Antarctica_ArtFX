@@ -1,12 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class AIPathController : MonoBehaviour
 {
+    [SerializeField] private GameObject[] nodes;
     [SerializeField] private bool DrawPath = false;
 
 
@@ -22,7 +22,7 @@ public class AIPathController : MonoBehaviour
     private float maxXDist;
     private float maxHypotenuse;
 
-    public Transform Target;
+    private Transform Target;
     private Transform tempTarget;
 
     [SerializeField] private List<Node> Path;
@@ -53,6 +53,7 @@ public class AIPathController : MonoBehaviour
     void Awake()
     {
         baseSpeed = speed;
+        Target = GameObject.FindGameObjectWithTag("Target").transform;
         tempTarget = Target;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         if (m_Rigidbody2D == null)
@@ -63,6 +64,10 @@ public class AIPathController : MonoBehaviour
         m_Collider2D = GetComponent<Collider2D>();
 
         AllNodes = FindObjectsOfType<Node>().ToList();
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            nodes[i].SetActive(false);
+        }
         m_LineRenderer = GetComponent<LineRenderer>();
 
     }

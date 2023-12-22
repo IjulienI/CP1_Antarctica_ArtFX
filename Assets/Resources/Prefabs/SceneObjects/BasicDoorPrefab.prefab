@@ -153,7 +153,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1283817951
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d9774ba358cf3ea40a2962b0dd0417e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -201,6 +201,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2842157632576914448}
   soundDoor: {fileID: 7417634711800808875}
+  isNeedingBomb: 0
+  spike: {fileID: 0}
 --- !u!61 &6615372359172742983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -255,10 +257,10 @@ AudioSource:
   m_GameObject: {fileID: 7232664083358389091}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1794179990248664827, guid: 043df4f37d4bcbb46891ab4e265a27ab, type: 2}
   m_audioClip: {fileID: 8300000, guid: ffdefee6f1ecae84ca73c8b1c84e4ad4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -302,7 +304,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
