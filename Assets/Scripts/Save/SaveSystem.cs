@@ -34,7 +34,7 @@ public class SaveSystem : MonoBehaviour
                 //else Debug.Log("Don't Cheat !");
             }
         }
-        else if (SceneManager.GetActiveScene().name == "SaveSystem") SceneManager.LoadScene("Level1");
+        else if (SceneManager.GetActiveScene().name == "SaveSystem") SceneManager.LoadScene("Level 1");
     }
     public void Save()
     {
@@ -143,10 +143,13 @@ public class SaveSystem : MonoBehaviour
     {
         if(gameInfo.levelName != null)
         {
-            if (SceneManager.GetActiveScene().name != gameInfo.levelName)
+            if(SceneManager.GetActiveScene().name == "SaveSystem")
             {
                 SceneManager.LoadScene(gameInfo.levelName);
-                Debug.Log("Hello");
+            }
+            if (SceneManager.GetActiveScene().name != gameInfo.levelName)
+            {
+                gameInfo.levelName = SceneManager.GetActiveScene().name;
             }
         }
     }

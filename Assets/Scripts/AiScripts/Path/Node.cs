@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 [ExecuteAlways]
 public class Node : MonoBehaviour
@@ -76,7 +74,7 @@ public class Node : MonoBehaviour
 
     }
 
-    [MenuItem("GameObject/AIPath/Node")]
+    //[MenuItem("GameObject/AIPath/Node")]
     public static GameObject InstantiateNode()
     {
         List<Node> AllNodes = FindObjectsOfType<Node>().ToList();
@@ -88,7 +86,7 @@ public class Node : MonoBehaviour
         return ob;
     }
 
-    [ContextMenu("Make Conection")]
+    //[ContextMenu("Make Conection")]
     void MakeConection()
     {
         conection = true;
@@ -154,18 +152,18 @@ public class Node : MonoBehaviour
     //    }
     //    //UnityEditor.Handles.EndGUI();
     //}
-    void DrawArrow(Vector3 pos, Vector3 direction, Color color)
-    {
-        float arrowHeadLength = 0.25f;
-        float arrowHeadAngle = 20.0f;
-        Gizmos.color = color;
-        Gizmos.DrawLine(pos, direction);
+    //void DrawArrow(Vector3 pos, Vector3 direction, Color color)
+    //{
+    //    float arrowHeadLength = 0.25f;
+    //    float arrowHeadAngle = 20.0f;
+    //    Gizmos.color = color;
+    //    Gizmos.DrawLine(pos, direction);
 
-        Vector3 right = Quaternion.LookRotation(pos - direction) * Quaternion.Euler(arrowHeadAngle, arrowHeadAngle, 0) * new Vector3(0, 0, 1);
-        Vector3 left = Quaternion.LookRotation(pos - direction) * Quaternion.Euler(-arrowHeadAngle, -arrowHeadAngle, 0) * new Vector3(0, 0, 1);
-        Gizmos.DrawRay((pos + direction) / 2, right * arrowHeadLength);
-        Gizmos.DrawRay((pos + direction) / 2, left * arrowHeadLength);
-    }
+    //    Vector3 right = Quaternion.LookRotation(pos - direction) * Quaternion.Euler(arrowHeadAngle, arrowHeadAngle, 0) * new Vector3(0, 0, 1);
+    //    Vector3 left = Quaternion.LookRotation(pos - direction) * Quaternion.Euler(-arrowHeadAngle, -arrowHeadAngle, 0) * new Vector3(0, 0, 1);
+    //    Gizmos.DrawRay((pos + direction) / 2, right * arrowHeadLength);
+    //    Gizmos.DrawRay((pos + direction) / 2, left * arrowHeadLength);
+    //}
 
     void CheckNodes(Node node)
     {
@@ -178,7 +176,7 @@ public class Node : MonoBehaviour
                 return;
             }
         }
-        DrawArrow(transform.position, node.transform.position, Color.white);
+        //DrawArrow(transform.position, node.transform.position, Color.white);
     }
 
     void Reposition()
@@ -199,47 +197,47 @@ public class Node : MonoBehaviour
         }
     }
 
-    public void OnDrawGizmos()
-    {
-        //DrawName(transform.position, Color.black);
-        Gizmos.DrawIcon(transform.position, "NodeIcon");
+    //public void OnDrawGizmos()
+    //{
+    //    //DrawName(transform.position, Color.black);
+    //    Gizmos.DrawIcon(transform.position, "NodeIcon");
 
-        foreach (var node in ConnectedTo)
-        {
-            if (node == null)
-                return;
+    //    foreach (var node in ConnectedTo)
+    //    {
+    //        if (node == null)
+    //            return;
 
-            CheckNodes(node);
-        }
-    }
-    void OnEnable()
-    {
-        SceneView.duringSceneGui += SceneGUI;
-    }
+    //        CheckNodes(node);
+    //    }
+    //}
+    //void OnEnable()
+    //{
+    //    SceneView.duringSceneGui += SceneGUI;
+    //}
 
 
-    void SceneGUI(SceneView sceneView)
-    {
-        Event cur = Event.current;
+    //void SceneGUI(SceneView sceneView)
+    //{
+    //    Event cur = Event.current;
 
-        if (cur.type == EventType.MouseDown || cur.type == EventType.MouseDrag)
-        {
-            mouseDown = true;
-        }
+    //    if (cur.type == EventType.MouseDown || cur.type == EventType.MouseDrag)
+    //    {
+    //        mouseDown = true;
+    //    }
 
-        if (cur.type == EventType.MouseUp || cur.type == EventType.MouseLeaveWindow)
-        {
-            mouseDown = false;
-        }
+    //    if (cur.type == EventType.MouseUp || cur.type == EventType.MouseLeaveWindow)
+    //    {
+    //        mouseDown = false;
+    //    }
 
-        if (conection)
-        {
-            HandleUtility.Repaint();
-            mousePos = new Vector3(cur.mousePosition.x, cur.mousePosition.y, 0);
-            Ray ray = HandleUtility.GUIPointToWorldRay(mousePos);
-            mousePos = ray.origin;
-            Handles.DrawLine(transform.position, mousePos);
-        }
-    }
+    //    if (conection)
+    //    {
+    //        HandleUtility.Repaint();
+    //        mousePos = new Vector3(cur.mousePosition.x, cur.mousePosition.y, 0);
+    //        Ray ray = HandleUtility.GUIPointToWorldRay(mousePos);
+    //        mousePos = ray.origin;
+    //        Handles.DrawLine(transform.position, mousePos);
+    //    }
+    //}
 
 }

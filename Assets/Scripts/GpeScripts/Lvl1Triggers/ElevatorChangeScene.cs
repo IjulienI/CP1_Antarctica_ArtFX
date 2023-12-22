@@ -6,7 +6,7 @@ public class ElevatorChangeScene : MonoBehaviour
 {
     public void ChangeScene()
     {
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level 2");
     }
     public void GamepadRumble()
     {
