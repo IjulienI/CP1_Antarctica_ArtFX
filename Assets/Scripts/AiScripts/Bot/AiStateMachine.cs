@@ -23,16 +23,19 @@ public class AiStateMachine : MonoBehaviour
     public bool goSound;
     private FieldOfView _fov;
     public GameObject zone;
+    public AudioSource _monsterSource;
+    public AudioClip monsterMovements, monsterBite, monsterScream;
+    public bool canResream = true;
 
     private void Awake()
     {
-        _circleCollider = GetComponent<CircleCollider2D>();
-        _circleCollider.enabled = false;
+        //_circleCollider = GetComponent<CircleCollider2D>();
+        //_circleCollider.enabled = false;
+        _monsterSource = GetComponent<AudioSource>();
         target = GameObject.FindGameObjectWithTag("Target");
         player = GameObject.FindAnyObjectByType<PlayerMovement>().gameObject;
         _controller = GetComponent<AIPathController>();
-        _fov = GetComponent<FieldOfView>();
-        
+        _fov = GetComponent<FieldOfView>();        
     }
 
     private void Start()
@@ -88,20 +91,20 @@ public class AiStateMachine : MonoBehaviour
         {
             state = State.chase;
         }
-        if(state == State.chase)
-        {
-            if (_circleCollider.enabled == false)
-            {
-                _circleCollider.enabled = true;
-            }
-        }
-        else
-        {
-            if (_circleCollider.enabled == true)
-            {
-                _circleCollider.enabled = false;
-            }
-        }
+        //if(state == State.chase)
+        //{
+        //    if (_circleCollider.enabled == false)
+        //    {
+        //        _circleCollider.enabled = true;
+        //    }
+        //}
+        //else
+        //{
+        //    if (_circleCollider.enabled == true)
+        //    {
+        //        _circleCollider.enabled = false;
+        //    }
+        //}
     }
 
     private void Initialize()
@@ -149,6 +152,7 @@ public class AiStateMachine : MonoBehaviour
     {
         if(state == State.wait)
         {
+            canResream = true;
             int rnd = Random.Range(0, 3);
             if (rnd < 2)
             {

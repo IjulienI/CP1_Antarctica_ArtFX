@@ -146,7 +146,7 @@ public class Node : MonoBehaviour
     //    //UnityEditor.Handles.BeginGUI();
     //    if (colour.HasValue) GUI.color = colour.Value;
     //    var view = UnityEditor.SceneView.currentDrawingSceneView;
-    //    if(view != null)
+    //    if (view != null)
     //    {
     //        Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
     //        Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
@@ -178,7 +178,7 @@ public class Node : MonoBehaviour
                 return;
             }
         }
-        //DrawArrow(transform.position, node.transform.position, Color.white);
+        DrawArrow(transform.position, node.transform.position, Color.white);
     }
 
     void Reposition()
