@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: de48efd66bf604c48b28ce889a4faf10
@@ -21,18 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 1.unity
     guid: 323d1d8c69d0aad4da8efcdbd1eb4adf
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 5f1afb6172fa45548a0eacff63f6db4d
+    path: Assets/Scenes/Level 2.unity
+    guid: b89fefe0956845743b07a74a88e9a35c
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 9b0521444424dac4ab346e3c36ca692e
   - enabled: 1
     path: Assets/Scenes/AlienGameOver.unity
     guid: 66f75499cb737094b9ccdf7365938a1f
   - enabled: 1
     path: Assets/Scenes/MucusGameOver.unity
     guid: f2e532ee53916fe4b890bbe6fd7ad28e
-  - enabled: 0
-    path: Assets/Scenes/Level 1.unity
-    guid: 323d1d8c69d0aad4da8efcdbd1eb4adf
-  - enabled: 0
-    path: Assets/Scenes/Level2.unity
-    guid: 5f1afb6172fa45548a0eacff63f6db4d
   m_configObjects: {}
