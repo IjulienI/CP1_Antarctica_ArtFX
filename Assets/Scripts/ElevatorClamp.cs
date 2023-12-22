@@ -11,6 +11,8 @@ public class ElevatorClamp : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] Animator animator;
 
+    [SerializeField] GameObject InvisibleWall;
+
     private bool isInside = false;
     public bool finish = false;
     private GameObject player;
@@ -56,5 +58,7 @@ public class ElevatorClamp : MonoBehaviour
     public void DisabledAnimator()
     {
         gameObject.GetComponent<Animator>().enabled = false;
+
+        InvisibleWall.SetActive(false);
     }
 }
