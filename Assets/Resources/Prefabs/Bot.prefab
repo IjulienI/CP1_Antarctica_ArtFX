@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 602457579379442254}
   - component: {fileID: 4044761076359475423}
+  - component: {fileID: 1530159391614836965}
   - component: {fileID: 7885385914737910243}
   - component: {fileID: 6367029698040010365}
   - component: {fileID: 7785916327004208723}
@@ -66,6 +67,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &1530159391614836965
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69734705110591234}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.016525269, y: 0.62629414}
+  serializedVersion: 2
+  m_Radius: 1.3662157
 --- !u!70 &7885385914737910243
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -81,7 +117,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -119,7 +155,7 @@ MonoBehaviour:
   startJump: {fileID: 11400000, guid: a3bcd707c4163824989ff8d6e504ffa1, type: 2}
   idleJump: {fileID: 11400000, guid: d816a4c0eb3dcf4428dde2652d5b8536, type: 2}
   endJump: {fileID: 11400000, guid: dbc18c52e9cb8ee468cd0627e92d7c47, type: 2}
-  wallJump: {fileID: 0}
+  wallJump: {fileID: 11400000, guid: 295936e218a70c641beded5c43f4ace4, type: 2}
 --- !u!114 &7785916327004208723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +316,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 996865817
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &8048274834085098173
