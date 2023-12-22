@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     [SerializeField] private int Level = 0;
 
+    public GameObject trigger;
+
     private bool isTransitioning = false;
     public bool isLooping = true;
     bool i = false;
@@ -67,6 +69,10 @@ public class AudioManager : MonoBehaviour
             musicSource2.loop = false;
             float a = musicSource2.clip.length - musicSource2.time; ;
             musicSource3.PlayScheduled(AudioSettings.dspTime + a); 
+        }
+        if (trigger.GetComponent<EndTrigger>().hasFinished)
+        {
+            isLooping = true;
         }
     }
 }
