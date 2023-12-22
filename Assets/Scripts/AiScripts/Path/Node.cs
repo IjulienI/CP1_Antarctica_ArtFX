@@ -141,19 +141,19 @@ public class Node : MonoBehaviour
         }
     }
 
-    void DrawName(Vector3 worldPos, Color? colour = null)
-    {
-        UnityEditor.Handles.BeginGUI();
-        if (colour.HasValue) GUI.color = colour.Value;
-        var view = UnityEditor.SceneView.currentDrawingSceneView;
-        if(view != null)
-        {
-            Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
-            Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
-            GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), name.ToString());
-        }
-        UnityEditor.Handles.EndGUI();
-    }
+    //void DrawName(Vector3 worldPos, Color? colour = null)
+    //{
+    //    //UnityEditor.Handles.BeginGUI();
+    //    if (colour.HasValue) GUI.color = colour.Value;
+    //    var view = UnityEditor.SceneView.currentDrawingSceneView;
+    //    if(view != null)
+    //    {
+    //        Vector3 screenPos = view.camera.WorldToScreenPoint(worldPos);
+    //        Vector2 size = GUI.skin.label.CalcSize(new GUIContent(name.ToString()));
+    //        GUI.Label(new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y), name.ToString());
+    //    }
+    //    //UnityEditor.Handles.EndGUI();
+    //}
     void DrawArrow(Vector3 pos, Vector3 direction, Color color)
     {
         float arrowHeadLength = 0.25f;
@@ -178,7 +178,7 @@ public class Node : MonoBehaviour
                 return;
             }
         }
-        DrawArrow(transform.position, node.transform.position, Color.white);
+        //DrawArrow(transform.position, node.transform.position, Color.white);
     }
 
     void Reposition()
@@ -201,7 +201,7 @@ public class Node : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        DrawName(transform.position, Color.black);
+        //DrawName(transform.position, Color.black);
         Gizmos.DrawIcon(transform.position, "NodeIcon");
 
         foreach (var node in ConnectedTo)
@@ -216,6 +216,7 @@ public class Node : MonoBehaviour
     {
         SceneView.duringSceneGui += SceneGUI;
     }
+
 
     void SceneGUI(SceneView sceneView)
     {

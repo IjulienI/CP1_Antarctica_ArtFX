@@ -1,15 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class AiStateMachine : MonoBehaviour
 {
     private GameObject target;
     private AIPathController _controller;
     private Locomotion locomotion;
+    private CircleCollider2D _circleCollider;
 
     [Header("Movements")]
     [SerializeField] private int randomRange;
@@ -29,6 +26,8 @@ public class AiStateMachine : MonoBehaviour
 
     private void Awake()
     {
+        _circleCollider = GetComponent<CircleCollider2D>();
+        _circleCollider.enabled = false;
         target = GameObject.FindGameObjectWithTag("Target");
         player = GameObject.FindAnyObjectByType<PlayerMovement>().gameObject;
         _controller = GetComponent<AIPathController>();
@@ -88,6 +87,20 @@ public class AiStateMachine : MonoBehaviour
         if(PlayerMovement.instance.stateOfFire == 3)
         {
             state = State.chase;
+        }
+        if(state == State.chase)
+        {
+            if (_circleCollider.enabled == false)
+            {
+                _circleCollider.enabled = true;
+            }
+        }
+        else
+        {
+            if (_circleCollider.enabled == true)
+            {
+                _circleCollider.enabled = false;
+            }
         }
     }
 
