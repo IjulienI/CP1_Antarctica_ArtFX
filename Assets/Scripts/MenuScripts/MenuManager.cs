@@ -357,4 +357,16 @@ public class MenuManager : MonoBehaviour
     {
         //sfxSource2.Play();
     }
+    public void SceneOne()
+    {
+        SceneManager.LoadScene("Level 1");
+    }
+    public void SceneTwo()
+    {
+        SceneManager.LoadScene("Level 2");
+    }
+    public void SceneThree()
+    {
+        SceneManager.LoadScene("Level 3");
+    }
 }
