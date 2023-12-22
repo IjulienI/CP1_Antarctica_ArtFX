@@ -130,7 +130,6 @@ public class SaveSystem : MonoBehaviour
                 }
             }
         }
-        Debug.Log(index);
     }
 
     //LEVEL GESTION :
