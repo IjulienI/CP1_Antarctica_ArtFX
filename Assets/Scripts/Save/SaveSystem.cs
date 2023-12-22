@@ -34,6 +34,7 @@ public class SaveSystem : MonoBehaviour
                 //else Debug.Log("Don't Cheat !");
             }
         }
+        else if (SceneManager.GetActiveScene().name == "SaveSystem") SceneManager.LoadScene("Level1");
     }
     public void Save()
     {
@@ -73,8 +74,8 @@ public class SaveSystem : MonoBehaviour
             player.transform.position = gameInfo.player.pos;
         }
     }
-    //PLAYER
-    //:
+
+    //AI :
     //---------------------------------------------------------------------------------------
     private void SaveAi()
     {
@@ -149,6 +150,5 @@ public class SaveSystem : MonoBehaviour
                 Debug.Log("Hello");
             }
         }
-        else SceneManager.LoadScene("Level1");
     }
 }
