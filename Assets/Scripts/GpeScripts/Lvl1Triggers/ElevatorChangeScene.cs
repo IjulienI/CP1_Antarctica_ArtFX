@@ -19,7 +19,7 @@ public class ElevatorChangeScene : MonoBehaviour
     }
     private void OnDisable()
     {
-        if(Gamepad.current != null)
+        if (Gamepad.current != null)
         {
             Gamepad.current.SetMotorSpeeds(0, 0);
         }
