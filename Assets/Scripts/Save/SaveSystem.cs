@@ -22,13 +22,14 @@ public class SaveSystem : MonoBehaviour
             string json = File.ReadAllText(Application.persistentDataPath + "/data.save");
             gameInfo = JsonUtility.FromJson<GameInfo>(json);
 
-            LoadLevel();
             if(SceneManager.GetActiveScene().name == gameInfo.levelName)
             {
                 LoadPlayer();
                 LoadAi();
                 LoadDoors();
             }
+            LoadLevel();
+
             if (File.GetLastWriteTime(Application.persistentDataPath + "/data.save").ToString(CultureInfo.CurrentCulture) != gameInfo.modificationDate)
             {
                 //File.Delete(Application.persistentDataPath + "/data.save");
