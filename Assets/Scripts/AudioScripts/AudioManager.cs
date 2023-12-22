@@ -70,9 +70,5 @@ public class AudioManager : MonoBehaviour
             float a = musicSource2.clip.length - musicSource2.time; ;
             musicSource3.PlayScheduled(AudioSettings.dspTime + a); 
         }
-        if (trigger.GetComponent<EndTrigger>().hasFinished)
-        {
-            isLooping = true;
-        }
     }
 }
