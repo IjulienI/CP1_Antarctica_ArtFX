@@ -8,6 +8,7 @@ public class SASDoor : MonoBehaviour
     [SerializeField] private Animator SASDoor2Anim;
     [SerializeField] private ParticleSystem SASParticlesR;
     [SerializeField] private ParticleSystem SASParticlesL;
+    [SerializeField] private AudioSource sasSources;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,6 +25,7 @@ public class SASDoor : MonoBehaviour
 
     private void Pchit()
     {
+        sasSources.Play();
         SASParticlesR.Play();
         SASParticlesL.Play();
     }
