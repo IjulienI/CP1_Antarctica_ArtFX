@@ -16,39 +16,54 @@ public class PlantTheSpike : MonoBehaviour
     [SerializeField] private Sprite gamepadKeybind;
     [SerializeField] private AudioSource spikeAudioSource;
     [SerializeField] private AudioSource pausingSpikeAudioSource;
+    [SerializeField] bool lastLevel = false;
     bool isSelectButtonShowed;
     bool justExitTrigger;
 
 
     private void OnEnable()
     {
-        interact.action.started += OnInteractStarted;
-        interact.action.canceled += OnInteractCanceled;
+        if (lastLevel == false)
+        {
+            interact.action.started += OnInteractStarted;
+            interact.action.canceled += OnInteractCanceled;
+        }
     }
 
     private void OnDisable()
     {
-        interact.action.started -= OnInteractStarted;
-        interact.action.canceled -= OnInteractCanceled;
+        if (lastLevel == false)
+        {
+            interact.action.started -= OnInteractStarted;
+            interact.action.canceled -= OnInteractCanceled;
+        }
     }
     private void Update()
     {
-        int isActivated = PlayerPrefs.GetInt("Vibration activation", 1);
-        if (isInteractPressed && !bombPlanted && isActivated == 1)
+        if(lastLevel == false)
         {
-            if(Gamepad.current != null)
+            int isActivated = PlayerPrefs.GetInt("Vibration activation", 1);
+            if (isInteractPressed && !bombPlanted && isActivated == 1)
             {
-                Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
+                if (Gamepad.current != null)
+                {
+                    Gamepad.current.SetMotorSpeeds(0.05f, 0.1f);
+                }
+            }
+            else if ((Gamepad.current != null && isInZone) || (Gamepad.current != null && justExitTrigger))
+            {
+
+                Gamepad.current.SetMotorSpeeds(0, 0);
+                progressBar.SetActive(false);
+                pausingSpikeAudioSource.Stop();
+                progressBar.GetComponent<Animator>().SetBool("Play", false);
             }
         }
-        else if((Gamepad.current != null && isInZone)||(Gamepad.current != null && justExitTrigger))
+        else if (lastLevel)
         {
-
-            Gamepad.current.SetMotorSpeeds(0, 0);
-            progressBar.SetActive(false);
-            pausingSpikeAudioSource.Stop();
-            progressBar.GetComponent<Animator>().SetBool("Play", false);
+            spikeGo.GetComponent<Animator>().SetTrigger("Loop");
         }
+
     }
     private void OnInteractStarted(InputAction.CallbackContext context)
     {
