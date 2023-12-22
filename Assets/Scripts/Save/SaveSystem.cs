@@ -146,7 +146,6 @@ public class SaveSystem : MonoBehaviour
             if (SceneManager.GetActiveScene().name != gameInfo.levelName)
             {
                 SceneManager.LoadScene(gameInfo.levelName);
-                Debug.Log("Hello");
             }
         }
     }
