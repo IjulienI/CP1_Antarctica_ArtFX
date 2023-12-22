@@ -74,7 +74,7 @@ public class Node : MonoBehaviour
 
     }
 
-    [MenuItem("GameObject/AIPath/Node")]
+   // [MenuItem("GameObject/AIPath/Node")]
     public static GameObject InstantiateNode()
     {
         List<Node> AllNodes = FindObjectsOfType<Node>().ToList();
@@ -86,7 +86,7 @@ public class Node : MonoBehaviour
         return ob;
     }
 
-    [ContextMenu("Make Conection")]
+   // [ContextMenu("Make Conection")]
     void MakeConection()
     {
         conection = true;

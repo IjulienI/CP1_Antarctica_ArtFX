@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _fire.color = new Color(96, 96, 96, 0.005f);
+        GUI.enabled = false;
     }
     private void Awake()
     {

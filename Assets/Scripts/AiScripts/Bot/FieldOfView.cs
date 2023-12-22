@@ -118,9 +118,9 @@ public class FieldOfView : MonoBehaviour
 
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10,10,100,20),touchTag);
-        GUI.Label(new Rect(10, 20, 100, 20), player.GetComponent<Rigidbody2D>().velocity.ToString());
-    }
+    //private void OnGUI()
+    //{
+    //    GUI.Label(new Rect(10,10,100,20),touchTag);
+    //    GUI.Label(new Rect(10, 20, 100, 20), player.GetComponent<Rigidbody2D>().velocity.ToString());
+    //}
 }

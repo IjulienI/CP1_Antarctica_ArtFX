@@ -342,8 +342,8 @@ public class AIPathController : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
-        GUILayout.Label(transform.position.ToString());
-    }
+    //private void OnGUI()
+    //{
+    //    GUILayout.Label(transform.position.ToString());
+    //}
 }
