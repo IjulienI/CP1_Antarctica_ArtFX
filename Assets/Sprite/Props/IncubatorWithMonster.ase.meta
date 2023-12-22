@@ -1,0 +1,508 @@
+fileFormatVersion: 2
+guid: 5348ac6d688267f4b8b47afbb079be28
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 32
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 638388069772379517
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: IncubatorWithMonster_Frame_0
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 67
+      height: 94
+    spriteID: 2eb17e598a619d34fbc17d90783131d3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: IncubatorWithMonster_Frame_1
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 106
+      width: 67
+      height: 94
+    spriteID: 7ebbb38a09994ba49b7b8282071491f8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 106}
+  - name: IncubatorWithMonster_Frame_2
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 208
+      width: 67
+      height: 94
+    spriteID: bce726954e02dab48a1074b03c1d87f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 208}
+  - name: IncubatorWithMonster_Frame_3
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 310
+      width: 67
+      height: 94
+    spriteID: c558179859b4999409b84dcacc389039
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 310}
+  - name: IncubatorWithMonster_Frame_4
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 412
+      width: 67
+      height: 94
+    spriteID: 175b04be4d9c1aa4e929393fc390e060
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 412}
+  - name: IncubatorWithMonster_Frame_5
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 4
+      width: 67
+      height: 94
+    spriteID: fb487996ed8fe9e4699e9ae4fcff5c93
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 4}
+  - name: IncubatorWithMonster_Frame_6
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 106
+      width: 67
+      height: 94
+    spriteID: f3e0078768356e44da71c924cd5f7d1b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 106}
+  - name: IncubatorWithMonster_Frame_7
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 208
+      width: 67
+      height: 94
+    spriteID: 16630f57e2537514ebdf5db0b6ef3516
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 208}
+  - name: IncubatorWithMonster_Frame_8
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 310
+      width: 67
+      height: 94
+    spriteID: df1cc89d0ff3ac34298fe93f64f8bbea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 310}
+  - name: IncubatorWithMonster_Frame_9
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 412
+      width: 67
+      height: 94
+    spriteID: 368bbd00335ba7042b1c4c1778d82f6c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 412}
+  - name: IncubatorWithMonster_Frame_10
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 154
+      y: 4
+      width: 67
+      height: 94
+    spriteID: 397cf92cd42e6d247a46ec31cc0f9fdd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 154, y: 4}
+  - name: IncubatorWithMonster_Frame_11
+    originalName: 
+    pivot: {x: 0.67164177, y: -0.17021276}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 154
+      y: 106
+      width: 67
+      height: 94
+    spriteID: 02c65d76eb3a48b489f19fd3b2e22d3c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 154, y: 106}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 2096737805
+    name: IncubatorWithMonster
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: IncubatorWithMonster_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 2eb17e598a619d34fbc17d90783131d3
+    - name: IncubatorWithMonster_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 7ebbb38a09994ba49b7b8282071491f8
+    - name: IncubatorWithMonster_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: bce726954e02dab48a1074b03c1d87f2
+    - name: IncubatorWithMonster_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: c558179859b4999409b84dcacc389039
+    - name: IncubatorWithMonster_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 175b04be4d9c1aa4e929393fc390e060
+    - name: IncubatorWithMonster_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: fb487996ed8fe9e4699e9ae4fcff5c93
+    - name: IncubatorWithMonster_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: f3e0078768356e44da71c924cd5f7d1b
+    - name: IncubatorWithMonster_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 16630f57e2537514ebdf5db0b6ef3516
+    - name: IncubatorWithMonster_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: df1cc89d0ff3ac34298fe93f64f8bbea
+    - name: IncubatorWithMonster_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 368bbd00335ba7042b1c4c1778d82f6c
+    - name: IncubatorWithMonster_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 397cf92cd42e6d247a46ec31cc0f9fdd
+    - name: IncubatorWithMonster_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 19
+        y: 16
+        width: 67
+        height: 94
+      spriteId: 02c65d76eb3a48b489f19fd3b2e22d3c
+    linkedCells: []
+    parentIndex: -1
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 128, y: 128}
