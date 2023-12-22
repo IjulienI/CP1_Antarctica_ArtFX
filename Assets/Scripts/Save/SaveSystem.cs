@@ -8,12 +8,11 @@ public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem instance;
     public GameInfo gameInfo;
-    public GameObject cheatScreen;
 
     private void Start()
     {
         instance = this;
-        Load();
+        if(SceneManager.GetActiveScene().name == "SaveSystem") Invoke(nameof(Load), 0.1f);
     }
 
     public void Load()
@@ -34,7 +33,10 @@ public class SaveSystem : MonoBehaviour
                 //else Debug.Log("Don't Cheat !");
             }
         }
-        else if (SceneManager.GetActiveScene().name == "SaveSystem") SceneManager.LoadScene("Level 1");
+        else if (SceneManager.GetActiveScene().name != "Level 1")
+        {
+            SceneManager.LoadScene("IntroScene");
+        }
     }
     public void Save()
     {
@@ -51,6 +53,7 @@ public class SaveSystem : MonoBehaviour
             File.Create(Application.persistentDataPath + "/data.save").Dispose();
         }
         File.WriteAllText(Application.persistentDataPath + "/data.save", json);
+        Debug.Log(Application.persistentDataPath + "/data.save");
     }
 
     //PLAYER :
