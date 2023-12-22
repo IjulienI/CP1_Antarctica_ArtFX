@@ -374,6 +374,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1dce644f-2104-423e-a911-082f274e8f7e
     m_ActionName: Player/MidLight[/Mouse/rightButton]
   - m_PersistentCalls:
@@ -381,6 +393,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3843487037794754977}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: UpLight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DeviceDetection, Assembly-CSharp
+        m_MethodName: DeviceDetector
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -587,7 +611,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1794179990248664827, guid: 043df4f37d4bcbb46891ab4e265a27ab, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.07
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 0
   Mute: 0
