@@ -12,7 +12,7 @@ public class SaveSystem : MonoBehaviour
     private void Start()
     {
         instance = this;
-        if(SceneManager.GetActiveScene().name == "SaveSystem") Invoke(nameof(Load), 0.1f);
+        Invoke(nameof(Load), 0.1f);
     }
 
     public void Load()
@@ -23,9 +23,12 @@ public class SaveSystem : MonoBehaviour
             gameInfo = JsonUtility.FromJson<GameInfo>(json);
 
             LoadLevel();
-            LoadPlayer();
-            LoadAi();
-            LoadDoors();
+            if(SceneManager.GetActiveScene().name == gameInfo.levelName)
+            {
+                LoadPlayer();
+                LoadAi();
+                LoadDoors();
+            }
             if (File.GetLastWriteTime(Application.persistentDataPath + "/data.save").ToString(CultureInfo.CurrentCulture) != gameInfo.modificationDate)
             {
                 //File.Delete(Application.persistentDataPath + "/data.save");
