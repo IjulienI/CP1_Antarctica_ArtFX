@@ -502,7 +502,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PauseGame(InputAction.CallbackContext pause)
     {
-        if ((pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)||(pause.performed && !hasNumpadCanvas))
+        if ((pause.performed && numpadImg != null && !numpadImg.IsActive() && canFlip)||(pause.performed && !hasNumpadCanvas && canFlip))
         {
             canFlip = false;
             MenuManager.instance.PauseGame();

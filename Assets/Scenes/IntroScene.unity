@@ -339,6 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264808337}
   - component: {fileID: 1264808336}
+  - component: {fileID: 1264808338}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -397,6 +398,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1264808338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264808335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecad8b4afa892c14c995fe23520d20f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1399058674
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +422,6 @@ GameObject:
   - component: {fileID: 1399058677}
   - component: {fileID: 1399058676}
   - component: {fileID: 1399058678}
-  - component: {fileID: 1399058679}
   m_Layer: 0
   m_Name: RawImage
   m_TagString: Untagged
@@ -567,19 +579,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1399058679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399058674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecad8b4afa892c14c995fe23520d20f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1399058678}
 --- !u!1 &2029592551
 GameObject:
   m_ObjectHideFlags: 0

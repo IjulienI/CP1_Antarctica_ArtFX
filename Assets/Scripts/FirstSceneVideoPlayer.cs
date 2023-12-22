@@ -1,22 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class FirstSceneVideoPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    private VideoPlayer audioSource;
+    private bool delay;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<VideoPlayer>();
     }
     void Update()
     {
-        if (!audioSource.isPlaying)
+        if(audioSource.isPlaying && !delay)
         {
-            print("is");
-            SceneManager.LoadScene("");
+            delay = true;
+        }
+        if(!audioSource.isPlaying && delay)
+        {
+            if(File.Exists(Application.persistentDataPath + "/data.save"))
+            {
+                File.Delete(Application.persistentDataPath + "/data.save");
+            }
+            SceneManager.LoadScene("SaveSystem");
         }
     }
 }

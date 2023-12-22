@@ -177,7 +177,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Continue()
     {
-        print("test1");
+        SceneManager.LoadScene("SaveSystem");
     }
     public void Option()
     {
