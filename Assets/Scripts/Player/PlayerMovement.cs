@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             flameAnim.SetBool("State1", true);
             if (actualCold > 0f)
             {
-                actualCold -= Time.deltaTime * 2;
+                actualCold -= Time.deltaTime * 4;
             }
         }
         else if (stateOfFire == 2)
@@ -371,22 +371,22 @@ public class PlayerMovement : MonoBehaviour
             {
 
             timeInMucus += Time.deltaTime;
-            if(timeInMucus > 0.1f && timeInMucus <= 3f)
+            if(timeInMucus > 0.1f && timeInMucus <= 3f/2)
             {
                 glassHit1.SetActive(true);
-                timeOutMucus = 10f;
+                timeOutMucus = 10f / 2;
             }
-            else if (timeInMucus > 3f && timeInMucus <= 6f)
+            else if (timeInMucus > 3f / 2 && timeInMucus <= 6f / 2)
             {
                 glassHit2.SetActive(true);
-                timeOutMucus = 15f;
+                timeOutMucus = 15f / 2;
             }
-            else if (timeInMucus > 6f && timeInMucus <= 9f)
+            else if (timeInMucus > 6f / 2 && timeInMucus <= 9f / 2)
             {
                 glassHit3.SetActive(true);
-                timeOutMucus = 20f;
+                timeOutMucus = 20f / 2;
             }
-            else if (timeInMucus > 9f)
+            else if (timeInMucus > 9f / 2)
             {
                 SceneManager.LoadScene("MucusGameOver");
             }
@@ -402,15 +402,15 @@ public class PlayerMovement : MonoBehaviour
                 timeOutMucus -= Time.deltaTime;
             }
 
-            if (timeOutMucus > 14.5f && timeOutMucus < 15f)
+            if (timeOutMucus > 14.5f / 2 && timeOutMucus < 15f / 2)
             {
                 glassHit3.SetActive(false);
             }
-            else if (timeOutMucus > 9.5f && timeOutMucus < 10f)
+            else if (timeOutMucus > 9.5f / 2 && timeOutMucus < 10f / 2)
             {
                 glassHit2.SetActive(false);
             }
-            else if (timeOutMucus > 4.5f && timeOutMucus < 5f)
+            else if (timeOutMucus > 4.5f / 2 && timeOutMucus < 5f / 2)
             {
                 glassHit1.SetActive(false);
             }
