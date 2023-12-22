@@ -13,6 +13,8 @@ public class Debris : MonoBehaviour
     [SerializeField] private float shakeAmount;
     [SerializeField] private float shakeDuration;
 
+    public AudioSource audioSource;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -31,6 +33,10 @@ public class Debris : MonoBehaviour
         if (particles3 != null)
         {
             particles3.Play();
+        }
+        if(audioSource != null)
+        {
+            audioSource.Play();
         }
         Invoke("Shake", shakeDelay);
     }

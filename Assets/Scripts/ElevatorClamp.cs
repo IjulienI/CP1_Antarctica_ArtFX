@@ -18,6 +18,8 @@ public class ElevatorClamp : MonoBehaviour
     public bool finish = false;
     private GameObject player;
 
+    public AudioSource audioSource;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");    }
@@ -62,5 +64,10 @@ public class ElevatorClamp : MonoBehaviour
 
         InvisibleWallR.SetActive(false);
         InvisibleWallL.SetActive(false);
+    }
+    
+    public void PlaySound()
+    {
+        audioSource.Play();
     }
 }
