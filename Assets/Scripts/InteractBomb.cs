@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class InteractBomb : MonoBehaviour
 {
-    private bool oui;
+    private bool oui = false;
     void Update()
     {
         if (oui && Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton2))
