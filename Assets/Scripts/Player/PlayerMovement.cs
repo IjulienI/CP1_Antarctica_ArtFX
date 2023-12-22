@@ -71,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
     bool onMucus = false;
     float timeInMucus = 0;
     float timeOutMucus = 0;
+    float timeIddle = 0;
+    bool stopTriggerDance = false;
     
 
     [Header("Input Manager (don't touch)")]
@@ -229,7 +231,8 @@ public class PlayerMovement : MonoBehaviour
         vertical = Mathf.RoundToInt(vertical);
         if (horizontal != 0)
         {
-
+            timeIddle = 0;
+            stopTriggerDance = false;
             anim.SetBool("isWalking", true);
             if (!isGrounded)
             {
@@ -258,6 +261,16 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("isWalking", false);
             speedX = Mathf.MoveTowards(speedX, 0f, Time.deltaTime * brakeFactor);
+
+            if (timeIddle <= 20)
+            {
+                timeIddle += Time.deltaTime;
+            }
+            else if (timeIddle > 20 && stopTriggerDance == false)
+            {
+                anim.SetTrigger("Dance");
+                stopTriggerDance = true;
+            }
         }
 
         if (ladderInteraction == true)
@@ -543,6 +556,12 @@ public class PlayerMovement : MonoBehaviour
 
 
             onMucus = true;
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            timeIddle = 0;
+            stopTriggerDance = false;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
