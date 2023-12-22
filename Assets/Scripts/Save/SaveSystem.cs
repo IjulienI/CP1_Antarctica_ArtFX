@@ -143,9 +143,13 @@ public class SaveSystem : MonoBehaviour
     {
         if(gameInfo.levelName != null)
         {
-            if (SceneManager.GetActiveScene().name != gameInfo.levelName)
+            if(SceneManager.GetActiveScene().name == "SaveSystem")
             {
                 SceneManager.LoadScene(gameInfo.levelName);
+            }
+            if (SceneManager.GetActiveScene().name != gameInfo.levelName)
+            {
+                gameInfo.levelName = SceneManager.GetActiveScene().name;
             }
         }
     }
