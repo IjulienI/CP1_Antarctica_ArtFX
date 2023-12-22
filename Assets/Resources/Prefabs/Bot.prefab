@@ -202,10 +202,11 @@ MonoBehaviour:
   player: {fileID: 0}
   goSound: 0
   zone: {fileID: 0}
+  _monsterSource: {fileID: 0}
   monsterMovements: {fileID: 0}
   monsterBite: {fileID: 0}
-  monsterIdle: {fileID: 0}
   monsterScream: {fileID: 0}
+  canResream: 1
 --- !u!82 &2681652088413689764
 AudioSource:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 9.405357
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -322,7 +323,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 256
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 9.790375
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -570,7 +571,7 @@ CircleCollider2D:
     m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 383
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -587,9 +588,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.34754944}
+  m_Offset: {x: 0, y: 0.462883}
   serializedVersion: 2
-  m_Radius: 1.1556396
+  m_Radius: 1.1138229
 --- !u!114 &7611407370150946978
 MonoBehaviour:
   m_ObjectHideFlags: 0

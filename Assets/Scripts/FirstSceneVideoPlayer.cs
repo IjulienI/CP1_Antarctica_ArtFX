@@ -24,7 +24,7 @@ public class FirstSceneVideoPlayer : MonoBehaviour
             {
                 File.Delete(Application.persistentDataPath + "/data.save");
             }
-            SceneManager.LoadScene("SaveSystem");
+            SceneManager.LoadScene("Level 1");
         }
     }
 }

@@ -50,7 +50,7 @@ public class AIPathController : MonoBehaviour
     public float HorizontalMove { get; private set; }
     public Vector2 JumpForce { get; private set; }
 
-    void Awake()
+    private void Start()
     {
         baseSpeed = speed;
         Target = GameObject.FindGameObjectWithTag("Target").transform;
@@ -64,21 +64,17 @@ public class AIPathController : MonoBehaviour
         m_Collider2D = GetComponent<Collider2D>();
 
         AllNodes = FindObjectsOfType<Node>().ToList();
-        for (int i = 0; i < nodes.Length; i++)
-        {
-            nodes[i].SetActive(false);
-        }
         m_LineRenderer = GetComponent<LineRenderer>();
-
-    }
-    private void Start()
-    {
         minDist = m_Collider2D.bounds.size.x / 2;
         maxYDist = maxDistanceToJump + .1f;
         maxXDist = maxYDist * 2;
         maxHypotenuse = Mathf.Sqrt(2 * Mathf.Pow(maxYDist, 2));
         velocity = speed;
         m_Rigidbody2D.gravityScale = speed * 0.122f;
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            nodes[i].SetActive(false);
+        }
     }
     void Update()
     {
@@ -90,7 +86,7 @@ public class AIPathController : MonoBehaviour
 
     void FixedUpdate()
     {
-        RenderLines();
+        //RenderLines();
         if (Target == null || AllNodes.Count == 0)
             return;
 
