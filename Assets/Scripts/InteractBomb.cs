@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class InteractBomb : MonoBehaviour
 {
     private bool oui = false;
+    [SerializeField]  GameObject animator;
     void Update()
     {
-        if (oui && Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton2))
+        if (animator.GetComponent<PlantTheSpike>().IsSpikePlanted())
         {
             SceneManager.LoadScene("Level 3");
         }
