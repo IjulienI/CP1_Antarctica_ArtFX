@@ -25,12 +25,14 @@ public class ClassicDoor : MonoBehaviour
             {
                 animator.SetBool("OpenDoor", true);
                 unlockedDoor = true;
+                soundDoor.Stop();
                 soundDoor.Play();
             }
             else if (!isNeedingBomb)
             {
                 animator.SetBool("OpenDoor", true);
                 unlockedDoor = true;
+                soundDoor.Stop();
                 soundDoor.Play();
             }
         }
