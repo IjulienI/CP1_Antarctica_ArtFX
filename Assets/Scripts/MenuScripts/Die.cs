@@ -14,7 +14,7 @@ public class Die : MonoBehaviour
     }
     public void Retry()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("SaveSystem");
     }
     public void ReturnMenu()
     {
