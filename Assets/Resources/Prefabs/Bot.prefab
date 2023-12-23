@@ -204,8 +204,8 @@ MonoBehaviour:
   zone: {fileID: 0}
   _monsterSource: {fileID: 0}
   monsterMovements: {fileID: 0}
-  monsterBite: {fileID: 0}
-  monsterScream: {fileID: 0}
+  monsterBite: {fileID: 8300000, guid: e6787f39a55eb094f9b33c6e84424eea, type: 3}
+  monsterScream: {fileID: 8300000, guid: 5cea454e6e964f544bd4a85044bc1972, type: 3}
   canResream: 1
 --- !u!82 &2681652088413689764
 AudioSource:
@@ -313,7 +313,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1794179990248664827, guid: 043df4f37d4bcbb46891ab4e265a27ab, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ba77e59a83f5c9346b08160600a031b9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -588,9 +588,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.462883}
+  m_Offset: {x: 0, y: 0.39796638}
   serializedVersion: 2
-  m_Radius: 1.1138229
+  m_Radius: 1.1787395
 --- !u!114 &7611407370150946978
 MonoBehaviour:
   m_ObjectHideFlags: 0
